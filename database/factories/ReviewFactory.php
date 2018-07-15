@@ -13,13 +13,13 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Models\User::class, function (Faker $faker) {
+$factory->define(App\Models\Review::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm',
+        'user_id' => 1,
+        'rating' => $faker->numberBetween(1, 5),
+        'comment' => $faker->paragraph,
+        'reply' => $faker->randomElement(['', $faker->paragraph]),
     ];
 });
 
-$factory->state(\App\Models\User::class, 'owner', ['role_id' => 2]);
-$factory->state(\App\Models\User::class, 'regular-user', ['role_id' => 3]);
+$factory->state(App\Models\Review::class, 'reply-pending', ['reply' => '']);

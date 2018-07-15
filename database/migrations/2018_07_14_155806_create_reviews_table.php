@@ -20,7 +20,8 @@ class CreateReviewsTable extends Migration
                 $table->unsignedInteger('user_id');
                 $table->unsignedInteger('restaurant_id');
                 $table->unsignedSmallInteger('rating');
-                $table->string('comment');
+                $table->text('comment');
+                $table->text('reply');
                 $table->timestamps();
                 $table->softDeletes();
 
