@@ -12,9 +12,17 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+/*
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
 
-Route::resource('restaurants', 'API\RestaurantsController')->middleware(['auth.basic.once']);
+Route::group(['middleware' => ['auth.basic.once']], function() {
+    Route::group(['prefix' => 'restaurants'], function() {
+       Route::get('/', ['uses' => 'API\RestaurantsController@index']);
+       Route::post('/', [
+           'uses' => 'API\RestaurantsController@store',
+           'middleware' => ['permission:create-restaurant']
+       ]);
+    });
+});

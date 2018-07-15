@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Exceptions\ApiResponseException;
 use App\Http\Resources\Restaurant as RestaurantResource;
 use App\Models\Restaurant;
+use App\Rules\HasRole;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class RestaurantsController extends Controller
 {
@@ -19,17 +23,26 @@ class RestaurantsController extends Controller
      */
     public function index(Request $request)
     {
-        return new ResourceCollection(Restaurant::all());
+        return new ResourceCollection(Restaurant::forUser(Auth::user())->get());
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     * @throws ApiResponseException
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'owner_id' => ['required', new HasRole(['owner'])],
+        ]);
+
+        if ($validator->fails()) {
+           throw new ApiResponseException($validator->errors(),Response::HTTP_UNPROCESSABLE_ENTITY);
+        };
+
         $restaurantModel = new Restaurant();
 
         $restaurant = $restaurantModel->save($request->only($restaurantModel->getFillable()));

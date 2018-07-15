@@ -23,4 +23,19 @@ class Restaurant extends Model
     public function reviews() {
         return $this->hasMany(Review::class, 'restaurant_id', 'id');
     }
+
+    /**
+     * Scopes a query based on the passed User.
+     *
+     * @param $query
+     * @param User $user
+     * @return mixed
+     */
+    public function scopeForUser($query, User $user) {
+        if ($user->hasRole(['admin', 'user'])) {
+            return $query;
+        }
+
+        return $query->where('owner_id', $user->getKey());
+    }
 }
