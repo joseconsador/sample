@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        factory(\App\Models\User::class, 2)->states('admin')->create();
         // Make reviewers
         $reviewers = factory(\App\Models\User::class, 100)->states('regular-user')->create();
 

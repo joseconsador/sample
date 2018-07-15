@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Faker\Generator as Faker;
 
 /*
@@ -21,5 +22,17 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
     ];
 });
 
-$factory->state(\App\Models\User::class, 'owner', ['role_id' => 2]);
-$factory->state(\App\Models\User::class, 'regular-user', ['role_id' => 3]);
+$factory->state(\App\Models\User::class, 'owner', []);
+$factory->afterCreatingState(\App\Models\User::class, 'owner', function(User $user, Faker $faker) {
+    $user->assignRole('owner');
+});
+
+$factory->state(\App\Models\User::class, 'admin', []);
+$factory->afterCreatingState(\App\Models\User::class, 'admin', function(User $user, Faker $faker) {
+    $user->assignRole('admin');
+});
+
+$factory->state(\App\Models\User::class, 'regular-user', []);
+$factory->afterCreatingState(\App\Models\User::class, 'regular-user', function(User $user, Faker $faker) {
+    $user->assignRole('user');
+});
