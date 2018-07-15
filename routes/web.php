@@ -15,7 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::get('/hello', function () {
 /*    echo domino("1-1"); // 1
 echo  domino("1-2,1-2"); // 1
