@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\AuthenticateOnceWithBasicAuth;
+use App\Http\Middleware\LimitPerPageQueryParameter;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -62,5 +63,6 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+        'api.per_page_limit' => LimitPerPageQueryParameter::class,
     ];
 }

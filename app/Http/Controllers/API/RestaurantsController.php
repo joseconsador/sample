@@ -9,11 +9,10 @@ use App\Http\Resources\Restaurant as RestaurantResource;
 use App\Models\Restaurant;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Auth;
 
-class RestaurantsController extends Controller
+class RestaurantsController extends BaseAPIController
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +23,8 @@ class RestaurantsController extends Controller
     public function index(Request $request)
     {
         return new ResourceCollection(Restaurant::forUser(Auth::user())
-                    ->paginate($request->query('per_page')));
+                    ->paginate($request->query('per_page'))
+                    ->appends($request->query->all()));
     }
 
     /**

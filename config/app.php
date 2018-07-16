@@ -211,4 +211,10 @@ return [
 
     ],
 
+    /**
+     * API Configuration
+     */
+    'api' => [
+        'limit_per_page' => env('API_LIMIT_PER_PAGE', 100),
+    ],
 ];

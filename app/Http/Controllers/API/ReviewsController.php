@@ -4,10 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class ReviewsController extends Controller
+class ReviewsController extends BaseAPIController
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,9 @@ class ReviewsController extends Controller
      */
     public function index(Request $request, Restaurant $restaurant)
     {
-        return new ResourceCollection($restaurant->reviews()->paginate($request->query('per_page')));
+        return new ResourceCollection($restaurant->reviews()
+            ->paginate($request->query('per_page'))
+            ->appends($request->query->all()));
     }
 
     /**

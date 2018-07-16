@@ -28,11 +28,11 @@ Route::group(['middleware' => ['auth.basic.once'], 'as' => 'api::'], function ()
         Route::put('/{restaurant}', ['uses' => 'API\RestaurantsController@update']);
 
         // api/restaurants/<ID>/reviews routes
-        Route::group(['prefix' => '/{restaurant}', 'as' => 'show'], function() {
+        Route::group(['prefix' => '/{restaurant}', 'as' => 'show'], function () {
             Route::get('/', ['uses' => 'API\RestaurantsController@show']);
 
-            Route::group(['prefix' => 'reviews', 'as' => '::reviews'], function() {
-               Route::get('/', ['uses' => 'API\ReviewsController@index']);
+            Route::group(['prefix' => 'reviews', 'as' => '::reviews'], function () {
+                Route::get('/', ['uses' => 'API\ReviewsController@index']);
             });
         });
     });
