@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\API;
 
 use App\Exceptions\ApiResponseException;
+use App\Http\Requests\CreateRestaurant;
+use App\Http\Requests\UpdateRestaurant;
 use App\Http\Resources\Restaurant as RestaurantResource;
 use App\Models\Restaurant;
-use App\Rules\HasRole;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Resources\Json\ResourceCollection;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
 class RestaurantsController extends Controller
 {
@@ -23,32 +23,35 @@ class RestaurantsController extends Controller
      */
     public function index(Request $request)
     {
-        return new ResourceCollection(Restaurant::forUser(Auth::user())->get());
+        return new ResourceCollection(Restaurant::forUser(Auth::user())
+                    ->paginate($request->get('per_page')));
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
      * @throws ApiResponseException
      */
-    public function store(Request $request)
+    public function store(CreateRestaurant $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'owner_id' => ['required', new HasRole(['owner'])],
-        ]);
+        $restaurant = new Restaurant();
+        $restaurant->save($request->only($restaurant->getFillable()));
 
-        if ($validator->fails()) {
-           throw new ApiResponseException($validator->errors(),Response::HTTP_UNPROCESSABLE_ENTITY);
-        };
-
-        $restaurantModel = new Restaurant();
-
-        $restaurant = $restaurantModel->save($request->only($restaurantModel->getFillable()));
-
-        if ($restaurant) {
+        /**
+         * @var $user User
+         */
+        $user = Auth::user();
+        if (!$user->hasRole('admin')) {
+            $restaurant->owner_id = $user->getKey();
         }
+
+        $restaurant->save();
+
+        return (new RestaurantResource($restaurant))
+                ->response()
+                ->header('Location', route('api::restaurant::show', ['id' => $restaurant->getKey()]));
     }
 
     /**
@@ -65,13 +68,25 @@ class RestaurantsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Restaurant  $restaurant
-     * @return \Illuminate\Http\Response
+     * @param UpdateRestaurant $request
+     * @param  \App\Models\Restaurant $restaurant
+     * @return RestaurantResource
      */
-    public function update(Request $request, Restaurant $restaurant)
+    public function update(UpdateRestaurant $request, Restaurant $restaurant)
     {
-        //
+        $fields = $request->only($restaurant->getFillable());
+
+        /**
+         * @var $user User
+         */
+        $user = Auth::user();
+        if (!$user->hasRole('admin')) {
+            $fields['owner_id'] = $user->getKey();
+        }
+
+        $restaurant->fill($fields)->save();
+
+        return new RestaurantResource($restaurant);
     }
 
     /**

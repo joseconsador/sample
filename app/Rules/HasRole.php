@@ -28,9 +28,12 @@ class HasRole implements Rule
      */
     public function passes($attribute, $value)
     {
-        $user = new User($value);
+        /**
+         * @var $user User
+         */
+        $user = User::find($value);
 
-        if (!$user->exists) {
+        if (!$user) {
             return false;
         }
 

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Restaurant extends Model
 {
+    protected $fillable = ['name'];
+
     /**
      * Returns the App\Model\User that owns the restaurant.
      *

@@ -28,9 +28,9 @@ class HasPermission implements Rule
      */
     public function passes($attribute, $value)
     {
-        $user = new User($value);
+        $user = User::find($value);
 
-        if (!$user->exists) {
+        if (!$user) {
             return false;
         }
 
