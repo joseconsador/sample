@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Restaurant;
+use App\Http\Resources\Review as ReviewResource;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -34,35 +36,25 @@ class ReviewsController extends BaseAPIController
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Restaurant $restaurant)
     {
-        //
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Review $review
+     * @return ReviewResource
      */
-    public function show($id)
+    public function show(Restaurant $restaurant, Review $review)
     {
-        //
+        return new ReviewResource($review);
     }
 
     /**

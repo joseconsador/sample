@@ -23,7 +23,7 @@ Route::group(['middleware' => ['auth.basic.once'], 'as' => 'api::'], function ()
         Route::get('/', ['uses' => 'API\RestaurantsController@index']);
         Route::post('/', [
             'uses' => 'API\RestaurantsController@store',
-            'middleware' => ['permission:create-restaurant']
+            'middleware' => ['permission:create-restaurant'],
         ]);
         Route::put('/{restaurant}', ['uses' => 'API\RestaurantsController@update']);
 
@@ -33,7 +33,13 @@ Route::group(['middleware' => ['auth.basic.once'], 'as' => 'api::'], function ()
 
             Route::group(['prefix' => 'reviews', 'as' => '::reviews'], function () {
                 Route::get('/', ['uses' => 'API\ReviewsController@index']);
+                Route::get('/{review}', ['uses' => 'API\ReviewsController@show']);
                 Route::get('/pending', ['uses' => 'API\ReviewsController@pending']);
+
+                Route::post('/', [
+                    'uses' => 'API\ReviewsController@store',
+                    'middleware' => ['permission:review-restaurant'],
+                ]);
             });
         });
     });

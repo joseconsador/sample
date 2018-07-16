@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Restaurant;
+use App\Models\Review;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -24,6 +26,20 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+
+        Route::bind('restaurant', function ($value, $route) {
+            /**
+             * @var $restaurant Restaurant
+             */
+            $restaurant = Restaurant::where('id', $value)->firstOrFail();
+            if ($route->hasParameter('review') &&
+                is_null($restaurant->reviews()->find($route->parameter('review')))
+            ) {
+                abort(404);
+            }
+
+            return $restaurant;
+        });
 
         parent::boot();
     }
