@@ -21,6 +21,19 @@ class ReviewsController extends BaseAPIController
     }
 
     /**
+     * Display reviews with pending replies.
+     *
+     * @return ResourceCollection
+     */
+    public function pending(Request $request, Restaurant $restaurant)
+    {
+        return new ResourceCollection($restaurant->reviews()
+            ->scopes(['withPendingReplies'])
+            ->paginate($request->query('per_page'))
+            ->appends($request->query->all()));
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

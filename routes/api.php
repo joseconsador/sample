@@ -33,6 +33,7 @@ Route::group(['middleware' => ['auth.basic.once'], 'as' => 'api::'], function ()
 
             Route::group(['prefix' => 'reviews', 'as' => '::reviews'], function () {
                 Route::get('/', ['uses' => 'API\ReviewsController@index']);
+                Route::get('/pending', ['uses' => 'API\ReviewsController@pending']);
             });
         });
     });

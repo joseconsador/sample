@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Review extends Model
@@ -24,5 +25,15 @@ class Review extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * Scopes a query to empty replies.
+     *
+     * @param Builder $query
+     * @return mixed
+     */
+    public function scopeWithPendingReplies(Builder $query) {
+        return $query->where('reply', '=', '')->orWhereNull('reply');
     }
 }

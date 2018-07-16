@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Restaurant extends Model
@@ -35,7 +36,7 @@ class Restaurant extends Model
      * @param User $user
      * @return mixed
      */
-    public function scopeForUser($query, User $user)
+    public function scopeForUser(Builder $query, User $user)
     {
         if ($user->hasRole(['admin', 'user'])) {
             return $query;
