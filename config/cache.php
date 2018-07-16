@@ -91,4 +91,7 @@ return [
         str_slug(env('APP_NAME', 'laravel'), '_').'_cache'
     ),
 
+    'lifetime' => [
+        'average_rating' => env('CACHE_LIFETIME_AVE_RATING', 15),
+    ],
 ];

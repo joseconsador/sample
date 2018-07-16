@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Restaurant extends Model
 {
@@ -43,5 +44,14 @@ class Restaurant extends Model
         }
 
         return $query->where('owner_id', $user->getKey());
+    }
+
+    public function getAverageRating()
+    {
+        $expiresAt = now()->addMinutes(config('cache.lifetime.average_rating'));
+        return Cache::remember('restaurant_' . $this->getKey() . '_average_rating', $expiresAt,
+            function() {
+                return $this->reviews()->avg('rating');
+            });
     }
 }
