@@ -24,7 +24,7 @@ class RestaurantsController extends Controller
     public function index(Request $request)
     {
         return new ResourceCollection(Restaurant::forUser(Auth::user())
-                    ->paginate($request->get('per_page')));
+                    ->paginate($request->query('per_page')));
     }
 
     /**
