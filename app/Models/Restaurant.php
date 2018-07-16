@@ -13,7 +13,8 @@ class Restaurant extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function owner() {
+    public function owner()
+    {
         return $this->belongsTo(User::class, 'owner_id');
     }
 
@@ -22,7 +23,8 @@ class Restaurant extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function reviews() {
+    public function reviews()
+    {
         return $this->hasMany(Review::class, 'restaurant_id', 'id');
     }
 
@@ -33,7 +35,8 @@ class Restaurant extends Model
      * @param User $user
      * @return mixed
      */
-    public function scopeForUser($query, User $user) {
+    public function scopeForUser($query, User $user)
+    {
         if ($user->hasRole(['admin', 'user'])) {
             return $query;
         }

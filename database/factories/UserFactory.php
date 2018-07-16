@@ -23,16 +23,16 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
 });
 
 $factory->state(\App\Models\User::class, 'owner', []);
-$factory->afterCreatingState(\App\Models\User::class, 'owner', function(User $user, Faker $faker) {
+$factory->afterCreatingState(\App\Models\User::class, 'owner', function (User $user, Faker $faker) {
     $user->assignRole('owner');
 });
 
 $factory->state(\App\Models\User::class, 'admin', []);
-$factory->afterCreatingState(\App\Models\User::class, 'admin', function(User $user, Faker $faker) {
+$factory->afterCreatingState(\App\Models\User::class, 'admin', function (User $user, Faker $faker) {
     $user->assignRole('admin');
 });
 
 $factory->state(\App\Models\User::class, 'regular-user', []);
-$factory->afterCreatingState(\App\Models\User::class, 'regular-user', function(User $user, Faker $faker) {
+$factory->afterCreatingState(\App\Models\User::class, 'regular-user', function (User $user, Faker $faker) {
     $user->assignRole('user');
 });

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<ruleset name="PSR2 Standard">
+    <description>
+        PSR-2 with some additional configuration.
+    </description>
+
+    <file>.</file>
+
+    <arg value="sp"/>
+    <arg name="extensions" value="php"/>
+
+    <exclude-pattern>vendor/*</exclude-pattern>
+    <exclude-pattern>bootstrap/cache/*</exclude-pattern>
+    <exclude-pattern>config/*</exclude-pattern>
+    <exclude-pattern>storage/framework/*</exclude-pattern>
+    <exclude-pattern>*.blade.php</exclude-pattern>
+    <exclude-pattern>public/index.php</exclude-pattern>
+
+    <rule ref="PSR2"/>
+
+    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+        <exclude-pattern>database/seeds/DatabaseSeeder.php</exclude-pattern>
+        <exclude-pattern>database/migrations/*</exclude-pattern>
+    </rule>
+
+    <rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
+        <exclude-pattern>bootstrap/autoload.php</exclude-pattern>
+    </rule>
+
+    <rule ref="Generic.Files.LineLength.TooLong">
+        <exclude-pattern>resources/lang/*</exclude-pattern>
+    </rule>
+
+</ruleset>

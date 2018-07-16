@@ -14,7 +14,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        DB::transaction(function() {
+        DB::transaction(function () {
             Schema::create('users', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name');
