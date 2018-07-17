@@ -29,7 +29,13 @@ class CreateReview extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['sometimes', 'required', 'integer', 'exists:users,id', new HasPermission('review-restaurant')],
+            'user_id' => [
+                'sometimes',
+                'required',
+                'integer',
+                'exists:users,id',
+                new HasPermission('review-restaurant')
+            ],
             'rating' => ['required', 'integer', 'between:1,5'],
             'comment' => ['required']
         ];

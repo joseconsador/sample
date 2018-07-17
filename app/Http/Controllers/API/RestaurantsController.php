@@ -107,11 +107,15 @@ class RestaurantsController extends BaseAPIController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Restaurant  $restaurant
-     * @return \Illuminate\Http\Response
+     * @param UpdateRestaurant $request
+     * @param  \App\Models\Restaurant $restaurant
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
-    public function destroy(Restaurant $restaurant)
+    public function destroy(UpdateRestaurant $request, Restaurant $restaurant)
     {
-        //
+        $restaurant->delete();
+
+        return response('ok');
     }
 }

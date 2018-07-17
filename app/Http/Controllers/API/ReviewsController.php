@@ -125,11 +125,16 @@ class ReviewsController extends BaseAPIController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateReview $request
+     * @param Restaurant $restaurant
+     * @param Review $review
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(UpdateReview $request, Restaurant $restaurant, Review $review)
     {
-        //
+        $review->delete();
+
+        return response('ok');
     }
 }

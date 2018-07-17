@@ -25,7 +25,8 @@ Route::group(['middleware' => ['auth.basic.once'], 'as' => 'api::'], function ()
             'uses' => 'API\RestaurantsController@store',
             'middleware' => ['permission:create-restaurant'],
         ]);
-        Route::put('/{restaurant}', ['uses' => 'API\RestaurantsController@update']);
+        Route::put('/{restaurant}', ['uses' => 'API\RestaurantsController@update'])->where('restaurant', '[0-9]+');
+        Route::delete('/{restaurant}', ['uses' => 'API\RestaurantsController@destroy'])->where('restaurant', '[0-9]+');
 
         // api/restaurants/<ID>/reviews routes
         Route::group(['prefix' => '/{restaurant}', 'as' => 'show'], function () {
@@ -37,15 +38,12 @@ Route::group(['middleware' => ['auth.basic.once'], 'as' => 'api::'], function ()
                 Route::get('/{review}', ['as' => '::show', 'uses' => 'API\ReviewsController@show'])
                     ->where('review', '[0-9]+');
 
-                Route::post('/', [
-                    'uses' => 'API\ReviewsController@store',
-                    'middleware' => ['permission:review-restaurant'],
-                ]);
+                Route::group(['middleware' => ['permission:review-restaurant']], function () {
+                    Route::post('/', ['uses' => 'API\ReviewsController@store']);
 
-                Route::put('/{review}', [
-                    'uses' => 'API\ReviewsController@update',
-                    'middleware' => ['permission:review-restaurant'],
-                ])->where('review', '[0-9]+');;
+                    Route::put('/{review}', ['uses' => 'API\ReviewsController@update'])->where('review', '[0-9]+');
+                    Route::delete('/{review}', ['uses' => 'API\ReviewsController@destroy'])->where('review', '[0-9]+');
+                });
             });
         });
     });
