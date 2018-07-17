@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Exceptions\ApiResponseException;
 use App\Http\Requests\CreateRestaurant;
 use App\Http\Requests\UpdateRestaurant;
 use App\Http\Resources\Restaurant\RestaurantCollection;

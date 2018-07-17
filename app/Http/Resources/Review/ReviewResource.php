@@ -22,6 +22,7 @@ class ReviewResource extends JsonResource
             'attributes' => [
                 'user_id' => $this->user_id,
                 'restaurant_id' => $this->restaurant_id,
+                'rating' => (int) $this->rating,
                 'comment' => $this->comment,
                 'reply' => $this->reply,
                 'created_at' => (string) $this->created_at,

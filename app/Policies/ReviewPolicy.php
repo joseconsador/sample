@@ -24,7 +24,7 @@ class ReviewPolicy
      * @param \App\Policies\Review $Review
      * @return mixed
      */
-    public function view(User $user, Review $Review)
+    public function view(User $user, Review $review)
     {
         //
     }
@@ -44,22 +44,25 @@ class ReviewPolicy
      * Determine whether the user can update the models review.
      *
      * @param  \App\Models\User $user
-     * @param Review $Review
+     * @param Review $review
      * @return mixed
      */
-    public function update(User $user, Review $Review)
+    public function update(User $user, Review $review)
     {
-        //
+        $fkeyVal = $user->getAttribute($review->user()->getOwnerKey());
+        $lkeyVal = $review->getAttribute($review->user()->getForeignKey());
+
+        return ($user->hasPermissionTo('review-restaurant') && $fkeyVal == $lkeyVal);
     }
 
     /**
      * Determine whether the user can delete the models review.
      *
      * @param  \App\Models\User $user
-     * @param Review $Review
+     * @param Review $review
      * @return mixed
      */
-    public function delete(User $user, Review $Review)
+    public function delete(User $user, Review $review)
     {
         //
     }

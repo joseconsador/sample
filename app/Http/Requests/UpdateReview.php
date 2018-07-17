@@ -9,7 +9,7 @@ use App\Rules\HasRole;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class CreateReview extends FormRequest
+class UpdateReview extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,7 +18,7 @@ class CreateReview extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('create', Review::class);
+        return $this->user()->can('update', $this->route('review'));
     }
 
     /**
@@ -30,8 +30,8 @@ class CreateReview extends FormRequest
     {
         return [
             'user_id' => ['sometimes', 'required', 'integer', 'exists:users,id', new HasPermission('review-restaurant')],
-            'rating' => ['required', 'integer', 'between:1,5'],
-            'comment' => ['required']
+            'rating' => ['sometimes', 'required', 'between:1,5'],
+            'comment' => ['sometimes', 'required']
         ];
     }
 }

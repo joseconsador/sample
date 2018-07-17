@@ -41,6 +41,11 @@ Route::group(['middleware' => ['auth.basic.once'], 'as' => 'api::'], function ()
                     'uses' => 'API\ReviewsController@store',
                     'middleware' => ['permission:review-restaurant'],
                 ]);
+
+                Route::put('/{review}', [
+                    'uses' => 'API\ReviewsController@update',
+                    'middleware' => ['permission:review-restaurant'],
+                ])->where('review', '[0-9]+');;
             });
         });
     });

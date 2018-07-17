@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 class Review extends Model
 {
     protected $exportableRelations = ['restaurant', 'user'];
-    protected $fillable = ['comment', 'restaurant_id', 'rating'];
+    protected $fillable = ['restaurant_id', 'comment', 'rating', 'user_id'];
 
     /**
      * Returns the restaurant for this review.

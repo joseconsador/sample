@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Requests\CreateReview;
+use App\Http\Requests\UpdateReview;
 use App\Http\Resources\Review\ReviewCollection;
 use App\Http\Resources\Review\ReviewResource;
 use App\Models\Restaurant;
@@ -51,18 +52,19 @@ class ReviewsController extends BaseAPIController
      */
     public function store(CreateReview $request, Restaurant $restaurant)
     {
-        $review = new Review();
-        $review->restaurant_id = $restaurant->getKey();
-        $review->fill($request->only($review->getFillable()));
-
         /**
          * @var $user User
          */
         $user = Auth::user();
-        if (!$user->hasRole('admin')) {
-            $review->user_id = $user->getKey();
+        if (!$user->hasRole('admin') || !$request->has('user_id')) {
+            $userId = $user->getKey();
+        } else {
+            $userId = $request->get('user_id');
         }
 
+        // Find an existing review from this user for this restaurant.
+        $review = Review::firstOrNew(['restaurant_id' => $restaurant->getKey(), 'user_id' => $userId]);
+        $review->fill($request->validated());
         $review->save();
 
         return (new ReviewResource($review))
@@ -92,26 +94,32 @@ class ReviewsController extends BaseAPIController
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateReview $request
+     * @param Restaurant $restaurant
+     * @param Review $review
+     * @return ReviewResource
      */
-    public function update(Request $request, $id)
+    public function update(UpdateReview $request, Restaurant $restaurant, Review $review)
     {
-        //
+        $fields = $request->validated();
+
+        /**
+         * @var $user User
+         */
+        $user = Auth::user();
+        if (!$user->hasRole('admin') || !$request->has('user_id')) {
+            $userId = $user->getKey();
+        } else {
+            $userId = $request->get('user_id');
+        }
+
+        $review->fill($fields);
+        $review->user_id = $userId;
+        $review->save();
+
+        return new ReviewResource($review);
     }
 
     /**
