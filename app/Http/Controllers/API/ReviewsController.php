@@ -43,7 +43,6 @@ class ReviewsController extends BaseAPIController
      */
     public function store(Request $request, Restaurant $restaurant)
     {
-
     }
 
     /**

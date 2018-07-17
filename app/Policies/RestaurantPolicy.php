@@ -12,7 +12,7 @@ class RestaurantPolicy
 
     public function before($user, $ability)
     {
-        if ($user->hasRole('admmin')) {
+        if ($user->hasRole('admin')) {
             return true;
         }
     }

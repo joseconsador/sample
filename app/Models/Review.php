@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Review extends Model
 {
+    protected $fillable = ['comment', 'restaurant_id', 'rating'];
+
     /**
      * Returns the restaurant for this review.
      *
@@ -33,7 +35,8 @@ class Review extends Model
      * @param Builder $query
      * @return mixed
      */
-    public function scopeWithPendingReplies(Builder $query) {
+    public function scopeWithPendingReplies(Builder $query)
+    {
         return $query->where('reply', '=', '')->orWhereNull('reply');
     }
 }

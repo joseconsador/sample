@@ -46,12 +46,20 @@ class Restaurant extends Model
         return $query->where('owner_id', $user->getKey());
     }
 
+    /**
+     * Returns the average rating from cache.
+     *
+     * @return int|null
+     */
     public function getAverageRating()
     {
         $expiresAt = now()->addMinutes(config('cache.lifetime.average_rating'));
-        return Cache::remember('restaurant_' . $this->getKey() . '_average_rating', $expiresAt,
-            function() {
+        return Cache::remember(
+            'restaurant_' . $this->getKey() . '_average_rating',
+            $expiresAt,
+            function () {
                 return $this->reviews()->avg('rating');
-            });
+            }
+        );
     }
 }

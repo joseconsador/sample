@@ -5,11 +5,12 @@ namespace App\Http\Controllers\API;
 use App\Exceptions\ApiResponseException;
 use App\Http\Requests\CreateRestaurant;
 use App\Http\Requests\UpdateRestaurant;
-use App\Http\Resources\Restaurant as RestaurantResource;
+use App\Http\Resources\Restaurant\RestaurantCollection;
+use App\Http\Resources\Restaurant\RestaurantResource;
 use App\Models\Restaurant;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Auth;
 
 class RestaurantsController extends BaseAPIController
@@ -18,13 +19,23 @@ class RestaurantsController extends BaseAPIController
      * Display a listing of the resource.
      *
      * @param Request $request
-     * @return ResourceCollection
+     * @return RestaurantCollection
      */
     public function index(Request $request)
     {
-        return new ResourceCollection(Restaurant::forUser(Auth::user())
-                    ->paginate($request->query('per_page'))
-                    ->appends($request->query->all()));
+        /**
+         * @var $collection Collection
+         */
+        $collection = Restaurant::forUser(Auth::user())
+                                    ->paginate($request->query('per_page'))
+                                    ->appends($request->query->all());
+
+        if ($request->has('include')) {
+            $collection->load(explode(',', $request->query('include')));
+        };
+
+
+        return new RestaurantCollection($collection);
     }
 
     /**
@@ -37,7 +48,7 @@ class RestaurantsController extends BaseAPIController
     public function store(CreateRestaurant $request)
     {
         $restaurant = new Restaurant();
-        $restaurant->save($request->only($restaurant->getFillable()));
+        $restaurant->fill($request->only($restaurant->getFillable()));
 
         /**
          * @var $user User
@@ -57,11 +68,16 @@ class RestaurantsController extends BaseAPIController
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Restaurant  $restaurant
+     * @param Request $request
+     * @param  \App\Models\Restaurant $restaurant
      * @return RestaurantResource
      */
-    public function show(Restaurant $restaurant)
+    public function show(Request $request, Restaurant $restaurant)
     {
+        if ($request->has('include')) {
+            $restaurant->load(explode(',', $request->query('include')));
+        };
+
         return new RestaurantResource($restaurant);
     }
 
@@ -74,7 +90,7 @@ class RestaurantsController extends BaseAPIController
      */
     public function update(UpdateRestaurant $request, Restaurant $restaurant)
     {
-        $fields = $request->only($restaurant->getFillable());
+        $fields = $request->all();
 
         /**
          * @var $user User
@@ -84,7 +100,9 @@ class RestaurantsController extends BaseAPIController
             $fields['owner_id'] = $user->getKey();
         }
 
-        $restaurant->fill($fields)->save();
+        $restaurant->fill($fields);
+        $restaurant->owner_id = $fields['owner_id'];
+        $restaurant->save();
 
         return new RestaurantResource($restaurant);
     }
