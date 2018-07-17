@@ -30,20 +30,14 @@ class RestaurantsController extends BaseAPIController
                                     ->paginate($request->query('per_page'))
                                     ->appends($request->query->all());
 
-        if ($request->has('include')) {
-            $collection->load(explode(',', $request->query('include')));
-        };
-
-
         return new RestaurantCollection($collection);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param CreateRestaurant $request
      * @return \Illuminate\Http\JsonResponse
-     * @throws ApiResponseException
      */
     public function store(CreateRestaurant $request)
     {
@@ -75,7 +69,11 @@ class RestaurantsController extends BaseAPIController
     public function show(Request $request, Restaurant $restaurant)
     {
         if ($request->has('include')) {
-            $restaurant->load(explode(',', $request->query('include')));
+            $relations = array_intersect(
+                explode(',', $request->query('include')),
+                $restaurant->getExportableRelations()
+            );
+            $restaurant->load($relations);
         };
 
         return new RestaurantResource($restaurant);

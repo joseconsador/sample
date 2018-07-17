@@ -2,22 +2,27 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Requests\CreateReview;
+use App\Http\Resources\Review\ReviewCollection;
+use App\Http\Resources\Review\ReviewResource;
 use App\Models\Restaurant;
-use App\Http\Resources\Review as ReviewResource;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewsController extends BaseAPIController
 {
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
+     * @param Restaurant $restaurant
      * @return ResourceCollection
      */
     public function index(Request $request, Restaurant $restaurant)
     {
-        return new ResourceCollection($restaurant->reviews()
+        return new ReviewCollection($restaurant->reviews()
             ->paginate($request->query('per_page'))
             ->appends($request->query->all()));
     }
@@ -25,11 +30,13 @@ class ReviewsController extends BaseAPIController
     /**
      * Display reviews with pending replies.
      *
+     * @param Request $request
+     * @param Restaurant $restaurant
      * @return ResourceCollection
      */
     public function pending(Request $request, Restaurant $restaurant)
     {
-        return new ResourceCollection($restaurant->reviews()
+        return new ReviewCollection($restaurant->reviews()
             ->scopes(['withPendingReplies'])
             ->paginate($request->query('per_page'))
             ->appends($request->query->all()));
@@ -38,21 +45,49 @@ class ReviewsController extends BaseAPIController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateReview $request
+     * @param Restaurant $restaurant
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request, Restaurant $restaurant)
+    public function store(CreateReview $request, Restaurant $restaurant)
     {
+        $review = new Review();
+        $review->restaurant_id = $restaurant->getKey();
+        $review->fill($request->only($review->getFillable()));
+
+        /**
+         * @var $user User
+         */
+        $user = Auth::user();
+        if (!$user->hasRole('admin')) {
+            $review->user_id = $user->getKey();
+        }
+
+        $review->save();
+
+        return (new ReviewResource($review))
+            ->response()
+            ->header('Location', route('api::restaurant::show::reviews::show', [
+                'restaurant' => $restaurant->getKey(),
+                'review' => $review->getKey()
+            ]));
     }
 
     /**
      * Display the specified resource.
      *
+     * @param Request $request
+     * @param Restaurant $restaurant
      * @param Review $review
      * @return ReviewResource
      */
-    public function show(Restaurant $restaurant, Review $review)
+    public function show(Request $request, Restaurant $restaurant, Review $review)
     {
+        if ($request->has('include')) {
+            $relations = array_intersect(explode(',', $request->query('include')), $review->getExportableRelations());
+            $review->load($relations);
+        };
+
         return new ReviewResource($review);
     }
 

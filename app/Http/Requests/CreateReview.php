@@ -28,13 +28,8 @@ class CreateReview extends FormRequest
     public function rules()
     {
         return [
-            'restaurant_id' => [
-                'required',
-                'exists:restaurant,id',
-                Rule::unique('reviews')->where(function ($query) {
-                    return $query;
-                })
-            ]
+            'rating' => ['required', 'between:1,5'],
+            'comment' => ['required']
         ];
     }
 }

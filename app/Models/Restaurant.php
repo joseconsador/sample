@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 
 class Restaurant extends Model
 {
+    protected $exportableRelations = ['owner', 'reviews'];
     protected $fillable = ['name'];
 
     /**

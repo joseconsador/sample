@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Restaurant;
+use App\Models\Review;
 use App\Policies\RestaurantPolicy;
+use App\Policies\ReviewPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Laravel\Passport\Passport;
 
@@ -16,6 +18,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Restaurant::class => RestaurantPolicy::class,
+        Review::class => ReviewPolicy::class,
     ];
 
     /**

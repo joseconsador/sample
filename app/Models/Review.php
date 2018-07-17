@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 
 class Review extends Model
 {
+    protected $exportableRelations = ['restaurant', 'user'];
     protected $fillable = ['comment', 'restaurant_id', 'rating'];
 
     /**

@@ -32,6 +32,7 @@ class RouteServiceProvider extends ServiceProvider
              * @var $restaurant Restaurant
              */
             $restaurant = Restaurant::where('id', $value)->firstOrFail();
+
             if ($route->hasParameter('review') &&
                 is_null($restaurant->reviews()->find($route->parameter('review')))
             ) {

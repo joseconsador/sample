@@ -44,6 +44,12 @@ class RestaurantResource extends JsonResource
         ];
     }
 
+    /**
+     * Add the included relationships to the response.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return array
+     */
     public function with($request)
     {
         return [
