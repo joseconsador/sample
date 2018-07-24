@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class Restaurant extends Model
 {
@@ -51,7 +52,7 @@ class Restaurant extends Model
      *
      * @return int|null
      */
-    public function getAverageRating()
+    public function getAverageRatingAttribute()
     {
         $expiresAt = now()->addMinutes(config('cache.lifetime.average_rating'));
         return Cache::remember(
@@ -61,5 +62,13 @@ class Restaurant extends Model
                 return $this->reviews()->avg('rating');
             }
         );
+    }
+
+    public function scopeWithAverageRating(Builder $query) {
+        return $query
+                ->select('restaurants.*')
+                ->leftJoin('reviews', 'reviews.restaurant_id', '=', 'restaurants.id')
+                ->addSelect(DB::raw('AVG(reviews.rating) as average_rating'))
+                ->groupBy('restaurants.id');
     }
 }

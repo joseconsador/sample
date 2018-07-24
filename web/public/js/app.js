@@ -52546,7 +52546,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -52584,7 +52584,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['reviews', 'users', 'ownerId'],
     methods: {
         getUser: function getUser(id) {
-            console.log(id);
             return this.users[id];
         }
     },

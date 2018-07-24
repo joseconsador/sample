@@ -28,7 +28,7 @@ class RestaurantResource extends JsonResource
             'attributes' => [
                 'name' => $this->name,
                 'owner_id' => $this->owner_id,
-                'average_rating' => round(min($this->resource->getAverageRating(), 5), 2),
+                'average_rating' => round(min($this->resource->average_rating, 5), 2),
                 'created_at' => (string) $this->created_at,
                 'updated_at' => (string) $this->updated_at,
             ],

@@ -23,7 +23,6 @@
         props: ['reviews', 'users', 'ownerId'],
         methods: {
             getUser(id) {
-                console.log(id);
                 return this.users[id];
             }
         },
