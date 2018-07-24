@@ -7,18 +7,19 @@
                     v-bind:rating=restaurant.attributes.average_rating
             />
         </div>
+
     </div>
 </template>
 
 <script>
-    import Restaurant from './Restaurant.vue'
+    import Restaurant from './Restaurant.vue';
 
     export default {
         components: {
-            'restaurant': Restaurant
+            'restaurant': Restaurant,
         },
-        props: ['restaurants'],
-        name: "RestaurantList"
+        props: ['restaurants', 'loader'],
+        name: "RestaurantList",
     }
 </script>
 

@@ -37,6 +37,7 @@ Vue.use(VueRouter);
 import App from './components/views/App'
 import Home from './components/views/Home'
 import Auth from './components/views/Auth'
+import Restaurants from './components/Restaurants/Restaurants'
 
 const router = new VueRouter({
     mode: 'history',
@@ -59,6 +60,11 @@ const router = new VueRouter({
                 shouldLogin: false
             }
         },
+        {
+            path: '/restaurants/:page',
+            name: 'restaurants',
+            component: Restaurants,
+        }
     ],
 });
 
