@@ -4,8 +4,8 @@
 
         <p>
             <router-link :to="{ name: 'home' }">Home</router-link> |
-            <router-link :to="{ name: 'hello' }">Hello World</router-link>
-            <router-link :to="{ name: 'login' }">Login</router-link>
+            <router-link v-if="!loggedIn" :to="{ name: 'login' }">Login</router-link>
+            <router-link v-if="loggedIn" :to="{ name: 'logout' }">Logout</router-link>
         </p>
 
         <div class="container">
@@ -14,5 +14,9 @@
     </div>
 </template>
 <script>
-    export default {}
+    export default {
+        computed: {
+            loggedIn() { return this.$store.state.loggedIn }
+        }
+    }
 </script>

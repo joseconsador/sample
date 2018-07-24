@@ -12,6 +12,6 @@
 */
 
 Route::post('/login', 'Auth\LoginController@login');
-Route::get('/logout', 'Auth\LoginController@logout');
+Route::delete('/logout', 'Auth\LoginController@logout');
 Route::get('/api/{any}', 'SpaController@proxy')->where('any', '.*');
 Route::get('/{any}', 'SpaController@index')->where('any', '.*');

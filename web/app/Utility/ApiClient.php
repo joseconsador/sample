@@ -46,6 +46,26 @@ class ApiClient
     }
 
     /**
+     * @param $refreshToken
+     * @return mixed
+     * @throws GuzzleException
+     */
+    public function refreshToken($refreshToken) {
+        $options = [
+            'method' => 'post',
+            'form_params' => [
+                'grant_type' => 'refresh_token',
+                'client_id' => config('services.restaurant.client_id'),
+                'client_secret' => config('services.restaurant.client_secret'),
+                'refresh_token' => $refreshToken,
+                'scope' => '',
+            ],
+        ];
+
+        return json_decode($this->send('/oauth/token', $options)->getBody(), true);
+    }
+
+    /**
      * @param $endpoint
      * @param $options
      * @param $accessToken

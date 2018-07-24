@@ -1,4 +1,6 @@
 import VueRouter from 'vue-router'
+import Vuex from 'vuex'
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -16,11 +18,25 @@ window.Vue = require('vue');
  */
 
 
-Vue.use(VueRouter)
+// Global state store
+const store = new Vuex.Store({
+    state: {
+        loggedIn: localStorage.getItem('logged-in') || false,
+    },
+    mutations: {
+        setLoggedIn (state, loggedIn) {
+            localStorage.setItem('logged-in', loggedIn);
+            state.loggedIn = loggedIn;
+            console.log(state.loggedIn);
+        },
+    }
+});
+
+Vue.use(VueRouter);
 
 import App from './components/views/App'
 import Home from './components/views/Home'
-import Login from './components/views/Login'
+import Auth from './components/views/Auth'
 
 const router = new VueRouter({
     mode: 'history',
@@ -33,17 +49,31 @@ const router = new VueRouter({
         {
             path: '/login',
             name: 'login',
-            component: Login,
+            component: Auth,
         },
         {
             path: '/logout',
             name: 'logout',
+            component: Auth,
+            props: {
+                shouldLogin: false
+            }
         },
     ],
+});
+
+// Setup auth guard
+router.beforeEach((to, from, next) => {
+    if (!['login', 'logout'].includes(to.name) && !store.state.loggedIn) {
+        next('login');
+    } else {
+        next();
+    }
 });
 
 const app = new Vue({
     el: '#app',
     components: { App },
     router,
+    store,
 });

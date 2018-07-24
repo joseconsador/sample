@@ -52,4 +52,12 @@ class LoginController extends Controller
             return response($e->getResponse()->getBody(), $e->getResponse()->getStatusCode());
         }
     }
+
+    public function logout()
+    {
+        Cookie::queue('api_token', null, -1);
+        Cookie::queue('refresh_token', null, -1);
+
+        return response('ok');
+    }
 }
