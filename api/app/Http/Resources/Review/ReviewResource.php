@@ -18,7 +18,7 @@ class ReviewResource extends JsonResource
     {
         return [
             'type' => 'review',
-            'id' => (string) $this->resource->getKey(),
+            'id' => $this->resource->getKey(),
             'attributes' => [
                 'user_id' => $this->user_id,
                 'restaurant_id' => $this->restaurant_id,

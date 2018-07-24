@@ -5,6 +5,7 @@
                     v-bind:name=restaurant.attributes.name
                     description="jojo"
                     v-bind:rating=restaurant.attributes.average_rating
+                    v-bind:id=restaurant.id
             />
         </div>
 
@@ -12,7 +13,7 @@
 </template>
 
 <script>
-    import Restaurant from './Restaurant.vue';
+    import Restaurant from './RestaurantListItem.vue';
 
     export default {
         components: {

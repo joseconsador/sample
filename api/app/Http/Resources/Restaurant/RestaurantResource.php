@@ -24,11 +24,11 @@ class RestaurantResource extends JsonResource
     {
         return [
             'type' => 'restaurant',
-            'id' => (string) $this->resource->getKey(),
+            'id' => $this->resource->getKey(),
             'attributes' => [
                 'name' => $this->name,
                 'owner_id' => $this->owner_id,
-                'average_rating' => $this->resource->getAverageRating(),
+                'average_rating' => round(min($this->resource->getAverageRating(), 5), 2),
                 'created_at' => (string) $this->created_at,
                 'updated_at' => (string) $this->updated_at,
             ],

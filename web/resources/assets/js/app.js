@@ -38,6 +38,7 @@ import App from './components/views/App'
 import Home from './components/views/Home'
 import Auth from './components/views/Auth'
 import Restaurants from './components/Restaurants/Restaurants'
+import Restaurant from './components/Restaurants/Restaurant'
 
 const router = new VueRouter({
     mode: 'history',
@@ -64,6 +65,11 @@ const router = new VueRouter({
             path: '/restaurants/:page',
             name: 'restaurants',
             component: Restaurants,
+        },
+        {
+            path: '/restaurant/:id',
+            name: 'restaurant',
+            component: Restaurant,
         }
     ],
 });

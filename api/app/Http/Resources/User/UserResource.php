@@ -17,7 +17,7 @@ class UserResource extends JsonResource
     {
         return [
             'type' => 'user',
-            'id' => (string) $this->resource->getKey(),
+            'id' => $this->resource->getKey(),
             'attributes' => [
                 'name' => $this->name,
                 'email' => $this->email,
