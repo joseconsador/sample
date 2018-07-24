@@ -27,7 +27,7 @@ class CreateRestaurant extends FormRequest
     {
         return [
             'name' => 'required',
-            'owner_id' => ['required', new HasRole(['owner'])],
+            'owner_id' => ['sometimes', 'required', new HasRole(['owner'])],
         ];
     }
 }

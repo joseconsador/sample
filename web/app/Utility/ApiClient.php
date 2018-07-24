@@ -73,16 +73,11 @@ class ApiClient
      * @throws GuzzleException
      */
     public function proxyRequest($endpoint, $options, $accessToken) {
-        $options = array_merge(
-            [
-                'headers' => [
-                    'Authorization' => 'Bearer ' . $accessToken,
-                ],
-            ],
-            $options
-        );
+        $headers = [
+            'Authorization' => 'Bearer ' . $accessToken,
+        ];
 
-        return $this->send($endpoint, $options);
+        return $this->send($endpoint, $options, $headers);
     }
 
     /**
@@ -90,16 +85,17 @@ class ApiClient
      *
      * @param $endpoint
      * @param $options
+     * @param array $headers
      * @return mixed
      * @throws GuzzleException
      */
-    private function send($endpoint, $options) {
+    private function send($endpoint, $options, $headers = []) {
         $options = array_merge(
             [
                 'method' => 'GET',
-                'headers' => [
+                'headers' => array_merge([
                     'Accept' => 'application/json',
-                ],
+                ], $headers),
             ],
             $options
         );

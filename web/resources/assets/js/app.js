@@ -69,6 +69,7 @@ import Home from './components/views/Home'
 import Auth from './components/views/Auth'
 import Restaurants from './components/Restaurants/Restaurants'
 import Restaurant from './components/Restaurants/Restaurant'
+import EditRestaurant from './components/Restaurants/Edit'
 
 const router = new VueRouter({
     mode: 'history',
@@ -97,10 +98,15 @@ const router = new VueRouter({
             component: Restaurants,
         },
         {
-            path: '/restaurant/:id',
+            path: '/restaurant/:id(\\d+)',
             name: 'restaurant',
             component: Restaurant,
-        }
+        },
+        {
+            path: '/restaurant/new',
+            name: 'addRestaurant',
+            component: EditRestaurant,
+        },
     ],
 });
 
@@ -108,6 +114,8 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
     if (!['login', 'logout'].includes(to.name) && !store.state.loggedIn) {
         next('login');
+    } else if (['addRestaurant'].includes(to.name) && !store.state.user.hasRole('owner')) {
+        next('home')
     } else {
         next();
     }

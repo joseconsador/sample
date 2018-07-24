@@ -49,8 +49,11 @@ class RestaurantsController extends BaseAPIController
          * @var $user User
          */
         $user = Auth::user();
-        if (!$user->hasRole('admin')) {
-            $restaurant->owner_id = $user->getKey();
+
+        $restaurant->owner_id = $user->getKey();
+
+        if ($user->hasRole('admin') && $request->has('owner_id')) {
+            $restaurant->owner_id = $request->post('owner_id');
         }
 
         $restaurant->save();

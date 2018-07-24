@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class Restaurant extends Model
 {
     protected $exportableRelations = ['owner', 'reviews'];
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'description'];
 
     /**
      * Returns the App\Model\User that owns the restaurant.

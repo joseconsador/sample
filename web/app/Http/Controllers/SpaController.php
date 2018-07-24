@@ -25,11 +25,21 @@ class SpaController extends Controller
     }
 
     public function proxy(Request $request) {
-        if ($request->hasCookie('api_token')) {
-            $response = $this->apiClient->proxyRequest($request->getRequestUri(), [], $request->cookie('api_token'));
-            return response($response->getBody(), $response->getStatusCode(), ['Content-type' => 'application/json']);
-        } else if ($request->hasCookie('refresh_token')){
-            try {
+        try {
+            if ($request->hasCookie('api_token')) {
+                $options = ['method' => $request->method()];
+
+                if (in_array($request->method(), ['POST', 'PUT'])) {
+                    $options['form_params'] = $request->input();
+                }
+
+                $response = $this->apiClient->proxyRequest(
+                    $request->getRequestUri(),
+                    $options,
+                    $request->cookie('api_token')
+                );
+                return response($response->getBody(), $response->getStatusCode(), ['Content-type' => 'application/json']);
+            } else if ($request->hasCookie('refresh_token')){
                 $response = $this->apiClient->refreshToken($request->cookie('refresh_token'));
 
                 Cookie::queue('api_token', $response['access_token'], $response['expires_in'] / 60);
@@ -37,9 +47,9 @@ class SpaController extends Controller
 
                 $response = $this->apiClient->proxyRequest($request->getRequestUri(), [], $request->cookie('api_token'));
                 return response($response->getBody(), $response->getStatusCode(), ['Content-type' => 'application/json']);
-            } catch (RequestException $e) {
-                return response($e->getResponse()->getBody(), $e->getResponse()->getStatusCode());
             }
+        } catch (RequestException $e) {
+            return response($e->getResponse()->getBody(), $e->getResponse()->getStatusCode(), ['Content-type' => 'application/json']);
         }
 
         return response('Unauthenticated', 401);
