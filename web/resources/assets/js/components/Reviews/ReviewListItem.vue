@@ -3,7 +3,10 @@
         <star-rating v-bind:rating="rating" />
         <p>By: {{ user.name }}</p>
         <p>{{ comment }}</p>
-        <p>{{ reply }}</p>
+        <div v-if="reply != ''" class="alert alert-warning" role="alert">
+            <p><b>{{ owner.name }}: (Owner)</b></p>
+            {{ reply }}
+        </div>
     </div>
 </template>
 
@@ -14,7 +17,7 @@
         components: {
             'star-rating': Rating
         },
-        props: ['comment', 'id', 'rating', 'reply', 'user'],
+        props: ['comment', 'id', 'rating', 'reply', 'user', 'owner'],
         name: "ReviewListItem"
     }
 </script>

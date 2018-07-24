@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => ['auth:api'], 'as' => 'api::'], function () {
     // api/user routes
-    Route::group(['prefix' => 'users', 'as' => 'users::'], function() {
+    Route::group(['prefix' => 'users', 'as' => 'users::'], function () {
         Route::get('/me', 'API\UsersController@me');
         Route::get('/{user}', ['as' => 'show', 'uses' => 'API\UsersController@show'])->where('user', '[0-9]+');
     });

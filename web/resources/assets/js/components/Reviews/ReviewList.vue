@@ -7,6 +7,7 @@
                     v-bind:comment="review.attributes.comment"
                     v-bind:reply="review.attributes.reply"
                     v-bind:user="getUser(review.attributes.user_id)"
+                    v-bind:owner="getUser(ownerId)"
             />
         </li>
     </ul>
@@ -19,9 +20,10 @@
         components: {
           'review': Review
         },
-        props: ['reviews', 'users'],
+        props: ['reviews', 'users', 'ownerId'],
         methods: {
             getUser(id) {
+                console.log(id);
                 return this.users[id];
             }
         },

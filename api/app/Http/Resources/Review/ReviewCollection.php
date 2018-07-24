@@ -42,6 +42,6 @@ class ReviewCollection extends ResourceCollection
             }
         };
 
-        return ['include' => $included];
+        return ['included' => $included];
     }
 }

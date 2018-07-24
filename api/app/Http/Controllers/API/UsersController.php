@@ -7,14 +7,16 @@ use App\Http\Resources\User\UserResource;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-class UsersController extends BaseAPIController {
+class UsersController extends BaseAPIController
+{
 
     /**
      * Returns the currently logged in user.
      *
      * @return UserResource
      */
-    public function me() {
+    public function me()
+    {
         $user = User::findOrFail(Auth::id());
         $user->load('roles');
         return new UserResource($user);
@@ -27,7 +29,8 @@ class UsersController extends BaseAPIController {
      * @param User $user
      * @return UserResource
      */
-    public function show(ShowUserRequest $request, User $user) {
+    public function show(ShowUserRequest $request, User $user)
+    {
         $user->load('roles');
         return new UserResource($user);
     }

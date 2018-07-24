@@ -44,7 +44,6 @@ class LoginController extends Controller
     {
         try {
             $response = $this->apiClient->requestToken($request->post('email'), $request->post('password'));
-
             Cookie::queue('api_token', $response['access_token'], $response['expires_in'] / 60);
             Cookie::queue('refresh_token', $response['refresh_token']);
             return response('ok');

@@ -1,13 +1,11 @@
 <template>
     <div>
         <div class="card">
-            <!--        <img class="card-img-top" src=".../100px180/" alt="Card image cap">-->
             <div class="card-body">
                 <h5 class="card-title">{{ name }}</h5>
                 <p class="card-text">{{ description }}</p>
                 <star-rating
                         v-bind:rating="rating"
-                        v-bind:read-only=false
                         v-bind:starSize=30 />
             </div>
         </div>
@@ -15,7 +13,7 @@
             <h4>Reviews</h4>
         </p>
         <hr/>
-        <reviews v-bind:reviews="reviews" v-bind:users="users"/>
+        <reviews v-bind:reviews="reviews" v-bind:users="users" v-bind:ownerId="ownerId"/>
     </div>
 </template>
 
@@ -34,20 +32,28 @@
                 description: "",
                 rating: 0,
                 reviews: {},
-                users: []
+                users: [],
+                ownerId: 0, // Restaurant owner ID
             };
         },
         methods: {
             fetch: function() {
-                axios.get('/api/restaurants/' + this.$route.params.id).then(resp => {
+                axios.get('/api/restaurants/' + this.$route.params.id + '?include=owner').then(resp => {
                     var restaurant = resp.data;
                     this.name = restaurant.data.attributes.name;
                     this.rating = restaurant.data.attributes.average_rating;
+                    this.ownerId = restaurant.data.attributes.owner_id;
+
+                    restaurant.included.forEach(resource => {
+                        if (resource.type == "user") {
+                            this.users[resource.id] = resource.attributes;
+                        }
+                    });
 
                     axios.get('/api/restaurants/' + this.$route.params.id + '/reviews?include=user').then(resp => {
                         this.reviews = resp.data.data;
 
-                        var users = resp.data.include.users;
+                        var users = resp.data.included.users;
 
                         users.forEach(user => {
                             this.users[user.id] = user.attributes;

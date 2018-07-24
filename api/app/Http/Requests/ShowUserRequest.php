@@ -9,7 +9,8 @@ class ShowUserRequest extends FormRequest
     /**
      * @return boolean
      */
-    public function authorize() {
+    public function authorize()
+    {
         return $this->user()->can('view', $this->route('user'));
     }
 }

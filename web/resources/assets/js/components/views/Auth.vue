@@ -35,8 +35,11 @@
                     email: this.email,
                     password: this.password
                 }).then(resp => {
-                    this.$store.commit('setLoggedIn', true);
-                    this.$router.push('/');
+                    axios.get('/api/users/me').then(resp => {
+                        this.$store.commit('setUser', resp.data.data);
+                        this.$store.commit('setLoggedIn', true);
+                        this.$router.push('/');
+                    });
                     return resp;
                 }).catch(err => {
                     this.$store.commit('setLoggedIn', false);

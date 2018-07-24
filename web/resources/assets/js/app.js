@@ -1,5 +1,6 @@
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
+import VuexPersist from 'vuex-persist';
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -17,17 +18,45 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+const vuexLocalStorage = new VuexPersist({
+    key: 'vuex', // The key to store the state on in the storage provider.
+    storage: window.localStorage, // or window.sessionStorage or localForage
+    // Function that passes the state and returns the state with only the objects you want to store.
+    // reducer: state => state,
+    // Function that passes a mutation and lets you decide if it should update the state in localStorage.
+    // filter: mutation => (true)
+});
 
 // Global state store
 const store = new Vuex.Store({
+    plugins: [vuexLocalStorage.plugin],
     state: {
-        loggedIn: localStorage.getItem('logged-in') || false,
+        loggedIn: false,
+        user: {
+            name: "",
+            roles: {},
+            hasRole: function(role) {
+                let hasRole = false;
+                this.roles.every(function (r, i) {
+                    if (r.name == role) {
+                        hasRole = true;
+                        return false;
+                    }
+
+                    return true;
+                });
+
+                return hasRole;
+            }
+        }
     },
     mutations: {
+        setUser (state, user) {
+            state.user.name = user.attributes.name;
+            state.user.roles = user.attributes.roles;
+        },
         setLoggedIn (state, loggedIn) {
-            localStorage.setItem('logged-in', loggedIn);
             state.loggedIn = loggedIn;
-            console.log(state.loggedIn);
         },
     }
 });

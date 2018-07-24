@@ -23,7 +23,7 @@ class UserResource extends JsonResource
                 'email' => $this->email,
                 'created_at' => (string) $this->created_at,
                 'updated_at' => (string) $this->updated_at,
-                'roles' => $this->whenLoaded('roles', function() {
+                'roles' => $this->whenLoaded('roles', function () {
                     return new RoleCollection($this->roles);
                 })
             ],

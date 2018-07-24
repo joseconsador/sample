@@ -1,24 +1,15 @@
 <template>
     <div>
-        <restaurant-list v-bind:restaurants=restaurantData />
+
     </div>
 </template>
 
 <script>
-    import RestaurantList from '../Restaurants/RestaurantList';
     export default {
-        components: {
-            'restaurant-list': RestaurantList
-        },
-        data: function () {
-            return {
-                restaurantData: {}
-            }
-        },
         mounted() {
-            axios.get('/api/restaurants').then(resp => {
-                this.restaurantData = resp.data.data;
-            });
+            if (this.$store.state.user.hasRole('user') || this.$store.state.user.hasRole('owner')) {
+                this.$router.push('/restaurants/1');
+            }
         }
     }
 </script>

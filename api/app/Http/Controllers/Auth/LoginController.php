@@ -27,7 +27,8 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/token';
 
-    public function token() {
+    public function token()
+    {
         return 'ok';
     }
 }
