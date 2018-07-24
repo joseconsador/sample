@@ -62,6 +62,7 @@ const store = new Vuex.Store({
 });
 
 Vue.use(VueRouter);
+Vue.use(require('vue-moment'));
 
 import App from './components/views/App'
 import Home from './components/views/Home'

@@ -3,9 +3,7 @@
         <li class="list-group-item" v-for="review in reviews">
             <review
                     v-bind:id="review.id"
-                    v-bind:rating="review.attributes.rating"
-                    v-bind:comment="review.attributes.comment"
-                    v-bind:reply="review.attributes.reply"
+                    v-bind:review="review.attributes"
                     v-bind:user="getUser(review.attributes.user_id)"
                     v-bind:owner="getUser(ownerId)"
             />

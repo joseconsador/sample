@@ -14,11 +14,15 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(App\Models\Review::class, function (Faker $faker) {
+    $created = $faker->dateTime();
+    $updated = $faker->dateTimeBetween($created);
     return [
         'user_id' => 1,
         'rating' => $faker->numberBetween(1, 5),
         'comment' => $faker->paragraph,
         'reply' => $faker->randomElement(['', $faker->paragraph]),
+        'created_at' => $created,
+        'updated_at' => $updated
     ];
 });
 

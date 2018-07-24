@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h2>Restaurant</h2>
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">{{ name }}</h5>
@@ -9,6 +10,10 @@
                         v-bind:starSize=30 />
             </div>
         </div>
+        <p>
+            <h4>Highlights</h4>
+        </p>
+        <hr/>
         <p>
             <h4>Reviews</h4>
         </p>
