@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h1>Restaurant Reviews</h1>
 
         <p>

@@ -25,8 +25,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
         Route::bind('restaurant', function ($value, $route) {
             /**
              * @var $restaurant Restaurant

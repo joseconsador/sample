@@ -1,13 +1,9 @@
 <template>
-    <div class="card" style="width: 18rem;">
-<!--        <img class="card-img-top" src=".../100px180/" alt="Card image cap">-->
-        <div class="card-body">
-            <h5 class="card-title">{{ name }}</h5>
-            <p class="card-text">{{ description }}</p>
-            <star-rating v-bind:rating="rating" v-bind:star-size="14" />
-
-            <router-link :to="{ name: 'restaurant', params: {id: id }}">View</router-link>
-        </div>
+    <div>
+        <h5 class="card-title">{{ name }}</h5>
+        <p class="card-text">{{ description }}</p>
+        <star-rating v-bind:rating="rating" v-bind:star-size="14" />
+        <router-link :to="{ name: 'restaurant', params: {id: id }}">View</router-link>
     </div>
 </template>
 

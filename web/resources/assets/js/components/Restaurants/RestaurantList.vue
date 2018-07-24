@@ -1,14 +1,15 @@
 <template>
     <div>
-        <div v-for="restaurant in restaurants">
+        <ul class="list-group">
+            <li class="list-group-item" v-for="restaurant in restaurants">
             <restaurant
                     v-bind:name=restaurant.attributes.name
                     description="jojo"
                     v-bind:rating=restaurant.attributes.average_rating
                     v-bind:id=restaurant.id
             />
-        </div>
-
+            </li>
+        </ul>
     </div>
 </template>
 

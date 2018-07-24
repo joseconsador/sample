@@ -23,9 +23,12 @@ class UserResource extends JsonResource
                 'email' => $this->email,
                 'created_at' => (string) $this->created_at,
                 'updated_at' => (string) $this->updated_at,
+                'roles' => $this->whenLoaded('roles', function() {
+                    return new RoleCollection($this->roles);
+                })
             ],
             'links' => [
-                'self' => '',//route('api::restaurant::show', ['restaurant' => $this->resource->getKey()])
+                'self' => route('api::users::show', ['user' => $this->id]),
             ]
         ];
     }

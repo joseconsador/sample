@@ -2,10 +2,10 @@
     <star-rating v-bind:increment="0.01"
                  v-bind:max-rating="5"
                  v-bind:rating="rating"
+                 v-bind:star-size=starSize
+                 v-bind:read-only=readOnly
                  inactive-color="#000"
                  active-color="#f00"
-                 v-bind:star-size="starSize"
-                 v-bind:read-only="readOnly"
     >
     </star-rating>
 </template>
@@ -20,11 +20,9 @@
                 default: 0
             },
             starSize: {
-                type: Number,
                 default: 20
             },
             readOnly: {
-                type: Boolean,
                 default: true
             }
         },

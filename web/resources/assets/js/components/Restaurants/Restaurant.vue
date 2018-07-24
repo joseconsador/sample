@@ -5,11 +5,17 @@
             <div class="card-body">
                 <h5 class="card-title">{{ name }}</h5>
                 <p class="card-text">{{ description }}</p>
-                <star-rating v-bind:rating="rating" read-only="true"/>
+                <star-rating
+                        v-bind:rating="rating"
+                        v-bind:read-only=false
+                        v-bind:starSize=30 />
             </div>
         </div>
-        <h4>Reviews</h4>
-        <reviews v-bind:reviews="reviews"/>
+        <p>
+            <h4>Reviews</h4>
+        </p>
+        <hr/>
+        <reviews v-bind:reviews="reviews" v-bind:users="users"/>
     </div>
 </template>
 
@@ -28,6 +34,7 @@
                 description: "",
                 rating: 0,
                 reviews: {},
+                users: []
             };
         },
         methods: {
@@ -37,8 +44,14 @@
                     this.name = restaurant.data.attributes.name;
                     this.rating = restaurant.data.attributes.average_rating;
 
-                    axios.get('/api/restaurants/' + this.$route.params.id + '/reviews').then(resp => {
+                    axios.get('/api/restaurants/' + this.$route.params.id + '/reviews?include=user').then(resp => {
                         this.reviews = resp.data.data;
+
+                        var users = resp.data.include.users;
+
+                        users.forEach(user => {
+                            this.users[user.id] = user.attributes;
+                        });
                     });
                 });
             }

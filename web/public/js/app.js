@@ -51384,7 +51384,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "container" }, [
     _c("h1", [_vm._v("Restaurant Reviews")]),
     _vm._v(" "),
     _c(
@@ -51538,7 +51538,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -51584,6 +51584,7 @@ module.exports = function listToStyles (parentId, list) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__RestaurantListItem_vue__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__RestaurantListItem_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__RestaurantListItem_vue__);
+//
 //
 //
 //
@@ -51695,7 +51696,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -51708,10 +51709,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Reviews_Rating__ = __webpack_require__(82);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Reviews_Rating___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Reviews_Rating__);
-//
-//
-//
-//
 //
 //
 //
@@ -51758,28 +51755,23 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card", staticStyle: { width: "18rem" } }, [
-    _c(
-      "div",
-      { staticClass: "card-body" },
-      [
-        _c("h5", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.name))]),
-        _vm._v(" "),
-        _c("p", { staticClass: "card-text" }, [
-          _vm._v(_vm._s(_vm.description))
-        ]),
-        _vm._v(" "),
-        _c("star-rating", { attrs: { rating: _vm.rating, "star-size": 14 } }),
-        _vm._v(" "),
-        _c(
-          "router-link",
-          { attrs: { to: { name: "restaurant", params: { id: _vm.id } } } },
-          [_vm._v("View")]
-        )
-      ],
-      1
-    )
-  ])
+  return _c(
+    "div",
+    [
+      _c("h5", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.name))]),
+      _vm._v(" "),
+      _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.description))]),
+      _vm._v(" "),
+      _c("star-rating", { attrs: { rating: _vm.rating, "star-size": 14 } }),
+      _vm._v(" "),
+      _c(
+        "router-link",
+        { attrs: { to: { name: "restaurant", params: { id: _vm.id } } } },
+        [_vm._v("View")]
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -51799,25 +51791,29 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    _vm._l(_vm.restaurants, function(restaurant) {
-      return _c(
-        "div",
-        [
-          _c("restaurant", {
-            attrs: {
-              name: restaurant.attributes.name,
-              description: "jojo",
-              rating: restaurant.attributes.average_rating,
-              id: restaurant.id
-            }
-          })
-        ],
-        1
-      )
-    })
-  )
+  return _c("div", [
+    _c(
+      "ul",
+      { staticClass: "list-group" },
+      _vm._l(_vm.restaurants, function(restaurant) {
+        return _c(
+          "li",
+          { staticClass: "list-group-item" },
+          [
+            _c("restaurant", {
+              attrs: {
+                name: restaurant.attributes.name,
+                description: "jojo",
+                rating: restaurant.attributes.average_rating,
+                id: restaurant.id
+              }
+            })
+          ],
+          1
+        )
+      })
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -51915,6 +51911,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -51973,49 +51976,82 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("form", { attrs: { action: "" }, on: { submit: _vm.login } }, [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.email,
-            expression: "email"
-          }
-        ],
-        attrs: { type: "text", placeholder: "Email" },
-        domProps: { value: _vm.email },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+          _vm._v("Email address")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.email,
+              expression: "email"
             }
-            _vm.email = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.password,
-            expression: "password"
-          }
-        ],
-        attrs: { type: "password", placeholder: "Password" },
-        domProps: { value: _vm.password },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "email",
+            id: "exampleInputEmail1",
+            "aria-describedby": "emailHelp",
+            placeholder: "Enter email"
+          },
+          domProps: { value: _vm.email },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.email = $event.target.value
             }
-            _vm.password = $event.target.value
           }
-        }
-      }),
+        }),
+        _vm._v(" "),
+        _c(
+          "small",
+          { staticClass: "form-text text-muted", attrs: { id: "emailHelp" } },
+          [_vm._v("We'll never share your email with anyone else.")]
+        )
+      ]),
       _vm._v(" "),
-      _c("button", [_vm._v("Login")])
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "exampleInputPassword1" } }, [
+          _vm._v("Password")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.password,
+              expression: "password"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "password",
+            id: "exampleInputPassword1",
+            placeholder: "Password"
+          },
+          domProps: { value: _vm.password },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.password = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_vm._v("Submit")]
+      )
     ])
   ])
 }
@@ -52283,7 +52319,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -52313,6 +52349,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -52327,7 +52369,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             name: "",
             description: "",
             rating: 0,
-            reviews: {}
+            reviews: {},
+            users: []
         };
     },
     methods: {
@@ -52339,8 +52382,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.name = restaurant.data.attributes.name;
                 _this.rating = restaurant.data.attributes.average_rating;
 
-                axios.get('/api/restaurants/' + _this.$route.params.id + '/reviews').then(function (resp) {
+                axios.get('/api/restaurants/' + _this.$route.params.id + '/reviews?include=user').then(function (resp) {
                     _this.reviews = resp.data.data;
+
+                    var users = resp.data.include.users;
+
+                    users.forEach(function (user) {
+                        _this.users[user.id] = user.attributes;
+                    });
                 });
             });
         }
@@ -52437,7 +52486,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -52463,15 +52512,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    'review': __WEBPACK_IMPORTED_MODULE_0__ReviewListItem___default.a
-  },
-  props: ['reviews'],
-  name: "ReviewList"
+    components: {
+        'review': __WEBPACK_IMPORTED_MODULE_0__ReviewListItem___default.a
+    },
+    props: ['reviews', 'users'],
+    methods: {
+        getUser: function getUser(id) {
+            return this.users[id];
+        }
+    },
+    name: "ReviewList"
 });
 
 /***/ }),
@@ -52560,7 +52615,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -52571,6 +52626,9 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Rating__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Rating___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Rating__);
+//
 //
 //
 //
@@ -52580,8 +52638,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['comment', 'id', 'rating', 'reply'],
+    components: {
+        'star-rating': __WEBPACK_IMPORTED_MODULE_0__Rating___default.a
+    },
+    props: ['comment', 'id', 'rating', 'reply', 'user'],
     name: "ReviewListItem"
 });
 
@@ -52593,13 +52656,19 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("p", [_vm._v(_vm._s(_vm.rating))]),
-    _vm._v(" "),
-    _c("p", [_vm._v(_vm._s(_vm.comment))]),
-    _vm._v(" "),
-    _c("p", [_vm._v(_vm._s(_vm.reply))])
-  ])
+  return _c(
+    "div",
+    [
+      _c("star-rating", { attrs: { rating: _vm.rating } }),
+      _vm._v(" "),
+      _c("p", [_vm._v("By: " + _vm._s(_vm.user.name))]),
+      _vm._v(" "),
+      _c("p", [_vm._v(_vm._s(_vm.comment))]),
+      _vm._v(" "),
+      _c("p", [_vm._v(_vm._s(_vm.reply))])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -52632,7 +52701,8 @@ var render = function() {
               id: review.id,
               rating: review.attributes.rating,
               comment: review.attributes.comment,
-              reply: review.attributes.reply
+              reply: review.attributes.reply,
+              user: _vm.getUser(review.attributes.user_id)
             }
           })
         ],
@@ -52737,7 +52807,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -52772,11 +52842,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             default: 0
         },
         starSize: {
-            type: Number,
             default: 20
         },
         readOnly: {
-            type: Boolean,
             default: true
         }
     },
@@ -52806,10 +52874,10 @@ var render = function() {
       increment: 0.01,
       "max-rating": 5,
       rating: _vm.rating,
-      "inactive-color": "#000",
-      "active-color": "#f00",
       "star-size": _vm.starSize,
-      "read-only": _vm.readOnly
+      "read-only": _vm.readOnly,
+      "inactive-color": "#000",
+      "active-color": "#f00"
     }
   })
 }
@@ -52846,16 +52914,21 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("star-rating", {
-              attrs: { rating: _vm.rating, "read-only": "true" }
+              attrs: { rating: _vm.rating, "read-only": false, starSize: 30 }
             })
           ],
           1
         )
       ]),
       _vm._v(" "),
+      _c("p"),
       _c("h4", [_vm._v("Reviews")]),
       _vm._v(" "),
-      _c("reviews", { attrs: { reviews: _vm.reviews } })
+      _c("p"),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c("reviews", { attrs: { reviews: _vm.reviews, users: _vm.users } })
     ],
     1
   )

@@ -30,8 +30,4 @@ class LoginController extends Controller
     public function token() {
         return 'ok';
     }
-
-    public function reload() {
-        return 'ok';
-    }
 }
