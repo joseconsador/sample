@@ -14,6 +14,11 @@
 
 <script>
     export default {
+        props: {
+            id: {
+                type: Number
+            }
+        },
         data: function() {
             return {
                 name: "",

@@ -107,6 +107,11 @@ const router = new VueRouter({
             name: 'addRestaurant',
             component: EditRestaurant,
         },
+        {
+            path: '/restaurant/edit/:id(\\d+)',
+            name: 'editRestaurant',
+            component: EditRestaurant,
+        },
     ],
 });
 

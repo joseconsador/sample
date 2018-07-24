@@ -26,7 +26,11 @@ class RestaurantPolicy
      */
     public function view(User $user, Restaurant $restaurant)
     {
-        //
+        if ($user->hasRole('owner')) {
+            return ($restaurant->owner->getKey() == $user->getKey());
+        }
+
+        return true;
     }
 
     /**

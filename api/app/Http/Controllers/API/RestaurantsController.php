@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Requests\CreateRestaurant;
+use App\Http\Requests\ShowRestaurantRequest;
 use App\Http\Requests\UpdateRestaurant;
 use App\Http\Resources\Restaurant\RestaurantCollection;
 use App\Http\Resources\Restaurant\RestaurantResource;
@@ -66,11 +67,11 @@ class RestaurantsController extends BaseAPIController
     /**
      * Display the specified resource.
      *
-     * @param Request $request
+     * @param ShowRestaurantRequest $request
      * @param  \App\Models\Restaurant $restaurant
      * @return RestaurantResource
      */
-    public function show(Request $request, Restaurant $restaurant)
+    public function show(ShowRestaurantRequest $request, Restaurant $restaurant)
     {
         if ($request->has('include')) {
             $relations = array_intersect(

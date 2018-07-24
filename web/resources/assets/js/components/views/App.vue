@@ -6,6 +6,9 @@
             <li class="nav-item">
                 <router-link class="nav-link" :to="{ name: 'home' }">Home</router-link>
             </li>
+            <li class="nav-item" v-if="this.$store.state.user.hasRole('owner') || this.$store.state.user.hasRole('admin')">
+                <router-link class="nav-link" :to="{ name: 'addRestaurant' }">Add Restaurant</router-link>
+            </li>
             <li class="nav-item">
                 <router-link class="nav-link" v-if="!loggedIn" :to="{ name: 'login' }">Login</router-link>
                 <router-link class="nav-link" v-if="loggedIn" :to="{ name: 'logout' }">Logout</router-link>

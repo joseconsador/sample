@@ -43,29 +43,35 @@
         },
         methods: {
             fetch: function() {
-                axios.get('/api/restaurants/' + this.$route.params.id + '?include=owner').then(resp => {
-                    var restaurant = resp.data;
-                    this.name = restaurant.data.attributes.name;
-                    this.rating = restaurant.data.attributes.average_rating;
-                    this.ownerId = restaurant.data.attributes.owner_id;
-                    this.description = restaurant.data.attributes.description;
+                axios.get('/api/restaurants/' + this.$route.params.id + '?include=owner')
+                    .then(resp => {
+                        var restaurant = resp.data;
+                        this.name = restaurant.data.attributes.name;
+                        this.rating = restaurant.data.attributes.average_rating;
+                        this.ownerId = restaurant.data.attributes.owner_id;
+                        this.description = restaurant.data.attributes.description;
 
-                    restaurant.included.forEach(resource => {
-                        if (resource.type == "user") {
-                            this.users[resource.id] = resource.attributes;
+                        restaurant.included.forEach(resource => {
+                            if (resource.type == "user") {
+                                this.users[resource.id] = resource.attributes;
+                            }
+                        });
+
+                        axios.get('/api/restaurants/' + this.$route.params.id + '/reviews?include=user').then(resp => {
+                            this.reviews = resp.data.data;
+
+                            var users = resp.data.included.users;
+
+                            users.forEach(user => {
+                                this.users[user.id] = user.attributes;
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        if (error.response.status == 403) {
+                            this.$router.push('/');
                         }
                     });
-
-                    axios.get('/api/restaurants/' + this.$route.params.id + '/reviews?include=user').then(resp => {
-                        this.reviews = resp.data.data;
-
-                        var users = resp.data.included.users;
-
-                        users.forEach(user => {
-                            this.users[user.id] = user.attributes;
-                        });
-                    });
-                });
             }
         },
         mounted: function() {

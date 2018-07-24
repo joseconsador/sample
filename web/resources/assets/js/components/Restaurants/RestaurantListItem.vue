@@ -5,6 +5,7 @@
         <td>{{ dateAdded | moment("dddd, MMMM Do YYYY, h:mm:ss a") }}</td>
         <td>
             <router-link :to="{ name: 'restaurant', params: {id: id }}">View</router-link>
+            <router-link v-if="this.$store.state.user.hasRole('owner') || this.$store.state.user.hasRole('admin')" :to="{ name: 'editRestaurant', params: {id: id }}">Edit</router-link>
         </td>
     </tr>
 </template>
