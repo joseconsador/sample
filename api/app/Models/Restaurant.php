@@ -64,6 +64,12 @@ class Restaurant extends Model
         );
     }
 
+    /**
+     * Adds the average_rating value to a query.
+     *
+     * @param Builder $query
+     * @return Builder|\Illuminate\Database\Query\Builder
+     */
     public function scopeWithAverageRating(Builder $query) {
         return $query
                 ->select('restaurants.*')

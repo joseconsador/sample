@@ -51594,7 +51594,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -51640,6 +51640,16 @@ module.exports = function listToStyles (parentId, list) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__RestaurantListItem_vue__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__RestaurantListItem_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__RestaurantListItem_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -51752,7 +51762,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -51765,6 +51775,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Reviews_Rating__ = __webpack_require__(82);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Reviews_Rating___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Reviews_Rating__);
+//
+//
 //
 //
 //
@@ -51798,6 +51810,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         rating: {
             type: Number,
             require: true
+        },
+        dateAdded: {
+            default: Date.now()
         }
     },
     name: "RestaurantListItem"
@@ -51811,23 +51826,33 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("h5", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.name))]),
-      _vm._v(" "),
-      _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.description))]),
-      _vm._v(" "),
-      _c("star-rating", { attrs: { rating: _vm.rating, "star-size": 14 } }),
-      _vm._v(" "),
-      _c(
-        "router-link",
-        { attrs: { to: { name: "restaurant", params: { id: _vm.id } } } },
-        [_vm._v("View")]
+  return _c("tr", [
+    _c(
+      "td",
+      [_c("star-rating", { attrs: { rating: _vm.rating, "star-size": 14 } })],
+      1
+    ),
+    _vm._v(" "),
+    _c("td", [_vm._v(_vm._s(_vm.name))]),
+    _vm._v(" "),
+    _c("td", [
+      _vm._v(
+        _vm._s(_vm._f("moment")(_vm.dateAdded, "dddd, MMMM Do YYYY, h:mm:ss a"))
       )
-    ],
-    1
-  )
+    ]),
+    _vm._v(" "),
+    _c(
+      "td",
+      [
+        _c(
+          "router-link",
+          { attrs: { to: { name: "restaurant", params: { id: _vm.id } } } },
+          [_vm._v("View")]
+        )
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -51848,30 +51873,45 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "ul",
-      { staticClass: "list-group" },
-      _vm._l(_vm.restaurants, function(restaurant) {
-        return _c(
-          "li",
-          { staticClass: "list-group-item" },
-          [
-            _c("restaurant", {
-              attrs: {
-                name: restaurant.attributes.name,
-                description: "jojo",
-                rating: restaurant.attributes.average_rating,
-                id: restaurant.id
-              }
-            })
-          ],
-          1
-        )
-      })
-    )
+    _c("table", { staticClass: "table table-striped" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.restaurants, function(restaurant) {
+          return _c("restaurant", {
+            tag: "tr",
+            attrs: {
+              name: restaurant.attributes.name,
+              description: "jojo",
+              rating: restaurant.attributes.average_rating,
+              id: restaurant.id,
+              dateAdded: restaurant.attributes.created_at
+            }
+          })
+        })
+      )
+    ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Rating")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Added")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Actions")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -52374,7 +52414,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -52441,6 +52481,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.name = restaurant.data.attributes.name;
                 _this.rating = restaurant.data.attributes.average_rating;
                 _this.ownerId = restaurant.data.attributes.owner_id;
+                _this.description = restaurant.data.attributes.description;
 
                 restaurant.included.forEach(function (resource) {
                     if (resource.type == "user") {

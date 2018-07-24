@@ -24,6 +24,7 @@ class ReviewsController extends BaseAPIController
     public function index(Request $request, Restaurant $restaurant)
     {
         return new ReviewCollection($restaurant->reviews()
+            ->orderBy('updated_at', 'desc')
             ->paginate($request->query('per_page'))
             ->appends($request->query->all()));
     }
@@ -41,6 +42,21 @@ class ReviewsController extends BaseAPIController
             ->scopes(['withPendingReplies'])
             ->paginate($request->query('per_page'))
             ->appends($request->query->all()));
+    }
+
+    /**
+     * Display highest and lowest reviews.
+     *
+     * @param Request $request
+     * @param Restaurant $restaurant
+     * @return ResourceCollection
+     */
+    public function highlights(Request $request, Restaurant $restaurant)
+    {
+/*        return new ReviewCollection(collect([
+            $restaurant->reviews()->max('rating'),
+            $restaurant->reviews()-
+        ]));*/
     }
 
     /**

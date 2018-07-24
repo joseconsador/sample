@@ -1,10 +1,12 @@
 <template>
-    <div>
-        <h5 class="card-title">{{ name }}</h5>
-        <p class="card-text">{{ description }}</p>
-        <star-rating v-bind:rating="rating" v-bind:star-size="14" />
-        <router-link :to="{ name: 'restaurant', params: {id: id }}">View</router-link>
-    </div>
+    <tr>
+        <td><star-rating v-bind:rating="rating" v-bind:star-size="14" /></td>
+        <td>{{ name }}</td>
+        <td>{{ dateAdded | moment("dddd, MMMM Do YYYY, h:mm:ss a") }}</td>
+        <td>
+            <router-link :to="{ name: 'restaurant', params: {id: id }}">View</router-link>
+        </td>
+    </tr>
 </template>
 
 <script>
@@ -31,6 +33,9 @@
             rating: {
                 type: Number,
                 require: true
+            },
+            dateAdded: {
+                default: Date.now()
             }
         },
         name: "RestaurantListItem"

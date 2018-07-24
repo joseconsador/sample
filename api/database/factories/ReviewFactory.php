@@ -14,7 +14,7 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(App\Models\Review::class, function (Faker $faker) {
-    $created = $faker->dateTime();
+    $created = $faker->dateTimeThisMonth();
     $updated = $faker->dateTimeBetween($created);
     return [
         'user_id' => 1,

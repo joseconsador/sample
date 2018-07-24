@@ -48,6 +48,7 @@
                     this.name = restaurant.data.attributes.name;
                     this.rating = restaurant.data.attributes.average_rating;
                     this.ownerId = restaurant.data.attributes.owner_id;
+                    this.description = restaurant.data.attributes.description;
 
                     restaurant.included.forEach(resource => {
                         if (resource.type == "user") {

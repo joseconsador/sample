@@ -1,15 +1,25 @@
 <template>
     <div>
-        <ul class="list-group">
-            <li class="list-group-item" v-for="restaurant in restaurants">
-            <restaurant
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Rating</th>
+                <th>Name</th>
+                <th>Added</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr is="restaurant"
+                    v-for="restaurant in restaurants"
                     v-bind:name=restaurant.attributes.name
                     description="jojo"
                     v-bind:rating=restaurant.attributes.average_rating
                     v-bind:id=restaurant.id
-            />
-            </li>
-        </ul>
+                    v-bind:dateAdded=restaurant.attributes.created_at
+                ></tr>
+            </tbody>
+        </table>
     </div>
 </template>
 

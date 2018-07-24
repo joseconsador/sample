@@ -15,7 +15,8 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\Restaurant::class, function (Faker $faker) {
     return [
-        'name' => $faker->word,
+        'name' => $faker->company,
         'owner_id' => 1,
+        'description' => $faker->words(5, true)
     ];
 });
