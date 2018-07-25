@@ -14505,7 +14505,8 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
     }, {
         path: '/restaurant/edit/:id(\\d+)',
         name: 'editRestaurant',
-        component: __WEBPACK_IMPORTED_MODULE_8__components_Restaurants_Edit___default.a
+        component: __WEBPACK_IMPORTED_MODULE_8__components_Restaurants_Edit___default.a,
+        props: true
     }]
 });
 
@@ -14528,7 +14529,7 @@ window.axios.interceptors.response.use(function (response) {
     console.log(error.response);
     if (error.response.status == 401) {
         store.commit('setLoggedIn', false);
-        this.$router.push('/');
+        router.push('/login');
     }
     // Do something with response error
     return Promise.reject(error);
@@ -60392,7 +60393,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -60403,8 +60404,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-var _this2 = this;
-
 //
 //
 //
@@ -60421,11 +60420,7 @@ var _this2 = this;
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: {
-        id: {
-            type: Number
-        }
-    },
+    props: ['id'],
     data: function data() {
         return {
             name: "",
@@ -60443,15 +60438,32 @@ var _this2 = this;
             }).then(function (resp) {
                 _this.$router.push('/restaurant/' + resp.data.data.id);
             });
+        },
+        load: function load() {
+            var _this2 = this;
+
+            if (this.id > 0) {
+                axios.get('/api/restaurants/' + this.id).then(function (resp) {
+                    _this2.name = resp.data.data.attributes.name;
+                    _this2.description = resp.data.data.attributes.description;
+                }).catch(function (error) {
+                    if (error.response.status == 403 || error.response.status == 404) {
+                        _this2.$router.push('/');
+                    }
+                });
+            } else {
+                this.name = "";
+                this.description = "";
+            }
+        }
+    },
+    watch: {
+        $route: function $route(to, from) {
+            this.load();
         }
     },
     mounted: function mounted() {
-        if (_this2.id > 0) {
-            axios.get('/api/restaurants/' + _this2.id).then(function (resp) {
-                _this2.name = resp.data.data.attributes.name;
-                _this2.description = resp.data.data.attributes.description;
-            });
-        }
+        this.load();
     },
     name: "RestaurantEdit"
 });

@@ -14,11 +14,7 @@
 
 <script>
     export default {
-        props: {
-            id: {
-                type: Number
-            }
-        },
+        props: ['id'],
         data: function() {
             return {
                 name: "",
@@ -34,15 +30,32 @@
                 }).then(resp => {
                     this.$router.push('/restaurant/' + resp.data.data.id);
                 });
+            },
+            load: function() {
+                if (this.id > 0) {
+                    axios.get('/api/restaurants/' + this.id)
+                        .then(resp => {
+                            this.name = resp.data.data.attributes.name;
+                            this.description = resp.data.data.attributes.description;
+                        })
+                        .catch(error => {
+                            if (error.response.status == 403 || error.response.status == 404) {
+                                this.$router.push('/');
+                            }
+                        });
+                } else {
+                    this.name = "";
+                    this.description = "";
+                }
             }
         },
-        mounted: () => {
-            if (this.id > 0) {
-                axios.get('/api/restaurants/' + this.id).then(resp => {
-                    this.name = resp.data.data.attributes.name;
-                    this.description = resp.data.data.attributes.description;
-                });
+        watch: {
+            $route (to, from) {
+                this.load();
             }
+        },
+        mounted: function() {
+            this.load();
         },
         name: "RestaurantEdit"
     }

@@ -121,6 +121,7 @@ const router = new VueRouter({
             path: '/restaurant/edit/:id(\\d+)',
             name: 'editRestaurant',
             component: EditRestaurant,
+            props: true
         },
     ],
 });
@@ -144,7 +145,7 @@ window.axios.interceptors.response.use(function (response) {
     console.log(error.response);
     if (error.response.status == 401) {
         store.commit('setLoggedIn', false);
-        this.$router.push('/');
+        router.push('/login');
     }
     // Do something with response error
     return Promise.reject(error);
