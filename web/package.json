@@ -22,6 +22,7 @@
     "dependencies": {
         "vue-moment": "^4.0.0",
         "vue-router": "^3.0.1",
+        "vue-slider-component": "^2.7.5",
         "vue-star-rating": "^1.6.0",
         "vuejs-paginate": "^2.0.0",
         "vuex": "^3.0.1",

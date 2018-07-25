@@ -99,4 +99,8 @@ return [
         ],
     ],
 
+    'token' => [
+        // minutes
+        'expiry' => env('TOKEN_EXPIRY', 120)
+    ]
 ];

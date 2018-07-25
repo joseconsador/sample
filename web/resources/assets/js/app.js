@@ -39,7 +39,7 @@ const store = new Vuex.Store({
                 let hasRole = false;
                 if (!_.isEmpty(this.roles)) {
                     this.roles.every(function (r, i) {
-                        if (r.name == role) {
+                        if (r.name == 'admin' || r.name == role) {
                             hasRole = true;
                             return false;
                         }
@@ -111,6 +111,7 @@ const router = new VueRouter({
             path: '/restaurant/:id(\\d+)',
             name: 'restaurant',
             component: Restaurant,
+            props: true,
         },
         {
             path: '/restaurant/new',
@@ -142,7 +143,6 @@ window.axios.interceptors.response.use(function (response) {
     // Do something with response data
     return response;
 }, function (error) {
-    console.log(error);
     if (error.response.status == 401) {
         store.commit('setLoggedIn', false);
         router.push('/login');

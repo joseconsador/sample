@@ -40,7 +40,6 @@
                     options.url += this.id.toString();
                 }
 
-                console.log(options);
                 axios(options).then(resp => {
                     this.$router.push('/restaurant/' + resp.data.data.id);
                 });

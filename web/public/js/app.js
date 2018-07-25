@@ -14431,7 +14431,7 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
                 var hasRole = false;
                 if (!_.isEmpty(this.roles)) {
                     this.roles.every(function (r, i) {
-                        if (r.name == role) {
+                        if (r.name == 'admin' || r.name == role) {
                             hasRole = true;
                             return false;
                         }
@@ -14497,7 +14497,8 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
     }, {
         path: '/restaurant/:id(\\d+)',
         name: 'restaurant',
-        component: __WEBPACK_IMPORTED_MODULE_7__components_Restaurants_Restaurant___default.a
+        component: __WEBPACK_IMPORTED_MODULE_7__components_Restaurants_Restaurant___default.a,
+        props: true
     }, {
         path: '/restaurant/new',
         name: 'addRestaurant',
@@ -14526,7 +14527,6 @@ window.axios.interceptors.response.use(function (response) {
     // Do something with response data
     return response;
 }, function (error) {
-    console.log(error);
     if (error.response.status == 401) {
         store.commit('setLoggedIn', false);
         router.push('/login');
@@ -59576,8 +59576,7 @@ var render = function() {
           [_vm._v("View")]
         ),
         _vm._v(" "),
-        this.$store.state.user.hasRole("owner") ||
-        this.$store.state.user.hasRole("admin")
+        this.$store.state.user.hasRole("owner")
           ? _c(
               "router-link",
               {
@@ -59799,7 +59798,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -59838,11 +59837,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['id'],
     components: {
         'reviews': __WEBPACK_IMPORTED_MODULE_0__Reviews_ReviewList___default.a,
         'star-rating': __WEBPACK_IMPORTED_MODULE_1__Reviews_Rating___default.a
@@ -59861,7 +59868,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         fetch: function fetch() {
             var _this = this;
 
-            axios.get('/api/restaurants/' + this.$route.params.id + '?include=owner').then(function (resp) {
+            axios.get('/api/restaurants/' + this.id + '?include=owner').then(function (resp) {
                 var restaurant = resp.data;
                 _this.name = restaurant.data.attributes.name;
                 _this.rating = restaurant.data.attributes.average_rating;
@@ -60266,11 +60273,33 @@ var render = function() {
           [
             _c("h5", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.name))]),
             _vm._v(" "),
+            _c(
+              "h6",
+              { staticClass: "card-subtitle mb-2" },
+              [
+                _c("star-rating", {
+                  attrs: { rating: _vm.rating, starSize: 30 }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
             _c("p", { staticClass: "card-text" }, [
               _vm._v(_vm._s(_vm.description))
             ]),
             _vm._v(" "),
-            _c("star-rating", { attrs: { rating: _vm.rating, starSize: 30 } })
+            this.$store.state.user.hasRole("owner")
+              ? _c(
+                  "router-link",
+                  {
+                    staticClass: "card-link",
+                    attrs: {
+                      to: { name: "editRestaurant", params: { id: _vm.id } }
+                    }
+                  },
+                  [_vm._v("Edit")]
+                )
+              : _vm._e()
           ],
           1
         )
@@ -60393,7 +60422,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -60448,7 +60477,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 options.url += this.id.toString();
             }
 
-            console.log(options);
             axios(options).then(function (resp) {
                 _this.$router.push('/restaurant/' + resp.data.data.id);
             });

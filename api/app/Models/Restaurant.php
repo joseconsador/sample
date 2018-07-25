@@ -68,13 +68,34 @@ class Restaurant extends Model
      * Adds the average_rating value to a query.
      *
      * @param Builder $query
+     * @param int|array $values
      * @return Builder|\Illuminate\Database\Query\Builder
      */
-    public function scopeWithAverageRating(Builder $query) {
-        return $query
-                ->select('restaurants.*')
-                ->leftJoin('reviews', 'reviews.restaurant_id', '=', 'restaurants.id')
-                ->addSelect(DB::raw('AVG(reviews.rating) as average_rating'))
-                ->groupBy('restaurants.id');
+    public function scopeWithAverageRating(Builder $query, $values = NULL) {
+        $query = $query
+                    ->select('restaurants.*')
+                    ->leftJoin('reviews', 'reviews.restaurant_id', '=', 'restaurants.id')
+                    ->addSelect(DB::raw('AVG(reviews.rating) as average_rating'));
+
+        return $query->groupBy('restaurants.id');
+    }
+
+    /**
+     * Filters by rating.
+     *
+     * @param Builder $query
+     * @param null $values
+     * @return Builder
+     */
+    public function scopeFilterRating(Builder $query, $values=null) {
+        if ($values != NULL) {
+            if (is_array($values) && count($values) > 1) {
+                return $query
+                            ->havingRaw('AVG(reviews.rating) >= ?', [$values[0]])
+                            ->havingRaw('AVG(reviews.rating) <= ?', [$values[1]]);
+            } else {
+                return $query->havingRaw('ROUND(AVG(reviews.rating), 2) = ?', $values);
+            }
+        }
     }
 }

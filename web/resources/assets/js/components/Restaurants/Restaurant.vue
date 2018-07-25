@@ -4,10 +4,17 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">{{ name }}</h5>
+                <h6  class="card-subtitle mb-2">
+                    <star-rating
+                            v-bind:rating="rating"
+                            v-bind:starSize=30 />
+                </h6>
                 <p class="card-text">{{ description }}</p>
-                <star-rating
-                        v-bind:rating="rating"
-                        v-bind:starSize=30 />
+                <router-link
+                        class="card-link"
+                        v-if="this.$store.state.user.hasRole('owner')"
+                        :to="{ name: 'editRestaurant', params: {id: id }}"
+                >Edit</router-link>
             </div>
         </div>
         <p>
@@ -27,6 +34,7 @@
     import Rating from '../Reviews/Rating';
 
     export default {
+        props: ['id'],
         components: {
             'reviews': Reviews,
             'star-rating': Rating,
@@ -43,7 +51,7 @@
         },
         methods: {
             fetch: function() {
-                axios.get('/api/restaurants/' + this.$route.params.id + '?include=owner')
+                axios.get('/api/restaurants/' + this.id + '?include=owner')
                     .then(resp => {
                         var restaurant = resp.data;
                         this.name = restaurant.data.attributes.name;

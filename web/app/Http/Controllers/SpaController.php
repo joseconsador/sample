@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Utility\ApiClient;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cookie;
 
 class SpaController extends Controller
@@ -55,7 +56,8 @@ class SpaController extends Controller
 
                 return response($response->getBody(), $response->getStatusCode(), ['Content-type' => 'application/json']);
             } catch (RequestException $e) {
-                if ($request->hasCookie('refresh_token')) {
+                // If a refresh_token exists and the response was a 401, try a refresh.
+                if ($request->hasCookie('refresh_token') && $e->getCode() == Response::HTTP_UNAUTHORIZED) {
                     $response = $this->apiClient->refreshToken($request->cookie('refresh_token'));
 
                     Cookie::queue('api_token', $response['access_token'], $response['expires_in'] / 60);
@@ -70,6 +72,6 @@ class SpaController extends Controller
             }
         }
 
-        return response('Unauthenticated', 401);
+        return response('Unauthenticated', Response::HTTP_UNAUTHORIZED);
     }
 }

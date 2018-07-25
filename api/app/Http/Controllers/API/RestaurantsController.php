@@ -9,8 +9,8 @@ use App\Http\Resources\Restaurant\RestaurantCollection;
 use App\Http\Resources\Restaurant\RestaurantResource;
 use App\Models\Restaurant;
 use App\Models\User;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,21 +19,30 @@ class RestaurantsController extends BaseAPIController
     /**
      * Display a listing of the resource.
      *
+     * To filter by single rating:
+     * GET ?rating=1
+     * To filter rating by range:
+     * GET ?rating=1:4
+     *
      * @param Request $request
      * @return RestaurantCollection
      */
     public function index(Request $request)
     {
+        $rating = null;
+        if ($request->has('rating')) {
+            $rating = explode(':', $request->get('rating'));
+        }
+
         /**
          * @var $collection Collection
          */
-        $collection = Restaurant::forUser(Auth::user())
-                        ->withAverageRating()
-                        ->orderBy('average_rating', 'desc')
-                        ->paginate($request->query('per_page'))
-                        ->appends($request->query->all());
-
-        return new RestaurantCollection($collection);
+        return Restaurant::forUser(Auth::user())
+            ->withAverageRating()
+            ->orderBy('average_rating', 'desc')
+            ->filterRating($rating)
+            ->paginate($request->query('per_page'))
+            ->appends($request->query->all());
     }
 
     /**
@@ -100,8 +109,10 @@ class RestaurantsController extends BaseAPIController
          * @var $user User
          */
         $user = Auth::user();
-        if (!$user->hasRole('admin')) {
-            $fields['owner_id'] = $user->getKey();
+        $fields['owner_id'] = $user->getKey();
+
+        if ($user->hasRole('admin') && $request->has('owner_id')) {
+            $restaurant->owner_id = $request->input('owner_id');
         }
 
         $restaurant->fill($fields);
