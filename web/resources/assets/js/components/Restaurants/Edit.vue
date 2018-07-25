@@ -36,6 +36,14 @@
                 });
             }
         },
+        mounted: () => {
+            if (this.id > 0) {
+                axios.get('/api/restaurants/' + this.id).then(resp => {
+                    this.name = resp.data.data.attributes.name;
+                    this.description = resp.data.data.attributes.description;
+                });
+            }
+        },
         name: "RestaurantEdit"
     }
 </script>

@@ -37,14 +37,16 @@ const store = new Vuex.Store({
             roles: {},
             hasRole: function(role) {
                 let hasRole = false;
-                this.roles.every(function (r, i) {
-                    if (r.name == role) {
-                        hasRole = true;
-                        return false;
-                    }
+                if (!_.isEmpty(this.roles)) {
+                    this.roles.every(function (r, i) {
+                        if (r.name == role) {
+                            hasRole = true;
+                            return false;
+                        }
 
-                    return true;
-                });
+                        return true;
+                    });
+                }
 
                 return hasRole;
             }
@@ -52,10 +54,18 @@ const store = new Vuex.Store({
     },
     mutations: {
         setUser (state, user) {
-            state.user.name = user.attributes.name;
-            state.user.roles = user.attributes.roles;
+            if (user == null) {
+                state.user.name = "";
+                state.user.roles = {};
+            } else {
+                state.user.name = user.attributes.name;
+                state.user.roles = user.attributes.roles;
+            }
         },
         setLoggedIn (state, loggedIn) {
+            if (loggedIn == false) {
+                this.commit('setUser', null);
+            }
             state.loggedIn = loggedIn;
         },
     }
@@ -124,6 +134,20 @@ router.beforeEach((to, from, next) => {
     } else {
         next();
     }
+});
+
+// Add a response interceptor
+window.axios.interceptors.response.use(function (response) {
+    // Do something with response data
+    return response;
+}, function (error) {
+    console.log(error.response);
+    if (error.response.status == 401) {
+        store.commit('setLoggedIn', false);
+        this.$router.push('/');
+    }
+    // Do something with response error
+    return Promise.reject(error);
 });
 
 const app = new Vue({

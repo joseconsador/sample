@@ -14429,14 +14429,16 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
             roles: {},
             hasRole: function hasRole(role) {
                 var hasRole = false;
-                this.roles.every(function (r, i) {
-                    if (r.name == role) {
-                        hasRole = true;
-                        return false;
-                    }
+                if (!_.isEmpty(this.roles)) {
+                    this.roles.every(function (r, i) {
+                        if (r.name == role) {
+                            hasRole = true;
+                            return false;
+                        }
 
-                    return true;
-                });
+                        return true;
+                    });
+                }
 
                 return hasRole;
             }
@@ -14444,10 +14446,18 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     },
     mutations: {
         setUser: function setUser(state, user) {
-            state.user.name = user.attributes.name;
-            state.user.roles = user.attributes.roles;
+            if (user == null) {
+                state.user.name = "";
+                state.user.roles = {};
+            } else {
+                state.user.name = user.attributes.name;
+                state.user.roles = user.attributes.roles;
+            }
         },
         setLoggedIn: function setLoggedIn(state, loggedIn) {
+            if (loggedIn == false) {
+                this.commit('setUser', null);
+            }
             state.loggedIn = loggedIn;
         }
     }
@@ -14508,6 +14518,20 @@ router.beforeEach(function (to, from, next) {
     } else {
         next();
     }
+});
+
+// Add a response interceptor
+window.axios.interceptors.response.use(function (response) {
+    // Do something with response data
+    return response;
+}, function (error) {
+    console.log(error.response);
+    if (error.response.status == 401) {
+        store.commit('setLoggedIn', false);
+        this.$router.push('/');
+    }
+    // Do something with response error
+    return Promise.reject(error);
 });
 
 var app = new Vue({
@@ -20557,9 +20581,9 @@ window.Popper = __webpack_require__(8).default;
  */
 
 try {
-    window.$ = window.jQuery = __webpack_require__(9);
+  window.$ = window.jQuery = __webpack_require__(9);
 
-    __webpack_require__(25);
+  __webpack_require__(25);
 } catch (e) {}
 
 /**
@@ -20581,22 +20605,10 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
-    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
-    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
-
-// Add a response interceptor
-window.axios.interceptors.response.use(function (response) {
-    // Do something with response data
-    return response;
-}, function (error) {
-    if (error.response.status == 401) {
-        localStorage.removeItem('logged-in');
-    }
-    // Do something with response error
-    return Promise.reject(error);
-});
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -60380,7 +60392,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -60391,6 +60403,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _this2 = this;
+
 //
 //
 //
@@ -60428,6 +60442,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 description: this.description
             }).then(function (resp) {
                 _this.$router.push('/restaurant/' + resp.data.data.id);
+            });
+        }
+    },
+    mounted: function mounted() {
+        if (_this2.id > 0) {
+            axios.get('/api/restaurants/' + _this2.id).then(function (resp) {
+                _this2.name = resp.data.data.attributes.name;
+                _this2.description = resp.data.data.attributes.description;
             });
         }
     },
