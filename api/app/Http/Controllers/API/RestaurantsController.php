@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Requests\CreateRestaurant;
-use App\Http\Requests\ShowRestaurantRequest;
+use App\Http\Requests\ShowRestaurant;
 use App\Http\Requests\UpdateRestaurant;
 use App\Http\Resources\Restaurant\RestaurantCollection;
 use App\Http\Resources\Restaurant\RestaurantResource;
 use App\Models\Restaurant;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -79,11 +78,11 @@ class RestaurantsController extends BaseAPIController
     /**
      * Display the specified resource.
      *
-     * @param ShowRestaurantRequest $request
+     * @param ShowRestaurant $request
      * @param  \App\Models\Restaurant $restaurant
      * @return RestaurantResource
      */
-    public function show(ShowRestaurantRequest $request, Restaurant $restaurant)
+    public function show(ShowRestaurant $request, Restaurant $restaurant)
     {
         if ($request->has('include')) {
             $relations = array_intersect(

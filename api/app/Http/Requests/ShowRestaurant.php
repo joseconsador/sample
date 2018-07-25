@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ShowRestaurantRequest extends FormRequest
+class ShowRestaurant extends FormRequest
 {
     /**
      * @return boolean

@@ -8,6 +8,7 @@ use App\Http\Resources\Review\ReviewCollection;
 use App\Http\Resources\Review\ReviewResource;
 use App\Models\Restaurant;
 use App\Models\Review;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Auth;
@@ -107,6 +108,18 @@ class ReviewsController extends BaseAPIController
         };
 
         return new ReviewResource($review);
+    }
+
+    /**
+     * Shows the review from a user.
+     *
+     * @param Request $request
+     * @param Restaurant $restaurant
+     * @param User $user
+     */
+    public function fromUser(Request $request, Restaurant $restaurant, User $user) {
+        dd($user->reviews());
+//        return $this->show($request, $restaurant, );
     }
 
     /**

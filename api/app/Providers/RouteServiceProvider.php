@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Models\Restaurant;
 use App\Models\Review;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -25,6 +27,15 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Route::bind('user', function ($value, $route) {
+            $userId = $value;
+            if ($value == 'me') {
+                $userId = Auth::id();
+            }
+
+            return User::findOrFail($userId);
+        });
+
         Route::bind('restaurant', function ($value, $route) {
             /**
              * @var $restaurant Restaurant

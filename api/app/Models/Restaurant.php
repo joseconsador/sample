@@ -71,7 +71,8 @@ class Restaurant extends Model
      * @param int|array $values
      * @return Builder|\Illuminate\Database\Query\Builder
      */
-    public function scopeWithAverageRating(Builder $query, $values = NULL) {
+    public function scopeWithAverageRating(Builder $query, $values = null)
+    {
         $query = $query
                     ->select('restaurants.*')
                     ->leftJoin('reviews', 'reviews.restaurant_id', '=', 'restaurants.id')
@@ -87,8 +88,9 @@ class Restaurant extends Model
      * @param null $values
      * @return Builder
      */
-    public function scopeFilterRating(Builder $query, $values=null) {
-        if ($values != NULL) {
+    public function scopeFilterRating(Builder $query, $values = null)
+    {
+        if ($values != null) {
             if (is_array($values) && count($values) > 1) {
                 return $query
                             ->havingRaw('IFNULL(ROUND(AVG(reviews.rating), 2), 0) >= ?', [$values[0]])

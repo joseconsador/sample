@@ -20,8 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware' => ['auth:api'], 'as' => 'api::'], function () {
     // api/user routes
     Route::group(['prefix' => 'users', 'as' => 'users::'], function () {
-        Route::get('/me', 'API\UsersController@me');
-        Route::get('/{user}', ['as' => 'show', 'uses' => 'API\UsersController@show'])->where('user', '[0-9]+');
+        Route::get('/{user}', ['as' => 'show', 'uses' => 'API\UsersController@show']);
+        Route::get('/{user}/reviews', ['uses' => 'API\UsersController@reviews']);
     });
 
     // api/restaurants routes
@@ -42,6 +42,8 @@ Route::group(['middleware' => ['auth:api'], 'as' => 'api::'], function () {
                 Route::get('/', ['uses' => 'API\ReviewsController@index']);
                 Route::get('/highlights', ['uses' => 'API\ReviewsController@highlights']);
                 Route::get('/pending', ['uses' => 'API\ReviewsController@pending']);
+                Route::get('/user/{id}', ['as' => '::user', 'uses' => 'API\ReviewsController@fromUser']);
+
                 Route::get('/{review}', ['as' => '::show', 'uses' => 'API\ReviewsController@show'])
                     ->where('review', '[0-9]+');
 

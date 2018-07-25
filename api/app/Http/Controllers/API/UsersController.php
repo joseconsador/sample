@@ -2,36 +2,37 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\ShowUserRequest;
+use App\Http\Requests\ShowUser;
+use App\Http\Resources\Review\ReviewCollection;
 use App\Http\Resources\User\UserResource;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class UsersController extends BaseAPIController
 {
-
     /**
-     * Returns the currently logged in user.
+     * Return a user by ID.
      *
+     * @param ShowUser $request
+     * @param User $user
      * @return UserResource
      */
-    public function me()
+    public function show(ShowUser $request, User $user)
     {
-        $user = User::findOrFail(Auth::id());
         $user->load('roles');
         return new UserResource($user);
     }
 
     /**
-     * Return a user by ID.
-     *
-     * @param ShowUserRequest $request
+     * @param ShowUser $equest
      * @param User $user
-     * @return UserResource
+     * @return ReviewCollection
      */
-    public function show(ShowUserRequest $request, User $user)
-    {
-        $user->load('roles');
-        return new UserResource($user);
+    public function reviews(ShowUser $request, User $user) {
+        return new ReviewCollection(
+            $user
+                ->reviews()
+                ->paginate($request->query('per_page'))
+                ->appends($request->query->all())
+        );
     }
 }

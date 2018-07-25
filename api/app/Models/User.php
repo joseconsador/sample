@@ -28,4 +28,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Return all reviews from a user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function reviews() {
+        return $this->hasMany(Review::class, 'user_id');
+    }
 }
