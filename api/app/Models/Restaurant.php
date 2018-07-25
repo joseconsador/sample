@@ -91,10 +91,10 @@ class Restaurant extends Model
         if ($values != NULL) {
             if (is_array($values) && count($values) > 1) {
                 return $query
-                            ->havingRaw('AVG(reviews.rating) >= ?', [$values[0]])
-                            ->havingRaw('AVG(reviews.rating) <= ?', [$values[1]]);
+                            ->havingRaw('IFNULL(ROUND(AVG(reviews.rating), 2), 0) >= ?', [$values[0]])
+                            ->havingRaw('IFNULL(ROUND(AVG(reviews.rating), 2), 0) <= ?', [$values[1]]);
             } else {
-                return $query->havingRaw('ROUND(AVG(reviews.rating), 2) = ?', $values);
+                return $query->havingRaw('IFNULL(ROUND(AVG(reviews.rating), 2), 0) = ?', $values);
             }
         }
     }

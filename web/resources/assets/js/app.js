@@ -103,9 +103,12 @@ const router = new VueRouter({
             }
         },
         {
-            path: '/restaurants/:page',
+            path: '/restaurants/:page(\\d+)',
             name: 'restaurants',
             component: Restaurants,
+            props: (route) => ({
+                page: Number(route.params.page)
+            }),
         },
         {
             path: '/restaurant/:id(\\d+)',
@@ -131,8 +134,8 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
     if (!['login', 'logout'].includes(to.name) && !store.state.loggedIn) {
         next('login');
-    } else if (['addRestaurant'].includes(to.name) && !store.state.user.hasRole('owner')) {
-        next('home')
+    } else if (['addRestaurant', 'editRestaurant'].includes(to.name) && !store.state.user.hasRole('owner')) {
+        next('/')
     } else {
         next();
     }

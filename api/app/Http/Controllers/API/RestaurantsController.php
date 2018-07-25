@@ -37,12 +37,14 @@ class RestaurantsController extends BaseAPIController
         /**
          * @var $collection Collection
          */
-        return Restaurant::forUser(Auth::user())
-            ->withAverageRating()
-            ->orderBy('average_rating', 'desc')
-            ->filterRating($rating)
-            ->paginate($request->query('per_page'))
-            ->appends($request->query->all());
+        return new RestaurantCollection(
+            Restaurant::forUser(Auth::user())
+                ->withAverageRating()
+                ->filterRating($rating)
+                ->orderBy('average_rating', 'desc')
+                ->paginate($request->query('per_page'))
+                ->appends($request->query->all())
+        );
     }
 
     /**
