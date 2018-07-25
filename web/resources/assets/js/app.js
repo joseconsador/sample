@@ -142,7 +142,7 @@ window.axios.interceptors.response.use(function (response) {
     // Do something with response data
     return response;
 }, function (error) {
-    console.log(error.response);
+    console.log(error);
     if (error.response.status == 401) {
         store.commit('setLoggedIn', false);
         router.push('/login');

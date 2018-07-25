@@ -14526,7 +14526,7 @@ window.axios.interceptors.response.use(function (response) {
     // Do something with response data
     return response;
 }, function (error) {
-    console.log(error.response);
+    console.log(error);
     if (error.response.status == 401) {
         store.commit('setLoggedIn', false);
         router.push('/login');
@@ -60393,7 +60393,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -60432,10 +60432,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             if (event) event.preventDefault();
-            axios.post('/api/restaurants', {
-                name: this.name,
-                description: this.description
-            }).then(function (resp) {
+
+            var options = {
+                method: 'post',
+                url: '/api/restaurants/',
+                data: {
+                    name: this.name,
+                    description: this.description
+                }
+            };
+
+            if (this.id > 0) {
+                options.data.id = this.id;
+                options.method = 'put';
+                options.url += this.id.toString();
+            }
+
+            console.log(options);
+            axios(options).then(function (resp) {
                 _this.$router.push('/restaurant/' + resp.data.data.id);
             });
         },

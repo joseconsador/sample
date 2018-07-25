@@ -24,10 +24,24 @@
         methods: {
             submit: function(event) {
                 if (event) event.preventDefault();
-                axios.post('/api/restaurants', {
-                    name: this.name,
-                    description: this.description
-                }).then(resp => {
+
+                let options = {
+                    method: 'post',
+                    url: '/api/restaurants/',
+                    data: {
+                        name: this.name,
+                        description: this.description
+                    },
+                };
+
+                if (this.id > 0) {
+                    options.data.id = this.id;
+                    options.method = 'put';
+                    options.url += this.id.toString();
+                }
+
+                console.log(options);
+                axios(options).then(resp => {
                     this.$router.push('/restaurant/' + resp.data.data.id);
                 });
             },
