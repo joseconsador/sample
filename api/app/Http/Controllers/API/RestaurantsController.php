@@ -22,7 +22,7 @@ class RestaurantsController extends BaseAPIController
      * To filter by single rating:
      * GET ?rating=1
      * To filter rating by range:
-     * GET ?rating=1:4
+     * GET ?rating=1,4
      *
      * @param Request $request
      * @return RestaurantCollection
@@ -31,7 +31,7 @@ class RestaurantsController extends BaseAPIController
     {
         $rating = null;
         if ($request->has('rating')) {
-            $rating = explode(':', $request->get('rating'));
+            $rating = explode(',', $request->get('rating'));
         }
 
         /**

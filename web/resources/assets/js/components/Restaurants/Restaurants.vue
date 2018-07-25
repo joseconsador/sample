@@ -17,10 +17,10 @@
                 </paginate>
             </div>
             <div class="col-3">
-                <slider id="name" ref="slider" v-bind="filterOptions" :rating="rating"></slider>
+                <slider id="name" ref="slider" v-bind="filterOptions" v-model="currentRating"></slider>
             </div>
             <div class="col-3">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button @click="load(1)" type="submit" class="btn btn-primary">Filter</button>
             </div>
         </div>
         <div class="row">
@@ -55,6 +55,7 @@
             return {
                 restaurantData: {},
                 pageCount: 1,
+                currentRating: this.rating,
                 currentPage: this.page,
                 filterOptions: {
                     max: 5,
@@ -66,10 +67,11 @@
         },
         methods: {
             load: function(page) {
-                this.$router.push('/restaurants/' + page);
+                this.currentPage = page;
+                this.$router.push('/restaurants/' + page + '?rating=' + this.currentRating);
             },
             fetch: function() {
-                var uri = '/api/restaurants?page=' + this.page + '&rating=' + this.rating.join(':');
+                var uri = '/api/restaurants?page=' + this.page + '&rating=' + this.currentRating;
 
                 axios.get(uri).then(resp => {
                     this.restaurantData = resp.data.data;

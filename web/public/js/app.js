@@ -59133,6 +59133,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             restaurantData: {},
             pageCount: 1,
+            currentRating: this.rating,
             currentPage: this.page,
             filterOptions: {
                 max: 5,
@@ -59144,12 +59145,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         load: function load(page) {
-            this.$router.push('/restaurants/' + page);
+            this.currentPage = page;
+            this.$router.push('/restaurants/' + page + '?rating=' + this.currentRating);
         },
         fetch: function fetch() {
             var _this = this;
 
-            var uri = '/api/restaurants?page=' + this.page + '&rating=' + this.rating.join(':');
+            var uri = '/api/restaurants?page=' + this.page + '&rating=' + this.currentRating;
 
             axios.get(uri).then(function (resp) {
                 _this.restaurantData = resp.data.data;
@@ -59763,7 +59765,17 @@ var render = function() {
           _c(
             "slider",
             _vm._b(
-              { ref: "slider", attrs: { id: "name", rating: _vm.rating } },
+              {
+                ref: "slider",
+                attrs: { id: "name" },
+                model: {
+                  value: _vm.currentRating,
+                  callback: function($$v) {
+                    _vm.currentRating = $$v
+                  },
+                  expression: "currentRating"
+                }
+              },
               "slider",
               _vm.filterOptions,
               false
@@ -59773,7 +59785,21 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _vm._m(0)
+      _c("div", { staticClass: "col-3" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { type: "submit" },
+            on: {
+              click: function($event) {
+                _vm.load(1)
+              }
+            }
+          },
+          [_vm._v("Filter")]
+        )
+      ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
@@ -59786,20 +59812,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-3" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-        [_vm._v("Submit")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
