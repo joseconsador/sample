@@ -37,6 +37,7 @@ Route::group(['middleware' => ['auth:api'], 'as' => 'api::'], function () {
         // api/restaurants/<ID>/reviews routes
         Route::group(['prefix' => '/{restaurant}', 'as' => 'show'], function () {
             Route::get('/', ['uses' => 'API\RestaurantsController@show']);
+            Route::get('/review', ['uses' => 'API\ReviewsController@fromUser'])->where('restaurant', '[0-9]+');
 
             Route::group(['prefix' => 'reviews', 'as' => '::reviews'], function () {
                 Route::get('/', ['uses' => 'API\ReviewsController@index']);

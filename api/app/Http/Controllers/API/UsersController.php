@@ -23,6 +23,8 @@ class UsersController extends BaseAPIController
     }
 
     /**
+     * Get all reviews by a user.
+     *
      * @param ShowUser $equest
      * @param User $user
      * @return ReviewCollection

@@ -111,15 +111,15 @@ class ReviewsController extends BaseAPIController
     }
 
     /**
-     * Shows the review from a user.
+     * Shows the review from the current user.
      *
      * @param Request $request
      * @param Restaurant $restaurant
-     * @param User $user
+     * @return ReviewResource
      */
-    public function fromUser(Request $request, Restaurant $restaurant, User $user) {
-        dd($user->reviews());
-//        return $this->show($request, $restaurant, );
+    public function fromUser(Request $request, Restaurant $restaurant) {
+        $review = Auth::user()->reviews()->where('restaurant_id', $restaurant->getKey())->firstOrFail();
+        return $this->show($request, $restaurant, $review);
     }
 
     /**
