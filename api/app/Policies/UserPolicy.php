@@ -25,6 +25,6 @@ class UserPolicy
      */
     public function view(User $currentUser, User $user)
     {
-        return $user->getKey() == $currentUser->getKey();
+        return $currentUser->is($user);
     }
 }

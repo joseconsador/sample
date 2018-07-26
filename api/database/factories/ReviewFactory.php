@@ -18,7 +18,7 @@ $factory->define(App\Models\Review::class, function (Faker $faker) {
     $updated = $faker->dateTimeBetween($created);
     return [
         'user_id' => 1,
-        'rating' => $faker->numberBetween(1, 5),
+        'rating' => $faker->randomElement(range(0, 5)),
         'comment' => $faker->paragraph,
         'reply' => $faker->randomElement(['', $faker->paragraph]),
         'created_at' => $created,

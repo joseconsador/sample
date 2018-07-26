@@ -36,7 +36,7 @@ class CreateReview extends FormRequest
                 'exists:users,id',
                 new HasPermission('review-restaurant')
             ],
-            'rating' => ['required', 'integer', 'between:1,5'],
+            'rating' => ['required', 'integer', 'between:0,5'],
             'comment' => ['required']
         ];
     }

@@ -27,7 +27,7 @@ class RestaurantPolicy
     public function view(User $user, Restaurant $restaurant)
     {
         if ($user->hasRole('owner')) {
-            return ($restaurant->owner->getKey() == $user->getKey());
+            return ($user->is($restaurant->owner));
         }
 
         return true;
@@ -53,10 +53,7 @@ class RestaurantPolicy
      */
     public function update(User $user, Restaurant $restaurant)
     {
-        $fkeyVal = $user->getAttribute($restaurant->owner()->getOwnerKey());
-        $lkeyVal = $restaurant->getAttribute($restaurant->owner()->getForeignKey());
-
-        return ($user->hasRole('owner') && $fkeyVal == $lkeyVal);
+        return ($user->hasRole('owner') && $user->is($restaurant->owner));
     }
 
     /**

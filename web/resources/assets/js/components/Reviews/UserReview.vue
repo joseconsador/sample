@@ -8,7 +8,12 @@
             />
         </template>
         <template v-else>
-            You have not reviewed this restaurant yet.
+            <router-link
+                class="nav-link"
+                :to="{ name: 'addReview', params: { restaurantId: this.restaurantId } }"
+            >
+                Add a review
+            </router-link>
         </template>
     </div>
 </template>

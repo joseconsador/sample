@@ -59608,7 +59608,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("star-rating", {
     attrs: {
-      increment: 0.01,
+      increment: 1,
       "max-rating": 5,
       "star-size": _vm.starSize,
       "read-only": _vm.readOnly,
@@ -60899,6 +60899,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -60956,7 +60961,21 @@ var render = function() {
               }
             })
           ]
-        : [_vm._v("\n        You have not reviewed this restaurant yet.\n    ")]
+        : [
+            _c(
+              "router-link",
+              {
+                staticClass: "nav-link",
+                attrs: {
+                  to: {
+                    name: "addReview",
+                    params: { restaurantId: this.restaurantId }
+                  }
+                }
+              },
+              [_vm._v("\n            Add a review\n        ")]
+            )
+          ]
     ],
     2
   )

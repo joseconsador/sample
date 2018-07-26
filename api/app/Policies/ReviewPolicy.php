@@ -49,10 +49,7 @@ class ReviewPolicy
      */
     public function update(User $user, Review $review)
     {
-        $fkeyVal = $user->getAttribute($review->user()->getOwnerKey());
-        $lkeyVal = $review->getAttribute($review->user()->getForeignKey());
-
-        return ($user->hasPermissionTo('review-restaurant') && $fkeyVal == $lkeyVal);
+        return ($user->hasPermissionTo('review-restaurant') && $user->is($review->user));
     }
 
     /**
