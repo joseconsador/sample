@@ -12,12 +12,12 @@
                 {{ review.reply }}
             </div>
         </template>
-        <template v-else-if="this.$store.state.user.hasRole('admin') || (owner.id == this.$store.state.user.id)">
+        <template v-else-if="id != undefined && (this.$store.state.user.hasRole('admin') || (owner.id == this.$store.state.user.id))">
             <reply-inline :restaurant-id="review.restaurant_id" :review-id="id" />
         </template>
 
         <router-link
-            v-if="this.$store.state.user.hasRole('admin') || (review.user_id == this.$store.state.user.id)"
+            v-if="id != undefined && (this.$store.state.user.hasRole('admin') || (review.user_id == this.$store.state.user.id))"
             :to="{ name: 'editReview', params: { restaurantId: review.restaurant_id, id: id } }"
         >Edit review</router-link>
     </div>

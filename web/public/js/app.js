@@ -59222,6 +59222,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         register: function register(event) {
+            var _this = this;
+
             if (event) event.preventDefault();
 
             axios.post('/register', {
@@ -59230,7 +59232,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 password: this.password,
                 password_confirmation: this.confirmPassword,
                 role: this.role
-            }).then(function (resp) {});
+            }).then(function (resp) {
+                alert("You may now login with your credentials");
+                _this.$router.push('/login');
+            });
         }
     }
 });
@@ -60821,8 +60826,9 @@ var render = function() {
               ]
             )
           ]
-        : this.$store.state.user.hasRole("admin") ||
-          _vm.owner.id == this.$store.state.user.id
+        : _vm.id != undefined &&
+          (this.$store.state.user.hasRole("admin") ||
+            _vm.owner.id == this.$store.state.user.id)
           ? [
               _c("reply-inline", {
                 attrs: {
@@ -60833,8 +60839,9 @@ var render = function() {
             ]
           : _vm._e(),
       _vm._v(" "),
-      this.$store.state.user.hasRole("admin") ||
-      _vm.review.user_id == this.$store.state.user.id
+      _vm.id != undefined &&
+      (this.$store.state.user.hasRole("admin") ||
+        _vm.review.user_id == this.$store.state.user.id)
         ? _c(
             "router-link",
             {

@@ -52,7 +52,8 @@
                     password_confirmation: this.confirmPassword,
                     role: this.role
                 }).then(resp => {
-
+                    alert("You may now login with your credentials");
+                    this.$router.push('/login');
                 });
             }
         }
