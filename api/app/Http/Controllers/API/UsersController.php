@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Requests\CreateUser;
 use App\Http\Requests\ShowUser;
 use App\Http\Resources\Review\ReviewCollection;
 use App\Http\Resources\User\UserResource;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends BaseAPIController
 {
@@ -25,7 +27,7 @@ class UsersController extends BaseAPIController
     /**
      * Get all reviews by a user.
      *
-     * @param ShowUser $equest
+     * @param ShowUser $request
      * @param User $user
      * @return ReviewCollection
      */
@@ -36,5 +38,23 @@ class UsersController extends BaseAPIController
                 ->paginate($request->query('per_page'))
                 ->appends($request->query->all())
         );
+    }
+
+    /**
+     * Add a new user
+     *
+     * @param CreateUser $request
+     * @return UserResource
+     */
+    public function store(CreateUser $request) {
+        $user = User::create([
+            'name' => $request->post('name'),
+            'email' => $request->post('email'),
+            'password' => Hash::make($request->post('password'))
+        ]);
+
+        $user->assignRole($request->post('role'));
+
+        return new UserResource($user);
     }
 }

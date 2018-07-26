@@ -52,6 +52,11 @@ class LoginController extends Controller
         }
     }
 
+    /**
+     * Logs out the user and expires the tokens.
+     *
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
     public function logout()
     {
         Cookie::queue('api_token', null, -1);

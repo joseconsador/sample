@@ -4,11 +4,14 @@
 
         <div class="row">
             <ul class="nav">
-                <li class="nav-item">
+                <li class="nav-item" v-if="loggedIn">
                     <router-link class="nav-link" :to="{ name: 'home' }">Home</router-link>
                 </li>
                 <li class="nav-item" v-if="this.$store.state.user.hasRole('owner') || this.$store.state.user.hasRole('admin')">
                     <router-link class="nav-link" :to="{ name: 'addRestaurant' }">Add Restaurant</router-link>
+                </li>
+                <li class="nav-item" v-if="!loggedIn">
+                    <router-link class="nav-link"  :to="{ name: 'register' }">Sign Up</router-link>
                 </li>
                 <li class="nav-item">
                     <router-link class="nav-link" v-if="!loggedIn" :to="{ name: 'login' }">Login</router-link>

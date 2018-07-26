@@ -56,6 +56,8 @@ class SpaController extends Controller
 
                 return response($response->getBody(), $response->getStatusCode(), ['Content-type' => 'application/json']);
             } catch (RequestException $e) {
+                $response = $e->getResponse();
+
                 // If a refresh_token exists and the response was a 401, try a refresh.
                 if ($request->hasCookie('refresh_token') && $e->getCode() == Response::HTTP_UNAUTHORIZED) {
                     $response = $this->apiClient->refreshToken($request->cookie('refresh_token'));
@@ -64,11 +66,9 @@ class SpaController extends Controller
                     Cookie::queue('refresh_token', $response['refresh_token']);
 
                     $response = $this->apiClient->proxyRequest($request->getRequestUri(), [], $response['access_token']);
-
-                    return response($response->getBody(), $response->getStatusCode(), ['Content-type' => 'application/json']);
                 }
 
-                return response($e->getResponse()->getBody(), $e->getResponse()->getStatusCode(), ['Content-type' => 'application/json']);
+                return response($response->getBody(), $response->getStatusCode(), ['Content-type' => 'application/json']);
             }
         }
 

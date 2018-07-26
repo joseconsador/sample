@@ -83,6 +83,7 @@ Vue.use(require('vue-moment'));
 import App from './components/views/App'
 import Home from './components/views/Home'
 import Auth from './components/views/Auth'
+import Register from './components/views/Register'
 import Restaurants from './components/Restaurants/Restaurants'
 import Restaurant from './components/Restaurants/Restaurant'
 import EditRestaurant from './components/Restaurants/Edit'
@@ -108,6 +109,11 @@ const router = new VueRouter({
             props: {
                 shouldLogin: false
             }
+        },
+        {
+            path: '/register',
+            name: 'register',
+            component: Register,
         },
         {
             path: '/restaurants/:page(\\d+)',
@@ -158,7 +164,7 @@ const router = new VueRouter({
 
 // Setup auth guard
 router.beforeEach((to, from, next) => {
-    if (!['login', 'logout'].includes(to.name) && !store.state.loggedIn) {
+    if (!['login', 'logout', 'register'].includes(to.name) && !store.state.loggedIn) {
         next('login');
     } else if (['addRestaurant', 'editRestaurant'].includes(to.name) && !store.state.user.hasRole('owner')) {
         next('/')

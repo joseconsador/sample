@@ -72,10 +72,12 @@ class ApiClient
      * @return Response
      * @throws GuzzleException
      */
-    public function proxyRequest($endpoint, $options, $accessToken) {
-        $headers = [
-            'Authorization' => 'Bearer ' . $accessToken,
-        ];
+    public function proxyRequest($endpoint, $options, $accessToken = '') {
+        $headers = [];
+
+        if (!empty($accessToken)) {
+            $headers['Authorization'] = 'Bearer ' . $accessToken;
+        }
 
         return $this->send($endpoint, $options, $headers);
     }

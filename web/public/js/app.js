@@ -14435,14 +14435,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_views_Home___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_views_Home__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_views_Auth__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_views_Auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_views_Auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Restaurants_Restaurants__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Restaurants_Restaurants___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_Restaurants_Restaurants__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_Restaurants_Restaurant__ = __webpack_require__(80);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_Restaurants_Restaurant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_Restaurants_Restaurant__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_Restaurants_Edit__ = __webpack_require__(97);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_Restaurants_Edit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_Restaurants_Edit__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_Reviews_Edit__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_Reviews_Edit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_Reviews_Edit__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_views_Register__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_views_Register___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_views_Register__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_Restaurants_Restaurants__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_Restaurants_Restaurants___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_Restaurants_Restaurants__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_Restaurants_Restaurant__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_Restaurants_Restaurant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_Restaurants_Restaurant__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_Restaurants_Edit__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_Restaurants_Edit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_Restaurants_Edit__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_Reviews_Edit__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_Reviews_Edit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_Reviews_Edit__);
 
 
 
@@ -14533,6 +14535,7 @@ Vue.use(__webpack_require__(49));
 
 
 
+
 var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
     mode: 'history',
     routes: [{
@@ -14551,9 +14554,13 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
             shouldLogin: false
         }
     }, {
+        path: '/register',
+        name: 'register',
+        component: __WEBPACK_IMPORTED_MODULE_6__components_views_Register___default.a
+    }, {
         path: '/restaurants/:page(\\d+)',
         name: 'restaurants',
-        component: __WEBPACK_IMPORTED_MODULE_6__components_Restaurants_Restaurants___default.a,
+        component: __WEBPACK_IMPORTED_MODULE_7__components_Restaurants_Restaurants___default.a,
         props: function props(route) {
             return {
                 page: Number(route.params.page)
@@ -14562,7 +14569,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
     }, {
         path: '/restaurant/:id(\\d+)',
         name: 'restaurant',
-        component: __WEBPACK_IMPORTED_MODULE_7__components_Restaurants_Restaurant___default.a,
+        component: __WEBPACK_IMPORTED_MODULE_8__components_Restaurants_Restaurant___default.a,
         props: function props(route) {
             return {
                 id: Number(route.params.id)
@@ -14571,7 +14578,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
     }, {
         path: '/restaurant/:restaurantId(\\d+)/review/new',
         name: 'addReview',
-        component: __WEBPACK_IMPORTED_MODULE_9__components_Reviews_Edit___default.a,
+        component: __WEBPACK_IMPORTED_MODULE_10__components_Reviews_Edit___default.a,
         props: function props(route) {
             return {
                 restaurantId: Number(route.params.restaurantId)
@@ -14580,7 +14587,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
     }, {
         path: '/restaurant/:restaurantId(\\d+)/review/:id(\\d+)/edit',
         name: 'editReview',
-        component: __WEBPACK_IMPORTED_MODULE_9__components_Reviews_Edit___default.a,
+        component: __WEBPACK_IMPORTED_MODULE_10__components_Reviews_Edit___default.a,
         props: function props(route) {
             return {
                 restaurantId: Number(route.params.restaurantId),
@@ -14590,18 +14597,18 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
     }, {
         path: '/restaurant/new',
         name: 'addRestaurant',
-        component: __WEBPACK_IMPORTED_MODULE_8__components_Restaurants_Edit___default.a
+        component: __WEBPACK_IMPORTED_MODULE_9__components_Restaurants_Edit___default.a
     }, {
         path: '/restaurant/edit/:id(\\d+)',
         name: 'editRestaurant',
-        component: __WEBPACK_IMPORTED_MODULE_8__components_Restaurants_Edit___default.a,
+        component: __WEBPACK_IMPORTED_MODULE_9__components_Restaurants_Edit___default.a,
         props: true
     }]
 });
 
 // Setup auth guard
 router.beforeEach(function (to, from, next) {
-    if (!['login', 'logout'].includes(to.name) && !store.state.loggedIn) {
+    if (!['login', 'logout', 'register'].includes(to.name) && !store.state.loggedIn) {
         next('login');
     } else if (['addRestaurant', 'editRestaurant'].includes(to.name) && !store.state.user.hasRole('owner')) {
         next('/');
@@ -58691,6 +58698,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     computed: {
@@ -58716,18 +58726,20 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("ul", { staticClass: "nav" }, [
-        _c(
-          "li",
-          { staticClass: "nav-item" },
-          [
-            _c(
-              "router-link",
-              { staticClass: "nav-link", attrs: { to: { name: "home" } } },
-              [_vm._v("Home")]
+        _vm.loggedIn
+          ? _c(
+              "li",
+              { staticClass: "nav-item" },
+              [
+                _c(
+                  "router-link",
+                  { staticClass: "nav-link", attrs: { to: { name: "home" } } },
+                  [_vm._v("Home")]
+                )
+              ],
+              1
             )
-          ],
-          1
-        ),
+          : _vm._e(),
         _vm._v(" "),
         this.$store.state.user.hasRole("owner") ||
         this.$store.state.user.hasRole("admin")
@@ -58742,6 +58754,24 @@ var render = function() {
                     attrs: { to: { name: "addRestaurant" } }
                   },
                   [_vm._v("Add Restaurant")]
+                )
+              ],
+              1
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        !_vm.loggedIn
+          ? _c(
+              "li",
+              { staticClass: "nav-item" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { to: { name: "register" } }
+                  },
+                  [_vm._v("Sign Up")]
                 )
               ],
               1
@@ -58957,7 +58987,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -59047,13 +59076,7 @@ var render = function() {
               _vm.email = $event.target.value
             }
           }
-        }),
-        _vm._v(" "),
-        _c(
-          "small",
-          { staticClass: "form-text text-muted", attrs: { id: "emailHelp" } },
-          [_vm._v("We'll never share your email with anyone else.")]
-        )
+        })
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
@@ -61255,6 +61278,312 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 106 */,
+/* 107 */,
+/* 108 */,
+/* 109 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(112)
+/* template */
+var __vue_template__ = __webpack_require__(114)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/views/Register.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7df97d1b", Component.options)
+  } else {
+    hotAPI.reload("data-v-7df97d1b", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 110 */,
+/* 111 */,
+/* 112 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            name: "",
+            email: "",
+            role: "user",
+            password: "",
+            confirmPassword: ""
+        };
+    },
+    methods: {
+        register: function register(event) {
+            if (event) event.preventDefault();
+
+            axios.post('/register', {
+                name: this.name,
+                email: this.email,
+                password: this.password,
+                password_confirmation: this.confirmPassword,
+                role: this.role
+            }).then(function (resp) {});
+        }
+    }
+});
+
+/***/ }),
+/* 113 */,
+/* 114 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("form", { attrs: { action: "" }, on: { submit: _vm.register } }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "name" } }, [_vm._v("Your Name")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.name,
+              expression: "name"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", id: "name", placeholder: "Enter your name" },
+          domProps: { value: _vm.name },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.name = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "email" } }, [_vm._v("Email address")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.email,
+              expression: "email"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "email",
+            id: "email",
+            "aria-describedby": "emailHelp",
+            placeholder: "Enter email"
+          },
+          domProps: { value: _vm.email },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.email = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "small",
+          { staticClass: "form-text text-muted", attrs: { id: "emailHelp" } },
+          [_vm._v("We'll never share your email with anyone else.")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "role" } }, [_vm._v("Register as")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.role,
+                expression: "role"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { id: "role" },
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.role = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              }
+            }
+          },
+          [
+            _c("option", { attrs: { value: "user" } }, [_vm._v("User")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "owner" } }, [_vm._v("Owner")])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "password" } }, [_vm._v("Password")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.password,
+              expression: "password"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "password", id: "password", placeholder: "Password" },
+          domProps: { value: _vm.password },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.password = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "password_confirmation" } }, [
+          _vm._v("Confirm Password")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.confirmPassword,
+              expression: "confirmPassword"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "password",
+            id: "password_confirmation",
+            placeholder: "Confirm Password"
+          },
+          domProps: { value: _vm.confirmPassword },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.confirmPassword = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_vm._v("Submit")]
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7df97d1b", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
