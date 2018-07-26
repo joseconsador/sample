@@ -60345,7 +60345,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -60362,6 +60362,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Reviews_Rating___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Reviews_Rating__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Reviews_UserReview__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Reviews_UserReview___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Reviews_UserReview__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -60468,12 +60480,20 @@ var urlParse = __webpack_require__(112);
                     }
                 });
 
-                _this.load('/api/restaurants/' + _this.id + '/reviews?include=user');
+                _this.showAll();
             }).catch(function (error) {
                 if ([403, 404].includes(error.response.status)) {
                     _this.$router.push('/');
                 }
             });
+        },
+        showAll: function showAll() {
+            this.reviews = [];
+            this.load('/api/restaurants/' + this.id + '/reviews?include=user');
+        },
+        showPending: function showPending() {
+            this.reviews = [];
+            this.load('/api/restaurants/' + this.id + '/reviews/pending?include=user');
         },
         load: function load(url) {
             var _this2 = this;
@@ -61156,6 +61176,36 @@ var render = function() {
         [
           _c("h4", [_vm._v("Reviews")]),
           _vm._v(" "),
+          this.$store.state.user.hasRole("owner")
+            ? _c("ul", { staticClass: "nav" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      attrs: { href: "javascript:void(0)" },
+                      on: { click: _vm.showAll }
+                    },
+                    [_vm._v("All")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      attrs: { href: "javascript:void(0)" },
+                      on: { click: _vm.showPending }
+                    },
+                    [_vm._v("Pending Replies")]
+                  )
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
           _c("hr"),
           _vm._v(" "),
           _vm.reviews.length > 0
@@ -61201,7 +61251,18 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link disabled", attrs: { href: "#" } }, [
+        _vm._v("Show:")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -62338,7 +62399,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -62375,14 +62436,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
-        reviewId: {
-            type: Number,
-            required: true
-        },
-        restaurantId: {
-            type: Number,
-            required: true
-        }
+        reviewId: Number,
+        restaurantId: Number
     },
     data: function data() {
         return {

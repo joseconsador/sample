@@ -45,6 +45,18 @@
         <div class="row mb-3">
             <div class="col-12">
                 <h4>Reviews</h4>
+
+                <ul v-if="this.$store.state.user.hasRole('owner')"  class="nav">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link disabled">Show:</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" v-on:click="showAll" href="javascript:void(0)">All</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" v-on:click="showPending" href="javascript:void(0)">Pending Replies</a>
+                    </li>
+                </ul>
                 <hr/>
                 <template v-if="reviews.length > 0">
                     <reviews v-bind:reviews="reviews" v-bind:users="users" v-bind:ownerId="ownerId"/>
@@ -103,13 +115,21 @@
                             }
                         });
 
-                        this.load('/api/restaurants/' + this.id + '/reviews?include=user');
+                        this.showAll();
                     })
                     .catch(error => {
                         if ([403, 404].includes(error.response.status)) {
                             this.$router.push('/');
                         }
                     });
+            },
+            showAll: function() {
+                this.reviews = [];
+                this.load('/api/restaurants/' + this.id + '/reviews?include=user');
+            },
+            showPending: function() {
+                this.reviews = [];
+                this.load('/api/restaurants/' + this.id + '/reviews/pending?include=user');
             },
             load: function(url) {
                 this.loadingReviews = true;

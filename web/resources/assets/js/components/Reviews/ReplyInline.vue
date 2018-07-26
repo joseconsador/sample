@@ -24,14 +24,8 @@
 <script>
     export default {
         props: {
-            reviewId: {
-                type: Number,
-                required: true,
-            },
-            restaurantId: {
-                type: Number,
-                required: true,
-            }
+            reviewId: Number,
+            restaurantId: Number
         },
         data: function() {
             return {
