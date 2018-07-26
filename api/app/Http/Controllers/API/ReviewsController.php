@@ -133,19 +133,18 @@ class ReviewsController extends BaseAPIController
     public function update(UpdateReview $request, Restaurant $restaurant, Review $review)
     {
         $fields = $request->validated();
+        $review->fill($fields);
 
         /**
          * @var $user User
          */
         $user = Auth::user();
-        if (!$user->hasRole('admin') || !$request->has('user_id')) {
-            $userId = $user->getKey();
-        } else {
-            $userId = $request->get('user_id');
+        if (!$user->hasRole('admin')) {
+            $review->user_id = $user->getKey();
+        } else if ($request->has('user_id')) {
+            $review->user_id = $request->get('user_id');
         }
 
-        $review->fill($fields);
-        $review->user_id = $userId;
         $review->save();
 
         return new ReviewResource($review);

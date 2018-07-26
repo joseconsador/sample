@@ -2,18 +2,14 @@
     <div>
         <template v-if="hasReview">
             <review
+                    :id="this.id"
                     :review="this.review"
                     :user="this.$store.state.user"
                     :owner="this.owner"
             />
         </template>
         <template v-else>
-            <router-link
-                class="nav-link"
-                :to="{ name: 'addReview', params: { restaurantId: this.restaurantId } }"
-            >
-                Add a review
-            </router-link>
+            <router-link :to="{ name: 'addReview', params: { restaurantId: this.restaurantId } }">Add a review</router-link>
         </template>
     </div>
 </template>
@@ -26,11 +22,16 @@
             'review': ListItem
         },
         props: {
-            restaurantId: Number,
+            reviewId: Number,
+            restaurantId: {
+                type: Number,
+                required: true
+            },
             owner: {}
         },
         data: function() {
             return {
+                id: null,
                 review: {},
                 hasReview: {
                     type: Boolean,
@@ -44,6 +45,7 @@
                 .then(resp => {
                     this.hasReview = true;
                     this.review = resp.data.data.attributes;
+                    this.id = resp.data.data.id;
                 })
                 .catch(error => {
                     if (error.response.status == 404) {

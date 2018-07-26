@@ -87,7 +87,7 @@
 
                         restaurant.included.forEach(resource => {
                             if (resource.type == "user") {
-                                this.users[resource.id] = resource.attributes;
+                                this.users[resource.id] = resource;
                             }
                         });
 
@@ -97,7 +97,7 @@
                             var users = resp.data.included.users;
 
                             users.forEach(user => {
-                                this.users[user.id] = user.attributes;
+                                this.users[user.id] = user;
                             });
                         });
                     })

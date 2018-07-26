@@ -33,6 +33,8 @@ const store = new Vuex.Store({
     state: {
         loggedIn: false,
         user: {
+            id: null,
+            attributes: {},
             name: "",
             roles: {},
             hasRole: function(role) {
@@ -55,9 +57,13 @@ const store = new Vuex.Store({
     mutations: {
         setUser (state, user) {
             if (user == null) {
+                state.user.id = null;
                 state.user.name = "";
                 state.user.roles = {};
+                state.user.attributes = {};
             } else {
+                state.user.id = user.id;
+                state.user.attributes = user.attributes;
                 state.user.name = user.attributes.name;
                 state.user.roles = user.attributes.roles;
             }
@@ -128,6 +134,15 @@ const router = new VueRouter({
             }),
         },
         {
+            path: '/restaurant/:restaurantId(\\d+)/review/:id(\\d+)/edit',
+            name: 'editReview',
+            component: EditReview,
+            props: (route) => ({
+                restaurantId: Number(route.params.restaurantId),
+                id: Number(route.params.id)
+            }),
+        },
+        {
             path: '/restaurant/new',
             name: 'addRestaurant',
             component: EditRestaurant,
@@ -146,6 +161,8 @@ router.beforeEach((to, from, next) => {
     if (!['login', 'logout'].includes(to.name) && !store.state.loggedIn) {
         next('login');
     } else if (['addRestaurant', 'editRestaurant'].includes(to.name) && !store.state.user.hasRole('owner')) {
+        next('/')
+    } else if (['addReview', 'editReview'].includes(to.name) && !store.state.user.hasRole('user')) {
         next('/')
     } else {
         next();

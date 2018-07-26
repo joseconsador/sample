@@ -1,6 +1,6 @@
 <template>
     <star-rating v-model="currentRating"
-                 :increment="1"
+                 :increment=increment
                  :max-rating="5"
                  :star-size=starSize
                  :read-only=readOnly
@@ -24,6 +24,9 @@
             },
             readOnly: {
                 default: true
+            },
+            increment: {
+                default: 0.01
             }
         },
         data: function() {
