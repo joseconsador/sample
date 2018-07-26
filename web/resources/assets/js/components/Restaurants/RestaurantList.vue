@@ -12,11 +12,11 @@
             <tbody>
                 <tr is="restaurant"
                     v-for="restaurant in restaurants"
-                    v-bind:name=restaurant.attributes.name
-                    description="jojo"
-                    v-bind:rating=restaurant.attributes.average_rating
-                    v-bind:id=restaurant.id
-                    v-bind:dateAdded=restaurant.attributes.created_at
+                    :name="restaurant.attributes.name"
+                    :description="restaurant.attributes.description"
+                    :rating="restaurant.attributes.average_rating"
+                    :id="restaurant.id"
+                    :dateAdded="restaurant.attributes.created_at"
                 ></tr>
             </tbody>
         </table>

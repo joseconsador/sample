@@ -80,6 +80,7 @@ import Auth from './components/views/Auth'
 import Restaurants from './components/Restaurants/Restaurants'
 import Restaurant from './components/Restaurants/Restaurant'
 import EditRestaurant from './components/Restaurants/Edit'
+import EditReview from './components/Reviews/Edit'
 
 const router = new VueRouter({
     mode: 'history',
@@ -114,7 +115,17 @@ const router = new VueRouter({
             path: '/restaurant/:id(\\d+)',
             name: 'restaurant',
             component: Restaurant,
-            props: true,
+            props: (route) => ({
+                id: Number(route.params.id)
+            }),
+        },
+        {
+            path: '/restaurant/:restaurantId(\\d+)/review/new',
+            name: 'addReview',
+            component: EditReview,
+            props: (route) => ({
+                restaurantId: Number(route.params.restaurantId)
+            }),
         },
         {
             path: '/restaurant/new',

@@ -1,9 +1,9 @@
 <template>
-    <star-rating v-bind:increment="0.01"
-                 v-bind:max-rating="5"
-                 v-bind:rating="rating"
-                 v-bind:star-size=starSize
-                 v-bind:read-only=readOnly
+    <star-rating v-model="currentRating"
+                 :increment="0.01"
+                 :max-rating="5"
+                 :star-size=starSize
+                 :read-only=readOnly
                  inactive-color="#000"
                  active-color="#f00"
     >
@@ -25,6 +25,19 @@
             readOnly: {
                 default: true
             }
+        },
+        data: function() {
+            return {
+                currentRating: this.rating
+            };
+        },
+        watch: {
+            rating: function(val) {
+                this.currentRating = val;
+            },
+            currentRating: function(val) {
+                this.$emit('update:rating', val);
+            },
         },
         components: {
             'star-rating': StarRating

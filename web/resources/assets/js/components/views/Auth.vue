@@ -54,7 +54,7 @@
                 });
             }
         },
-        mounted: function () {
+        created: function () {
             if (!this.shouldLogin) {
                 this.logout();
             }

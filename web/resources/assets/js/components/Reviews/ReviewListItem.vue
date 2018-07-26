@@ -6,8 +6,8 @@
             <small>{{ review.updated_at | moment("dddd, MMMM Do YYYY, h:mm:ss a") }}</small>
         </p>
         <p>{{ review.comment }}</p>
-        <div v-if="review.reply != ''" class="alert alert-warning" role="alert">
-            <p><b>{{ owner.name }}: (Owner)</b></p>
+        <div v-if="review.reply" class="alert alert-warning" role="alert">
+            <p><b>{{ owner.name }} (Owner):</b></p>
             {{ review.reply }}
         </div>
     </div>

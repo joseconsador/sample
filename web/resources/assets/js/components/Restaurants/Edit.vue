@@ -67,7 +67,7 @@
                 this.load();
             }
         },
-        mounted: function() {
+        created: function() {
             this.load();
         },
         name: "RestaurantEdit"

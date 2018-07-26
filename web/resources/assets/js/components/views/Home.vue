@@ -6,7 +6,7 @@
 
 <script>
     export default {
-        mounted() {
+        created() {
             if (this.$store.state.user.hasRole('user') || this.$store.state.user.hasRole('owner')) {
                 this.$router.push('/restaurants/1');
             }

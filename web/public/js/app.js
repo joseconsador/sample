@@ -14390,6 +14390,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_Restaurants_Restaurant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_Restaurants_Restaurant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_Restaurants_Edit__ = __webpack_require__(94);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_Restaurants_Edit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_Restaurants_Edit__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_Reviews_Edit__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_Reviews_Edit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_Reviews_Edit__);
 
 
 
@@ -14473,6 +14475,7 @@ Vue.use(__webpack_require__(48));
 
 
 
+
 var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
     mode: 'history',
     routes: [{
@@ -14503,7 +14506,20 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
         path: '/restaurant/:id(\\d+)',
         name: 'restaurant',
         component: __WEBPACK_IMPORTED_MODULE_7__components_Restaurants_Restaurant___default.a,
-        props: true
+        props: function props(route) {
+            return {
+                id: Number(route.params.id)
+            };
+        }
+    }, {
+        path: '/restaurant/:restaurantId(\\d+)/review/new',
+        name: 'addReview',
+        component: __WEBPACK_IMPORTED_MODULE_9__components_Reviews_Edit___default.a,
+        props: function props(route) {
+            return {
+                restaurantId: Number(route.params.restaurantId)
+            };
+        }
     }, {
         path: '/restaurant/new',
         name: 'addRestaurant',
@@ -58777,7 +58793,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
+    created: function created() {
         if (this.$store.state.user.hasRole('user') || this.$store.state.user.hasRole('owner')) {
             this.$router.push('/restaurants/1');
         }
@@ -58917,7 +58933,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         }
     },
-    mounted: function mounted() {
+    created: function created() {
         if (!this.shouldLogin) {
             this.logout();
         }
@@ -59164,7 +59180,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.fetch();
         }
     },
-    mounted: function mounted() {
+    created: function created() {
         this.fetch();
     }
 });
@@ -59515,7 +59531,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -59556,6 +59572,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             default: true
         }
     },
+    data: function data() {
+        return {
+            currentRating: this.rating
+        };
+    },
+    watch: {
+        rating: function rating(val) {
+            this.currentRating = val;
+        },
+        currentRating: function currentRating(val) {
+            this.$emit('update:rating', val);
+        }
+    },
     components: {
         'star-rating': __WEBPACK_IMPORTED_MODULE_0_vue_star_rating___default.a
     },
@@ -59581,11 +59610,17 @@ var render = function() {
     attrs: {
       increment: 0.01,
       "max-rating": 5,
-      rating: _vm.rating,
       "star-size": _vm.starSize,
       "read-only": _vm.readOnly,
       "inactive-color": "#000",
       "active-color": "#f00"
+    },
+    model: {
+      value: _vm.currentRating,
+      callback: function($$v) {
+        _vm.currentRating = $$v
+      },
+      expression: "currentRating"
     }
   })
 }
@@ -59676,7 +59711,7 @@ var render = function() {
             tag: "tr",
             attrs: {
               name: restaurant.attributes.name,
-              description: "jojo",
+              description: restaurant.attributes.description,
               rating: restaurant.attributes.average_rating,
               id: restaurant.id,
               dateAdded: restaurant.attributes.created_at
@@ -59914,7 +59949,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -59929,6 +59964,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Reviews_ReviewList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Reviews_ReviewList__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Reviews_Rating__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Reviews_Rating___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Reviews_Rating__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Reviews_UserReview__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Reviews_UserReview___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Reviews_UserReview__);
 //
 //
 //
@@ -59960,15 +59997,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['id'],
+    props: {
+        id: Number
+    },
     components: {
         'reviews': __WEBPACK_IMPORTED_MODULE_0__Reviews_ReviewList___default.a,
-        'star-rating': __WEBPACK_IMPORTED_MODULE_1__Reviews_Rating___default.a
+        'star-rating': __WEBPACK_IMPORTED_MODULE_1__Reviews_Rating___default.a,
+        'user-review': __WEBPACK_IMPORTED_MODULE_2__Reviews_UserReview___default.a
     },
     data: function data() {
         return {
@@ -60007,13 +60070,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     });
                 });
             }).catch(function (error) {
-                if (error.response.status == 403) {
+                if ([403, 404].includes(error.response.status)) {
                     _this.$router.push('/');
                 }
             });
         }
     },
-    mounted: function mounted() {
+    created: function created() {
         this.fetch();
     },
     name: "Restaurant"
@@ -60303,13 +60366,13 @@ var render = function() {
       _vm._v(" "),
       _c("p", [_vm._v(_vm._s(_vm.review.comment))]),
       _vm._v(" "),
-      _vm.review.reply != ""
+      _vm.review.reply
         ? _c(
             "div",
             { staticClass: "alert alert-warning", attrs: { role: "alert" } },
             [
               _c("p", [
-                _c("b", [_vm._v(_vm._s(_vm.owner.name) + ": (Owner)")])
+                _c("b", [_vm._v(_vm._s(_vm.owner.name) + " (Owner):")])
               ]),
               _vm._v("\n        " + _vm._s(_vm.review.reply) + "\n    ")
             ]
@@ -60377,72 +60440,118 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("h2", [_vm._v("Restaurant")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card" }, [
-        _c(
-          "div",
-          { staticClass: "card-body" },
-          [
-            _c("h5", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.name))]),
+  return _c("div", [
+    _c("div", { staticClass: "row mb-4" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("h2", [_vm._v("Restaurant")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card" }, [
+          _c(
+            "div",
+            { staticClass: "card-body" },
+            [
+              _c("h5", { staticClass: "card-title" }, [
+                _vm._v(_vm._s(_vm.name))
+              ]),
+              _vm._v(" "),
+              _c(
+                "h6",
+                { staticClass: "card-subtitle mb-2" },
+                [
+                  _c("star-rating", {
+                    attrs: { rating: _vm.rating, starSize: 30 }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("p", { staticClass: "card-text" }, [
+                _vm._v(_vm._s(_vm.description))
+              ]),
+              _vm._v(" "),
+              this.$store.state.user.hasRole("owner")
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass: "card-link",
+                      attrs: {
+                        to: { name: "editRestaurant", params: { id: _vm.id } }
+                      }
+                    },
+                    [_vm._v("Edit")]
+                  )
+                : _vm._e()
+            ],
+            1
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    this.$store.state.user.hasRole("user")
+      ? _c("div", { staticClass: "row mb-3" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("h4", [_vm._v("Your Review")]),
             _vm._v(" "),
-            _c(
-              "h6",
-              { staticClass: "card-subtitle mb-2" },
-              [
-                _c("star-rating", {
-                  attrs: { rating: _vm.rating, starSize: 30 }
-                })
-              ],
-              1
-            ),
+            _c("hr"),
             _vm._v(" "),
-            _c("p", { staticClass: "card-text" }, [
-              _vm._v(_vm._s(_vm.description))
-            ]),
-            _vm._v(" "),
-            this.$store.state.user.hasRole("owner")
-              ? _c(
-                  "router-link",
-                  {
-                    staticClass: "card-link",
+            _c("ul", { staticClass: "list-group" }, [
+              _c(
+                "li",
+                { staticClass: "list-group-item" },
+                [
+                  _c("user-review", {
                     attrs: {
-                      to: { name: "editRestaurant", params: { id: _vm.id } }
+                      "restaurant-id": this.id,
+                      owner: this.users[_vm.ownerId]
                     }
-                  },
-                  [_vm._v("Edit")]
-                )
-              : _vm._e()
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c("p"),
-      _c("h4", [_vm._v("Highlights")]),
-      _vm._v(" "),
-      _c("p"),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _c("p"),
-      _c("h4", [_vm._v("Reviews")]),
-      _vm._v(" "),
-      _c("p"),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _c("reviews", {
-        attrs: { reviews: _vm.reviews, users: _vm.users, ownerId: _vm.ownerId }
-      })
-    ],
-    1
-  )
+                  })
+                ],
+                1
+              )
+            ])
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "row mb-3" }, [
+      _c(
+        "div",
+        { staticClass: "col-12" },
+        [
+          _c("h4", [_vm._v("Reviews")]),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c("reviews", {
+            attrs: {
+              reviews: _vm.reviews,
+              users: _vm.users,
+              ownerId: _vm.ownerId
+            }
+          })
+        ],
+        1
+      )
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mb-3" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("h4", [_vm._v("Highlights")]),
+        _vm._v(" "),
+        _c("hr")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -60620,7 +60729,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.load();
         }
     },
-    mounted: function mounted() {
+    created: function created() {
         this.load();
     },
     name: "RestaurantEdit"
@@ -60714,6 +60823,357 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 100 */,
+/* 101 */,
+/* 102 */,
+/* 103 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(106)
+/* template */
+var __vue_template__ = __webpack_require__(108)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Reviews/UserReview.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6f7f908e", Component.options)
+  } else {
+    hotAPI.reload("data-v-6f7f908e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 104 */,
+/* 105 */,
+/* 106 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ReviewListItem__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ReviewListItem___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ReviewListItem__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        'review': __WEBPACK_IMPORTED_MODULE_0__ReviewListItem___default.a
+    },
+    props: {
+        restaurantId: Number,
+        owner: {}
+    },
+    data: function data() {
+        return {
+            review: {},
+            hasReview: {
+                type: Boolean,
+                default: false
+            }
+        };
+    },
+    name: "UserReview",
+    created: function created() {
+        var _this = this;
+
+        axios.get('/api/restaurants/' + this.restaurantId + '/review').then(function (resp) {
+            _this.hasReview = true;
+            _this.review = resp.data.data.attributes;
+        }).catch(function (error) {
+            if (error.response.status == 404) {
+                _this.hasReview = false;
+            }
+        });
+    }
+});
+
+/***/ }),
+/* 107 */,
+/* 108 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm.hasReview
+        ? [
+            _c("review", {
+              attrs: {
+                review: this.review,
+                user: this.$store.state.user,
+                owner: this.owner
+              }
+            })
+          ]
+        : [_vm._v("\n        You have not reviewed this restaurant yet.\n    ")]
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-6f7f908e", module.exports)
+  }
+}
+
+/***/ }),
+/* 109 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(112)
+/* template */
+var __vue_template__ = __webpack_require__(114)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Reviews/Edit.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-74bbaa55", Component.options)
+  } else {
+    hotAPI.reload("data-v-74bbaa55", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 110 */,
+/* 111 */,
+/* 112 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Rating__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Rating___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Rating__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        'star-rating': __WEBPACK_IMPORTED_MODULE_0__Rating___default.a
+    },
+    props: {
+        restaurantId: {
+            type: Number,
+            required: true
+        },
+        id: {
+            type: Number
+        }
+    },
+    data: function data() {
+        return {
+            restaurant: {},
+            comment: "",
+            rating: 0
+        };
+    },
+    methods: {
+        submit: function submit(event) {
+            var _this = this;
+
+            if (event) event.preventDefault();
+
+            var options = {
+                method: 'post',
+                url: '/api/restaurants/' + this.restaurantId + '/reviews',
+                data: {
+                    rating: this.rating,
+                    comment: this.comment
+                }
+            };
+
+            if (this.id > 0) {
+                options.data.id = this.id;
+                options.method = 'put';
+                options.url += this.id.toString();
+            }
+
+            axios(options).then(function (resp) {
+                _this.$router.push('/restaurant/' + _this.restaurantId);
+            });
+        }
+    },
+    created: function created() {
+        var _this2 = this;
+
+        axios.get('/api/restaurants/' + this.restaurantId).then(function (resp) {
+            _this2.restaurant = resp.data.data;
+        });
+    }
+});
+
+/***/ }),
+/* 113 */,
+/* 114 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("form", { attrs: { action: "" }, on: { submit: _vm.submit } }, [
+      _c(
+        "div",
+        { staticClass: "form-group" },
+        [
+          _c("label", { attrs: { for: "rating" } }, [_vm._v("Rating")]),
+          _vm._v(" "),
+          _c("star-rating", {
+            attrs: { rating: _vm.rating, "read-only": false, "star-size": 30 },
+            on: {
+              "update:rating": function($event) {
+                _vm.rating = $event
+              }
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "comment" } }, [_vm._v("Comment")]),
+        _vm._v(" "),
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.comment,
+              expression: "comment"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { id: "comment", placeholder: "Leave a comment..." },
+          domProps: { value: _vm.comment },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.comment = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_vm._v("Submit")]
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-74bbaa55", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

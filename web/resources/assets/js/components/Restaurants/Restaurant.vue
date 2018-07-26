@@ -1,43 +1,69 @@
 <template>
     <div>
-        <h2>Restaurant</h2>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">{{ name }}</h5>
-                <h6  class="card-subtitle mb-2">
-                    <star-rating
-                            v-bind:rating="rating"
-                            v-bind:starSize=30 />
-                </h6>
-                <p class="card-text">{{ description }}</p>
-                <router-link
-                        class="card-link"
-                        v-if="this.$store.state.user.hasRole('owner')"
-                        :to="{ name: 'editRestaurant', params: {id: id }}"
-                >Edit</router-link>
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2>Restaurant</h2>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ name }}</h5>
+                        <h6  class="card-subtitle mb-2">
+                            <star-rating
+                                    :rating="rating"
+                                    :starSize=30 />
+                        </h6>
+                        <p class="card-text">{{ description }}</p>
+                        <router-link
+                                class="card-link"
+                                v-if="this.$store.state.user.hasRole('owner')"
+                                :to="{ name: 'editRestaurant', params: {id: id }}"
+                        >Edit</router-link>
+                    </div>
+                </div>
             </div>
         </div>
-        <p>
-            <h4>Highlights</h4>
-        </p>
-        <hr/>
-        <p>
-            <h4>Reviews</h4>
-        </p>
-        <hr/>
-        <reviews v-bind:reviews="reviews" v-bind:users="users" v-bind:ownerId="ownerId"/>
+
+        <div v-if="this.$store.state.user.hasRole('user')" class="row mb-3">
+            <div class="col-12">
+                <h4>Your Review</h4>
+                <hr>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <user-review :restaurant-id="this.id" :owner="this.users[ownerId]"/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-12">
+                <h4>Highlights</h4>
+                <hr>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-12">
+                <h4>Reviews</h4>
+                <hr/>
+                <reviews v-bind:reviews="reviews" v-bind:users="users" v-bind:ownerId="ownerId"/>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
     import Reviews from '../Reviews/ReviewList';
     import Rating from '../Reviews/Rating';
+    import UserReview from '../Reviews/UserReview';
 
     export default {
-        props: ['id'],
+        props: {
+            id: Number
+        },
         components: {
             'reviews': Reviews,
             'star-rating': Rating,
+            'user-review': UserReview,
         },
         data: function() {
             return {
@@ -76,13 +102,13 @@
                         });
                     })
                     .catch(error => {
-                        if (error.response.status == 403) {
+                        if ([403, 404].includes(error.response.status)) {
                             this.$router.push('/');
                         }
                     });
             }
         },
-        mounted: function() {
+        created: function() {
             this.fetch();
         },
         name: "Restaurant"

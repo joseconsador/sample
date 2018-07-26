@@ -84,7 +84,7 @@
                 this.fetch()
             }
         },
-        mounted: function() {
+        created: function() {
             this.fetch()
         }
     }
