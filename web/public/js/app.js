@@ -14628,6 +14628,7 @@ window.axios.interceptors.response.use(function (response) {
         store.commit('setLoggedIn', false);
         router.push('/login');
     }
+
     // Do something with response error
     return Promise.reject(error);
 });
@@ -60667,7 +60668,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -60680,6 +60681,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Rating__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Rating___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Rating__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ReplyInline__ = __webpack_require__(115);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ReplyInline___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ReplyInline__);
 //
 //
 //
@@ -60699,12 +60702,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: {
-        'star-rating': __WEBPACK_IMPORTED_MODULE_0__Rating___default.a
+        'star-rating': __WEBPACK_IMPORTED_MODULE_0__Rating___default.a,
+        'reply-inline': __WEBPACK_IMPORTED_MODULE_1__ReplyInline___default.a
     },
     props: ['id', 'review', 'user', 'owner'],
     name: "ReviewListItem"
@@ -60742,19 +60753,33 @@ var render = function() {
       _c("p", [_vm._v(_vm._s(_vm.review.comment))]),
       _vm._v(" "),
       _vm.review.reply
-        ? _c(
-            "div",
-            { staticClass: "alert alert-warning", attrs: { role: "alert" } },
-            [
-              _c("p", [
-                _c("b", [
-                  _vm._v(_vm._s(_vm.owner.attributes.name) + " (Owner):")
-                ])
-              ]),
-              _vm._v("\n        " + _vm._s(_vm.review.reply) + "\n    ")
+        ? [
+            _c(
+              "div",
+              { staticClass: "alert alert-warning", attrs: { role: "alert" } },
+              [
+                _c("p", [
+                  _c("b", [
+                    _vm._v(_vm._s(_vm.owner.attributes.name) + " (Owner):")
+                  ])
+                ]),
+                _vm._v(
+                  "\n            " + _vm._s(_vm.review.reply) + "\n        "
+                )
+              ]
+            )
+          ]
+        : this.$store.state.user.hasRole("admin") ||
+          _vm.owner.id == this.$store.state.user.id
+          ? [
+              _c("reply-inline", {
+                attrs: {
+                  "restaurant-id": _vm.review.restaurant_id,
+                  "review-id": _vm.id
+                }
+              })
             ]
-          )
-        : _vm._e(),
+          : _vm._e(),
       _vm._v(" "),
       this.$store.state.user.hasRole("admin") ||
       _vm.review.user_id == this.$store.state.user.id
@@ -60772,7 +60797,7 @@ var render = function() {
           )
         : _vm._e()
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -62186,6 +62211,265 @@ function querystringify(obj, prefix) {
 exports.stringify = querystringify;
 exports.parse = querystring;
 
+
+/***/ }),
+/* 115 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(116)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(118)
+/* template */
+var __vue_template__ = __webpack_require__(119)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-7da93528"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Reviews/ReplyInline.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7da93528", Component.options)
+  } else {
+    hotAPI.reload("data-v-7da93528", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 116 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(117);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(4)("3d75b50a", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7da93528\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ReplyInline.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7da93528\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ReplyInline.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 117 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 118 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        reviewId: {
+            type: Number,
+            required: true
+        },
+        restaurantId: {
+            type: Number,
+            required: true
+        }
+    },
+    data: function data() {
+        return {
+            showInput: false,
+            reply: "",
+            submitted: false
+        };
+    },
+    methods: {
+        submit: function submit(event) {
+            var _this = this;
+
+            if (event) event.preventDefault();
+
+            axios.post('/api/restaurants/' + this.restaurantId + '/reviews/' + this.reviewId + '/reply', {
+                reply: this.reply
+            }).then(function (resp) {
+                _this.submitted = true;
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 119 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      !_vm.showInput
+        ? [
+            _c(
+              "a",
+              {
+                attrs: { href: "javascript:void(0)" },
+                on: {
+                  click: function($event) {
+                    _vm.showInput = true
+                  }
+                }
+              },
+              [_vm._v("Leave a reply")]
+            )
+          ]
+        : !_vm.submitted
+          ? [
+              _c(
+                "form",
+                { attrs: { action: "" }, on: { submit: _vm.submit } },
+                [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "reply" } }, [
+                      _vm._v("Replying to comment:")
+                    ]),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.reply,
+                          expression: "reply"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "reply", placeholder: "Leave a reply..." },
+                      domProps: { value: _vm.reply },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.reply = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "submit" }
+                    },
+                    [_vm._v("Submit")]
+                  )
+                ]
+              )
+            ]
+          : [
+              _c(
+                "div",
+                {
+                  staticClass: "alert alert-warning",
+                  attrs: { role: "alert" }
+                },
+                [
+                  _c("p", [
+                    _c("b", [
+                      _vm._v(
+                        _vm._s(this.$store.state.user.attributes.name) +
+                          " (Owner):"
+                      )
+                    ])
+                  ]),
+                  _vm._v("\n            " + _vm._s(_vm.reply) + "\n        ")
+                ]
+              )
+            ]
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7da93528", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

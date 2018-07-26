@@ -40,9 +40,11 @@ Route::group(['middleware' => ['auth:api'], 'as' => 'api::'], function () {
                 Route::get('/', ['uses' => 'API\ReviewsController@index']);
                 Route::get('/highlights', ['uses' => 'API\ReviewsController@highlights']);
                 Route::get('/pending', ['uses' => 'API\ReviewsController@pending']);
-                Route::get('/user/{id}', ['as' => '::user', 'uses' => 'API\ReviewsController@fromUser']);
 
                 Route::get('/{review}', ['as' => '::show', 'uses' => 'API\ReviewsController@show'])
+                    ->where('review', '[0-9]+');
+
+                Route::match(['post', 'put'], '/{review}/reply', ['uses' => 'API\ReviewsController@reply'])
                     ->where('review', '[0-9]+');
 
                 Route::group(['middleware' => ['permission:review-restaurant']], function () {

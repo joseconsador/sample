@@ -184,6 +184,7 @@ window.axios.interceptors.response.use(function (response) {
         store.commit('setLoggedIn', false);
         router.push('/login');
     }
+
     // Do something with response error
     return Promise.reject(error);
 });

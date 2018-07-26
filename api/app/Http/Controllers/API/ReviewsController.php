@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Requests\CreateReview;
+use App\Http\Requests\ReplyReview;
 use App\Http\Requests\UpdateReview;
 use App\Http\Resources\Review\ReviewCollection;
 use App\Http\Resources\Review\ReviewResource;
@@ -146,6 +147,21 @@ class ReviewsController extends BaseAPIController
             $review->user_id = $request->get('user_id');
         }
 
+        $review->save();
+
+        return new ReviewResource($review);
+    }
+
+    /**
+     * Reply to a review.
+     *
+     * @param ReplyReview $request
+     * @param Restaurant $restaurant
+     * @param Review $review
+     * @return ReviewResource
+     */
+    public function reply(ReplyReview $request, Restaurant $restaurant, Review $review) {
+        $review->reply = $request->input('reply');
         $review->save();
 
         return new ReviewResource($review);

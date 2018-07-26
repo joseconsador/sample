@@ -18,18 +18,6 @@ class ReviewPolicy
     }
 
     /**
-     * Determine whether the user can view the models review.
-     *
-     * @param  \App\Models\User $user
-     * @param \App\Policies\Review $Review
-     * @return mixed
-     */
-    public function view(User $user, Review $review)
-    {
-        //
-    }
-
-    /**
      * Determine whether the user can create models reviews.
      *
      * @param  \App\Models\User  $user
@@ -53,14 +41,14 @@ class ReviewPolicy
     }
 
     /**
-     * Determine whether the user can delete the models review.
+     * Determine whether the user can reply to the review.
      *
      * @param  \App\Models\User $user
      * @param Review $review
      * @return mixed
      */
-    public function delete(User $user, Review $review)
+    public function reply(User $user, Review $review)
     {
-        //
+        return ($user->hasPermissionTo('create-restaurant') && $user->is($review->restaurant->owner));
     }
 }
