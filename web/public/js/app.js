@@ -60345,7 +60345,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -60362,6 +60362,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Reviews_Rating___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Reviews_Rating__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Reviews_UserReview__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Reviews_UserReview___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Reviews_UserReview__);
+//
 //
 //
 //
@@ -60446,7 +60447,8 @@ var urlParse = __webpack_require__(112);
             users: [],
             ownerId: 0, // Restaurant owner ID
             nextPage: null,
-            loadingReviews: true
+            loadingReviews: true,
+            highlights: []
         };
     },
     methods: {
@@ -60465,6 +60467,8 @@ var urlParse = __webpack_require__(112);
                         _this.users[resource.id] = resource;
                     }
                 });
+
+                _this.load('/api/restaurants/' + _this.id + '/reviews?include=user');
             }).catch(function (error) {
                 if ([403, 404].includes(error.response.status)) {
                     _this.$router.push('/');
@@ -60496,11 +60500,39 @@ var urlParse = __webpack_require__(112);
                 console.log(error);
                 _this2.loadingReviews = false;
             });
+        },
+        getHighlights: function getHighlights() {
+            var _this3 = this;
+
+            axios.get('/api/restaurants/' + this.id + '/reviews/highest?include=user').then(function (resp) {
+                var highest = resp.data;
+
+                highest.included.forEach(function (resource) {
+                    if (resource.type == "user") {
+                        _this3.users[resource.id] = resource;
+                    }
+                });
+                axios.get('/api/restaurants/' + _this3.id + '/reviews/lowest?include=user').then(function (resp) {
+                    _this3.highlights = _this3.highlights.concat(highest.data);
+                    var lowest = resp.data;
+
+                    lowest.included.forEach(function (resource) {
+                        if (resource.type == "user") {
+                            _this3.users[resource.id] = resource;
+                        }
+                    });
+
+                    // Do not add to the array if they are the same resource
+                    if (highest.data.id != lowest.data.id) {
+                        _this3.highlights = _this3.highlights.concat(lowest.data);
+                    }
+                });
+            });
         }
     },
     created: function created() {
         this.fetch();
-        this.load('/api/restaurants/' + this.id + '/reviews?include=user');
+        this.getHighlights();
     },
     name: "Restaurant"
 });
@@ -61094,7 +61126,28 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    _vm._m(0),
+    _vm.highlights.length > 0
+      ? _c("div", { staticClass: "row mb-3" }, [
+          _c(
+            "div",
+            { staticClass: "col-12" },
+            [
+              _c("h4", [_vm._v("Highlights")]),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _c("reviews", {
+                attrs: {
+                  reviews: _vm.highlights,
+                  users: _vm.users,
+                  ownerId: _vm.ownerId
+                }
+              })
+            ],
+            1
+          )
+        ])
+      : _vm._e(),
     _vm._v(" "),
     _c("div", { staticClass: "row mb-3" }, [
       _c(
@@ -61105,7 +61158,7 @@ var render = function() {
           _vm._v(" "),
           _c("hr"),
           _vm._v(" "),
-          _vm.reviews
+          _vm.reviews.length > 0
             ? [
                 _c("reviews", {
                   attrs: {
@@ -61148,20 +61201,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mb-3" }, [
-      _c("div", { staticClass: "col-12" }, [
-        _c("h4", [_vm._v("Highlights")]),
-        _vm._v(" "),
-        _c("hr")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

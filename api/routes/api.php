@@ -38,7 +38,8 @@ Route::group(['middleware' => ['auth:api'], 'as' => 'api::'], function () {
 
             Route::group(['prefix' => 'reviews', 'as' => '::reviews'], function () {
                 Route::get('/', ['uses' => 'API\ReviewsController@index']);
-                Route::get('/highlights', ['uses' => 'API\ReviewsController@highlights']);
+                Route::get('/highest', ['uses' => 'API\ReviewsController@highest']);
+                Route::get('/lowest', ['uses' => 'API\ReviewsController@lowest']);
                 Route::get('/pending', ['uses' => 'API\ReviewsController@pending']);
 
                 Route::get('/{review}', ['as' => '::show', 'uses' => 'API\ReviewsController@show'])

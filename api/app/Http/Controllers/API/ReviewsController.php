@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 class ReviewsController extends BaseAPIController
 {
     /**
-     * Display a listing of the resource.
+     * Return a listing of the resource.
      *
      * @param Request $request
      * @param Restaurant $restaurant
@@ -32,7 +32,7 @@ class ReviewsController extends BaseAPIController
     }
 
     /**
-     * Display reviews with pending replies.
+     * Return reviews with pending replies.
      *
      * @param Request $request
      * @param Restaurant $restaurant
@@ -47,19 +47,43 @@ class ReviewsController extends BaseAPIController
     }
 
     /**
-     * Display highest and lowest reviews.
+     * Return the highest review.
      *
      * @param Request $request
      * @param Restaurant $restaurant
-     * @return ResourceCollection
+     * @return ReviewResource
      */
-    public function highlights(Request $request, Restaurant $restaurant)
+    public function highest(Request $request, Restaurant $restaurant)
     {
-/*        return new ReviewCollection(collect([
-            $restaurant->reviews()->max('rating'),
-            $restaurant->reviews()-
-        ]));*/
+        return $this->show(
+            $request,
+            $restaurant,
+            $restaurant
+                ->reviews()
+                ->orderBy('rating', 'desc')
+                ->firstOrFail()
+        );
     }
+
+    /**
+     * Return the lowest review.
+     *
+     * @param Request $request
+     * @param Restaurant $restaurant
+     * @return ReviewResource
+     */
+    public function lowest(Request $request, Restaurant $restaurant)
+    {
+        return $this->show(
+            $request,
+            $restaurant,
+            $restaurant
+                ->reviews()
+                ->orderBy('rating', 'asc')
+                ->firstOrFail()
+        );
+    }
+
 
     /**
      * Store a newly created resource in storage.

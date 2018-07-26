@@ -34,10 +34,11 @@
             </div>
         </div>
 
-        <div class="row mb-3">
+        <div class="row mb-3" v-if="highlights.length > 0">
             <div class="col-12">
                 <h4>Highlights</h4>
                 <hr>
+                <reviews :reviews="highlights" v-bind:users="users" v-bind:ownerId="ownerId"/>
             </div>
         </div>
 
@@ -45,7 +46,7 @@
             <div class="col-12">
                 <h4>Reviews</h4>
                 <hr/>
-                <template v-if="reviews">
+                <template v-if="reviews.length > 0">
                     <reviews v-bind:reviews="reviews" v-bind:users="users" v-bind:ownerId="ownerId"/>
                     <a v-if="this.nextPage != null" v-on:click="load(nextPage)" href="javascript:void(0);">Load More</a>
                 </template>
@@ -82,7 +83,8 @@
                 users: [],
                 ownerId: 0, // Restaurant owner ID
                 nextPage: null,
-                loadingReviews: true
+                loadingReviews: true,
+                highlights: []
             };
         },
         methods: {
@@ -100,6 +102,8 @@
                                 this.users[resource.id] = resource;
                             }
                         });
+
+                        this.load('/api/restaurants/' + this.id + '/reviews?include=user');
                     })
                     .catch(error => {
                         if ([403, 404].includes(error.response.status)) {
@@ -130,11 +134,39 @@
                     console.log(error);
                     this.loadingReviews = false;
                 });
+            },
+            getHighlights() {
+                axios.get('/api/restaurants/' + this.id + '/reviews/highest?include=user')
+                    .then(resp => {
+                        let highest = resp.data;
+
+                        highest.included.forEach(resource => {
+                            if (resource.type == "user") {
+                                this.users[resource.id] = resource;
+                            }
+                        });
+                        axios.get('/api/restaurants/' + this.id + '/reviews/lowest?include=user')
+                            .then(resp => {
+                                this.highlights = this.highlights.concat(highest.data);
+                                let lowest = resp.data;
+
+                                lowest.included.forEach(resource => {
+                                    if (resource.type == "user") {
+                                        this.users[resource.id] = resource;
+                                    }
+                                });
+
+                                // Do not add to the array if they are the same resource
+                                if (highest.data.id != lowest.data.id) {
+                                    this.highlights = this.highlights.concat(lowest.data);
+                                }
+                            });
+                    });
             }
         },
         created: function() {
             this.fetch();
-            this.load('/api/restaurants/' + this.id + '/reviews?include=user');
+            this.getHighlights();
         },
         name: "Restaurant"
     }
