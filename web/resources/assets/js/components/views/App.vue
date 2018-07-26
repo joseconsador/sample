@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container pb-5">
         <h1>Restaurant Reviews</h1>
 
         <div class="row">

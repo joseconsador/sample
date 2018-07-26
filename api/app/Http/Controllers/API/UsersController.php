@@ -31,7 +31,8 @@ class UsersController extends BaseAPIController
      * @param User $user
      * @return ReviewCollection
      */
-    public function reviews(ShowUser $request, User $user) {
+    public function reviews(ShowUser $request, User $user)
+    {
         return new ReviewCollection(
             $user
                 ->reviews()
@@ -46,7 +47,8 @@ class UsersController extends BaseAPIController
      * @param CreateUser $request
      * @return UserResource
      */
-    public function store(CreateUser $request) {
+    public function store(CreateUser $request)
+    {
         $user = User::create([
             'name' => $request->post('name'),
             'email' => $request->post('email'),

@@ -16,7 +16,8 @@ class SpaController extends Controller
      * SpaController constructor.
      * @param ApiClient $apiClient
      */
-    public function __construct(ApiClient $apiClient) {
+    public function __construct(ApiClient $apiClient)
+    {
         $this->apiClient = $apiClient;
     }
 
@@ -39,7 +40,8 @@ class SpaController extends Controller
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function proxy(Request $request) {
+    public function proxy(Request $request)
+    {
         if ($request->hasCookie('api_token') || $request->hasCookie('refresh_token')) {
             try {
                 $options = ['method' => $request->method()];

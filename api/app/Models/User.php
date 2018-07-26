@@ -34,7 +34,8 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function reviews() {
+    public function reviews()
+    {
         return $this->hasMany(Review::class, 'user_id');
     }
 }

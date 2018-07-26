@@ -45,7 +45,13 @@
             <div class="col-12">
                 <h4>Reviews</h4>
                 <hr/>
-                <reviews v-bind:reviews="reviews" v-bind:users="users" v-bind:ownerId="ownerId"/>
+                <template v-if="reviews">
+                    <reviews v-bind:reviews="reviews" v-bind:users="users" v-bind:ownerId="ownerId"/>
+                    <a v-if="this.nextPage != null" v-on:click="load(nextPage)" href="javascript:void(0);">Load More</a>
+                </template>
+                <div v-if="loadingReviews" class="alert alert-secondary" role="alert">
+                    Loading reviews..
+                </div>
             </div>
         </div>
     </div>
@@ -55,6 +61,8 @@
     import Reviews from '../Reviews/ReviewList';
     import Rating from '../Reviews/Rating';
     import UserReview from '../Reviews/UserReview';
+
+    var urlParse = require("url-parse")
 
     export default {
         props: {
@@ -70,9 +78,11 @@
                 name: "",
                 description: "",
                 rating: 0,
-                reviews: {},
+                reviews: [],
                 users: [],
                 ownerId: 0, // Restaurant owner ID
+                nextPage: null,
+                loadingReviews: true
             };
         },
         methods: {
@@ -90,26 +100,41 @@
                                 this.users[resource.id] = resource;
                             }
                         });
-
-                        axios.get('/api/restaurants/' + this.$route.params.id + '/reviews?include=user').then(resp => {
-                            this.reviews = resp.data.data;
-
-                            var users = resp.data.included.users;
-
-                            users.forEach(user => {
-                                this.users[user.id] = user;
-                            });
-                        });
                     })
                     .catch(error => {
                         if ([403, 404].includes(error.response.status)) {
                             this.$router.push('/');
                         }
                     });
+            },
+            load: function(url) {
+                this.loadingReviews = true;
+                this.nextPage = null;
+
+                axios.get(url).then(resp => {
+                    this.reviews = this.reviews.concat(resp.data.data);
+
+                    if (!_.isNull(resp.data.links.next)) {
+                        var parsed = urlParse(resp.data.links.next);
+                        this.nextPage = parsed.pathname + parsed.query;
+                    }
+
+                    var users = resp.data.included.users;
+
+                    users.forEach(user => {
+                        this.users[user.id] = user;
+                    });
+
+                    this.loadingReviews = false;
+                }).catch(error => {
+                    console.log(error);
+                    this.loadingReviews = false;
+                });
             }
         },
         created: function() {
             this.fetch();
+            this.load('/api/restaurants/' + this.id + '/reviews?include=user');
         },
         name: "Restaurant"
     }

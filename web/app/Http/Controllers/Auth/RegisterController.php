@@ -29,7 +29,8 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function register(Request $request) {
+    public function register(Request $request)
+    {
         try {
             $response = $this->apiClient->proxyRequest('api/users', [
                 'method' => 'post',

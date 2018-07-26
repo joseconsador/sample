@@ -29,7 +29,8 @@ class ApiClient
      * @return mixed
      * @throws GuzzleException
      */
-    public function requestToken($email, $password) {
+    public function requestToken($email, $password)
+    {
         $options = [
             'method' => 'post',
             'form_params' => [
@@ -50,7 +51,8 @@ class ApiClient
      * @return mixed
      * @throws GuzzleException
      */
-    public function refreshToken($refreshToken) {
+    public function refreshToken($refreshToken)
+    {
         $options = [
             'method' => 'post',
             'form_params' => [
@@ -72,7 +74,8 @@ class ApiClient
      * @return Response
      * @throws GuzzleException
      */
-    public function proxyRequest($endpoint, $options, $accessToken = '') {
+    public function proxyRequest($endpoint, $options, $accessToken = '')
+    {
         $headers = [];
 
         if (!empty($accessToken)) {
@@ -91,7 +94,8 @@ class ApiClient
      * @return mixed
      * @throws GuzzleException
      */
-    private function send($endpoint, $options, $headers = []) {
+    private function send($endpoint, $options, $headers = [])
+    {
         $options = array_merge(
             [
                 'method' => 'GET',

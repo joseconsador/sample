@@ -117,7 +117,8 @@ class ReviewsController extends BaseAPIController
      * @param Restaurant $restaurant
      * @return ReviewResource
      */
-    public function fromUser(Request $request, Restaurant $restaurant) {
+    public function fromUser(Request $request, Restaurant $restaurant)
+    {
         $review = Auth::user()->reviews()->where('restaurant_id', $restaurant->getKey())->firstOrFail();
         return $this->show($request, $restaurant, $review);
     }
@@ -141,7 +142,7 @@ class ReviewsController extends BaseAPIController
         $user = Auth::user();
         if (!$user->hasRole('admin')) {
             $review->user_id = $user->getKey();
-        } else if ($request->has('user_id')) {
+        } elseif ($request->has('user_id')) {
             $review->user_id = $request->get('user_id');
         }
 
