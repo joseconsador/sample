@@ -59837,7 +59837,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -59850,6 +59850,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Reviews_Rating__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Reviews_Rating___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Reviews_Rating__);
+//
 //
 //
 //
@@ -60077,6 +60078,12 @@ var render = function() {
               },
               [_vm._v("Edit")]
             )
+          : _vm._e(),
+        _vm._v(" "),
+        this.$store.state.user.hasRole("owner")
+          ? _c("a", { attrs: { href: "javascript:void(0)" } }, [
+              _vm._v("Delete")
+            ])
           : _vm._e()
       ],
       1

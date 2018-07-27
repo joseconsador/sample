@@ -38,4 +38,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Review::class, 'user_id');
     }
+
+    /**
+     * Return all restaurants of a user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function restaurants()
+    {
+        return $this->hasMany(Restaurant::class, 'owner_id');
+    }
 }

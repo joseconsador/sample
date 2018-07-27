@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Requests\CreateRestaurant;
+use App\Http\Requests\DeleteRestaurant;
 use App\Http\Requests\ShowRestaurant;
 use App\Http\Requests\UpdateRestaurant;
 use App\Http\Resources\Restaurant\RestaurantCollection;
@@ -126,12 +127,12 @@ class RestaurantsController extends BaseAPIController
     /**
      * Remove the specified resource from storage.
      *
-     * @param UpdateRestaurant $request
+     * @param DeleteRestaurant $request
      * @param  \App\Models\Restaurant $restaurant
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function destroy(UpdateRestaurant $request, Restaurant $restaurant)
+    public function destroy(DeleteRestaurant $request, Restaurant $restaurant)
     {
         $restaurant->delete();
 

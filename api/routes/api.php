@@ -34,11 +34,11 @@ Route::group(['middleware' => ['auth:api'], 'as' => 'api::'], function () {
         Route::delete('/{restaurant}', ['uses' => 'API\RestaurantsController@destroy'])->where('restaurant', '[0-9]+');
 
         // api/restaurants/<ID>/reviews routes
-        Route::group(['prefix' => '/{restaurant}', 'as' => 'show'], function () {
-            Route::get('/', ['uses' => 'API\RestaurantsController@show']);
+        Route::group(['prefix' => '/{restaurant}'], function () {
+            Route::get('/', ['uses' => 'API\RestaurantsController@show', 'as' => 'show']);
             Route::get('/review', ['uses' => 'API\ReviewsController@fromUser'])->where('restaurant', '[0-9]+');
 
-            Route::group(['prefix' => 'reviews', 'as' => '::reviews'], function () {
+            Route::group(['prefix' => 'reviews', 'as' => 'show::reviews'], function () {
                 Route::get('/', ['uses' => 'API\ReviewsController@index']);
                 Route::get('/highest', ['uses' => 'API\ReviewsController@highest']);
                 Route::get('/lowest', ['uses' => 'API\ReviewsController@lowest']);
