@@ -5,12 +5,25 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\CreateUser;
 use App\Http\Requests\ShowUser;
 use App\Http\Resources\Review\ReviewCollection;
+use App\Http\Resources\User\UserCollection;
 use App\Http\Resources\User\UserResource;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UsersController extends BaseAPIController
 {
+    /**
+     * Return a listing of the resource.
+     *
+     * @param Request $request
+     * @return UserCollection
+     */
+    public function index(Request $request)
+    {
+        return new UserCollection(User::paginate($request->query('per_page'))->appends($request->query->all()));
+    }
+
     /**
      * Return a user by ID.
      *
