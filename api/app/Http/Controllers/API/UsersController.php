@@ -4,11 +4,13 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\CreateUser;
 use App\Http\Requests\ShowUser;
+use App\Http\Requests\UpdateUser;
 use App\Http\Resources\Review\ReviewCollection;
 use App\Http\Resources\User\UserCollection;
 use App\Http\Resources\User\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UsersController extends BaseAPIController
@@ -69,6 +71,28 @@ class UsersController extends BaseAPIController
         ]);
 
         $user->assignRole($request->post('role'));
+
+        return new UserResource($user);
+    }
+
+    /**
+     * Update an existing user.
+     *
+     * @param UpdateUser $request
+     * @param User $user
+     * @return UserResource
+     */
+    public function update(UpdateUser $request, User $user)
+    {
+        $fields = $request->validated();
+        $user->fill($fields);
+
+        // Only admins can change a role.
+        if (isset($fields['role']) && Auth::user()->hasRole('admin')) {
+            $user->syncRoles($fields['role']);
+        }
+
+        $user->save();
 
         return new UserResource($user);
     }

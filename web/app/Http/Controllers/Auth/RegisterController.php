@@ -32,6 +32,7 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         try {
+            // Send a request using the admin token, this protects the signup endpoint from potential abuse.
             $response = $this->apiClient->proxyRequest('api/users', [
                 'method' => 'post',
                 'form_params' => $request->post()

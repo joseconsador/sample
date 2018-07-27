@@ -27,4 +27,16 @@ class UserPolicy
     {
         return $currentUser->is($user);
     }
+
+    /**
+     * Determine whether the user can update the models user.
+     *
+     * @param User $currentUser
+     * @param User $user
+     * @return boolean
+     */
+    public function update(User $currentUser, User $user)
+    {
+        return $currentUser->is($user);
+    }
 }
