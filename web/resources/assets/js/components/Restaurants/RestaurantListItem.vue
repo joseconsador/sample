@@ -6,7 +6,7 @@
         <td>
             <router-link :to="{ name: 'restaurant', params: {id: id }}">View</router-link>
             <router-link v-if="this.$store.state.user.hasRole('owner')" :to="{ name: 'editRestaurant', params: {id: id }}">Edit</router-link>
-            <a v-if="this.$store.state.user.hasRole('owner')" href="javascript:void(0)">Delete</a>
+            <a v-on:click="onDelete(id)" v-if="this.$store.state.user.hasRole('owner')" href="javascript:void(0)">Delete</a>
         </td>
     </tr>
 </template>
@@ -38,7 +38,8 @@
             },
             dateAdded: {
                 default: Date.now()
-            }
+            },
+            onDelete: Function
         },
         name: "RestaurantListItem"
     }

@@ -17,6 +17,7 @@
                     :rating="restaurant.attributes.average_rating"
                     :id="restaurant.id"
                     :dateAdded="restaurant.attributes.created_at"
+                    :onDelete="onDelete"
                 ></tr>
             </tbody>
         </table>
@@ -30,7 +31,7 @@
         components: {
             'restaurant': Restaurant,
         },
-        props: ['restaurants', 'loader'],
+        props: ['restaurants', 'loader', 'onDelete'],
         name: "RestaurantList",
     }
 </script>

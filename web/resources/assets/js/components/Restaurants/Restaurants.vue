@@ -25,7 +25,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <restaurant-list v-bind:restaurants=restaurantData />
+                <restaurant-list v-bind:restaurants=restaurantData :onDelete="deleteRestaurant" />
             </div>
         </div>
     </div>
@@ -77,6 +77,13 @@
                     this.restaurantData = resp.data.data;
                     this.pageCount = resp.data.meta.last_page;
                 });
+            },
+            deleteRestaurant: function(id) {
+                axios.delete('/api/restaurants/' + id)
+                    .then(resp => {
+                        alert("Deleted restaurant");
+                        this.fetch();
+                    });
             }
         },
         watch: {

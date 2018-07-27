@@ -59571,6 +59571,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.restaurantData = resp.data.data;
                 _this.pageCount = resp.data.meta.last_page;
             });
+        },
+        deleteRestaurant: function deleteRestaurant(id) {
+            var _this2 = this;
+
+            axios.delete('/api/restaurants/' + id).then(function (resp) {
+                alert("Deleted restaurant");
+                _this2.fetch();
+            });
         }
     },
     watch: {
@@ -59669,7 +59677,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -59740,6 +59748,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -59747,7 +59756,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     components: {
         'restaurant': __WEBPACK_IMPORTED_MODULE_0__RestaurantListItem_vue___default.a
     },
-    props: ['restaurants', 'loader'],
+    props: ['restaurants', 'loader', 'onDelete'],
     name: "RestaurantList"
 });
 
@@ -59837,7 +59846,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -59890,7 +59899,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         dateAdded: {
             default: Date.now()
-        }
+        },
+        onDelete: Function
     },
     name: "RestaurantListItem"
 });
@@ -60081,9 +60091,18 @@ var render = function() {
           : _vm._e(),
         _vm._v(" "),
         this.$store.state.user.hasRole("owner")
-          ? _c("a", { attrs: { href: "javascript:void(0)" } }, [
-              _vm._v("Delete")
-            ])
+          ? _c(
+              "a",
+              {
+                attrs: { href: "javascript:void(0)" },
+                on: {
+                  click: function($event) {
+                    _vm.onDelete(_vm.id)
+                  }
+                }
+              },
+              [_vm._v("Delete")]
+            )
           : _vm._e()
       ],
       1
@@ -60122,7 +60141,8 @@ var render = function() {
               description: restaurant.attributes.description,
               rating: restaurant.attributes.average_rating,
               id: restaurant.id,
-              dateAdded: restaurant.attributes.created_at
+              dateAdded: restaurant.attributes.created_at,
+              onDelete: _vm.onDelete
             }
           })
         })
@@ -60255,7 +60275,14 @@ var render = function() {
       _c(
         "div",
         { staticClass: "col-12" },
-        [_c("restaurant-list", { attrs: { restaurants: _vm.restaurantData } })],
+        [
+          _c("restaurant-list", {
+            attrs: {
+              restaurants: _vm.restaurantData,
+              onDelete: _vm.deleteRestaurant
+            }
+          })
+        ],
         1
       )
     ])
