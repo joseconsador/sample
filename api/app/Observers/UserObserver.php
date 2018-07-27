@@ -12,7 +12,10 @@ class UserObserver
      * @param User $user
      */
     public function deleting(User $user) {
-        $user->restaurants()->delete();
+        foreach ($user->restaurants()->getResults() as $restaurant) {
+            $restaurant->delete();
+        }
+
         $user->reviews()->delete();
     }
 }

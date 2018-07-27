@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Requests\CreateUser;
+use App\Http\Requests\DeleteUser;
 use App\Http\Requests\ShowUser;
 use App\Http\Requests\UpdateUser;
 use App\Http\Resources\Review\ReviewCollection;
@@ -95,5 +96,20 @@ class UsersController extends BaseAPIController
         $user->save();
 
         return new UserResource($user);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param DeleteUser $request
+     * @param User $user
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function destroy(DeleteUser $request, User $user)
+    {
+        $user->delete();
+
+        return response('ok');
     }
 }
