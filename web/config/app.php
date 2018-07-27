@@ -212,4 +212,5 @@ return [
 
     ],
 
+    'admin_token' => env('ADMIN_ACCESS_TOKEN', null),
 ];

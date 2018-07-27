@@ -35,7 +35,7 @@ class RegisterController extends Controller
             $response = $this->apiClient->proxyRequest('api/users', [
                 'method' => 'post',
                 'form_params' => $request->post()
-            ]);
+            ], config('app.admin_token'));
         } catch (RequestException $e) {
             $response = $e->getResponse();
         }

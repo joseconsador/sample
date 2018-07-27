@@ -14373,7 +14373,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(93)
 /* template */
-var __vue_template__ = __webpack_require__(94)
+var __vue_template__ = __webpack_require__(99)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -14416,7 +14416,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(18);
-module.exports = __webpack_require__(108);
+module.exports = __webpack_require__(116);
 
 
 /***/ }),
@@ -14441,9 +14441,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_Restaurants_Restaurants___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_Restaurants_Restaurants__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_Restaurants_Restaurant__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_Restaurants_Restaurant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_Restaurants_Restaurant__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_Restaurants_Edit__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_Restaurants_Edit__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_Restaurants_Edit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_Restaurants_Edit__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_Reviews_Edit__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_Reviews_Edit__ = __webpack_require__(113);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_Reviews_Edit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_Reviews_Edit__);
 
 
@@ -60277,7 +60277,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(86)
 /* template */
-var __vue_template__ = __webpack_require__(99)
+var __vue_template__ = __webpack_require__(107)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -60365,7 +60365,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Reviews_ReviewList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Reviews_ReviewList__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Reviews_Rating__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Reviews_Rating___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Reviews_Rating__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Reviews_UserReview__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Reviews_UserReview__ = __webpack_require__(101);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Reviews_UserReview___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Reviews_UserReview__);
 //
 //
@@ -60444,7 +60444,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-var urlParse = __webpack_require__(112);
+var urlParse = __webpack_require__(104);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -60575,7 +60575,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(90)
 /* template */
-var __vue_template__ = __webpack_require__(95)
+var __vue_template__ = __webpack_require__(100)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -60738,7 +60738,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Rating__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Rating___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Rating__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ReplyInline__ = __webpack_require__(115);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ReplyInline__ = __webpack_require__(94);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ReplyInline___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ReplyInline__);
 //
 //
@@ -60780,6 +60780,259 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 /* 94 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(95)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(97)
+/* template */
+var __vue_template__ = __webpack_require__(98)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-7da93528"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Reviews/ReplyInline.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7da93528", Component.options)
+  } else {
+    hotAPI.reload("data-v-7da93528", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 95 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(96);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(4)("3d75b50a", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7da93528\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ReplyInline.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7da93528\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ReplyInline.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 96 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 97 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        reviewId: Number,
+        restaurantId: Number
+    },
+    data: function data() {
+        return {
+            showInput: false,
+            reply: "",
+            submitted: false
+        };
+    },
+    methods: {
+        submit: function submit(event) {
+            var _this = this;
+
+            if (event) event.preventDefault();
+
+            axios.post('/api/restaurants/' + this.restaurantId + '/reviews/' + this.reviewId + '/reply', {
+                reply: this.reply
+            }).then(function (resp) {
+                _this.submitted = true;
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 98 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      !_vm.showInput
+        ? [
+            _c(
+              "a",
+              {
+                attrs: { href: "javascript:void(0)" },
+                on: {
+                  click: function($event) {
+                    _vm.showInput = true
+                  }
+                }
+              },
+              [_vm._v("Leave a reply")]
+            )
+          ]
+        : !_vm.submitted
+          ? [
+              _c(
+                "form",
+                { attrs: { action: "" }, on: { submit: _vm.submit } },
+                [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "reply" } }, [
+                      _vm._v("Replying to comment:")
+                    ]),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.reply,
+                          expression: "reply"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "reply", placeholder: "Leave a reply..." },
+                      domProps: { value: _vm.reply },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.reply = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "submit" }
+                    },
+                    [_vm._v("Submit")]
+                  )
+                ]
+              )
+            ]
+          : [
+              _c(
+                "div",
+                {
+                  staticClass: "alert alert-warning",
+                  attrs: { role: "alert" }
+                },
+                [
+                  _c("p", [
+                    _c("b", [
+                      _vm._v(
+                        _vm._s(this.$store.state.user.attributes.name) +
+                          " (Owner):"
+                      )
+                    ])
+                  ]),
+                  _vm._v("\n            " + _vm._s(_vm.reply) + "\n        ")
+                ]
+              )
+            ]
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7da93528", module.exports)
+  }
+}
+
+/***/ }),
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -60870,7 +61123,7 @@ if (false) {
 }
 
 /***/ }),
-/* 95 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -60910,15 +61163,15 @@ if (false) {
 }
 
 /***/ }),
-/* 96 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(97)
+var __vue_script__ = __webpack_require__(102)
 /* template */
-var __vue_template__ = __webpack_require__(98)
+var __vue_template__ = __webpack_require__(103)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -60957,7 +61210,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 97 */
+/* 102 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -61022,7 +61275,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 98 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -61072,715 +61325,14 @@ if (false) {
 }
 
 /***/ }),
-/* 99 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "row mb-4" }, [
-      _c("div", { staticClass: "col-12" }, [
-        _c("h2", [_vm._v("Restaurant")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card" }, [
-          _c(
-            "div",
-            { staticClass: "card-body" },
-            [
-              _c("h5", { staticClass: "card-title" }, [
-                _vm._v(_vm._s(_vm.name))
-              ]),
-              _vm._v(" "),
-              _c(
-                "h6",
-                { staticClass: "card-subtitle mb-2" },
-                [
-                  _c("star-rating", {
-                    attrs: { rating: _vm.rating, starSize: 30 }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("p", { staticClass: "card-text" }, [
-                _vm._v(_vm._s(_vm.description))
-              ]),
-              _vm._v(" "),
-              this.$store.state.user.hasRole("owner")
-                ? _c(
-                    "router-link",
-                    {
-                      staticClass: "card-link",
-                      attrs: {
-                        to: { name: "editRestaurant", params: { id: _vm.id } }
-                      }
-                    },
-                    [_vm._v("Edit")]
-                  )
-                : _vm._e()
-            ],
-            1
-          )
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    this.$store.state.user.hasRole("user")
-      ? _c("div", { staticClass: "row mb-3" }, [
-          _c("div", { staticClass: "col-12" }, [
-            _c("h4", [_vm._v("Your Review")]),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c("ul", { staticClass: "list-group" }, [
-              _c(
-                "li",
-                { staticClass: "list-group-item" },
-                [
-                  _c("user-review", {
-                    attrs: {
-                      "restaurant-id": this.id,
-                      owner: this.users[_vm.ownerId]
-                    }
-                  })
-                ],
-                1
-              )
-            ])
-          ])
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.highlights.length > 0
-      ? _c("div", { staticClass: "row mb-3" }, [
-          _c(
-            "div",
-            { staticClass: "col-12" },
-            [
-              _c("h4", [_vm._v("Highlights")]),
-              _vm._v(" "),
-              _c("hr"),
-              _vm._v(" "),
-              _c("reviews", {
-                attrs: {
-                  reviews: _vm.highlights,
-                  users: _vm.users,
-                  ownerId: _vm.ownerId
-                }
-              })
-            ],
-            1
-          )
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c("div", { staticClass: "row mb-3" }, [
-      _c(
-        "div",
-        { staticClass: "col-12" },
-        [
-          _c("h4", [_vm._v("Reviews")]),
-          _vm._v(" "),
-          this.$store.state.user.hasRole("owner")
-            ? _c("ul", { staticClass: "nav" }, [
-                _vm._m(0),
-                _vm._v(" "),
-                _c("li", { staticClass: "nav-item" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link",
-                      attrs: { href: "javascript:void(0)" },
-                      on: { click: _vm.showAll }
-                    },
-                    [_vm._v("All")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link",
-                      attrs: { href: "javascript:void(0)" },
-                      on: { click: _vm.showPending }
-                    },
-                    [_vm._v("Pending Replies")]
-                  )
-                ])
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _c("hr"),
-          _vm._v(" "),
-          _vm.reviews.length > 0
-            ? [
-                _c("reviews", {
-                  attrs: {
-                    reviews: _vm.reviews,
-                    users: _vm.users,
-                    ownerId: _vm.ownerId
-                  }
-                }),
-                _vm._v(" "),
-                this.nextPage != null
-                  ? _c(
-                      "a",
-                      {
-                        attrs: { href: "javascript:void(0);" },
-                        on: {
-                          click: function($event) {
-                            _vm.load(_vm.nextPage)
-                          }
-                        }
-                      },
-                      [_vm._v("Load More")]
-                    )
-                  : _vm._e()
-              ]
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.loadingReviews
-            ? _c(
-                "div",
-                {
-                  staticClass: "alert alert-secondary",
-                  attrs: { role: "alert" }
-                },
-                [_vm._v("\n                Loading reviews..\n            ")]
-              )
-            : _vm._e()
-        ],
-        2
-      )
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item" }, [
-      _c("a", { staticClass: "nav-link disabled", attrs: { href: "#" } }, [
-        _vm._v("Show:")
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-8e24f3a6", module.exports)
-  }
-}
-
-/***/ }),
-/* 100 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(101)
-}
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(103)
-/* template */
-var __vue_template__ = __webpack_require__(104)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = "data-v-4a7c7c7a"
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/Restaurants/Edit.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4a7c7c7a", Component.options)
-  } else {
-    hotAPI.reload("data-v-4a7c7c7a", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 101 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(102);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(4)("7a780cba", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4a7c7c7a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Edit.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4a7c7c7a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Edit.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 102 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(3)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 103 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['id'],
-    data: function data() {
-        return {
-            name: "",
-            description: ""
-        };
-    },
-    methods: {
-        submit: function submit(event) {
-            var _this = this;
-
-            if (event) event.preventDefault();
-
-            var options = {
-                method: 'post',
-                url: '/api/restaurants/',
-                data: {
-                    name: this.name,
-                    description: this.description
-                }
-            };
-
-            if (this.id > 0) {
-                options.data.id = this.id;
-                options.method = 'put';
-                options.url += this.id.toString();
-            }
-
-            axios(options).then(function (resp) {
-                _this.$router.push('/restaurant/' + resp.data.data.id);
-            });
-        },
-        load: function load() {
-            var _this2 = this;
-
-            if (this.id > 0) {
-                axios.get('/api/restaurants/' + this.id).then(function (resp) {
-                    _this2.name = resp.data.data.attributes.name;
-                    _this2.description = resp.data.data.attributes.description;
-                }).catch(function (error) {
-                    if (error.response.status == 403 || error.response.status == 404) {
-                        _this2.$router.push('/');
-                    }
-                });
-            } else {
-                this.name = "";
-                this.description = "";
-            }
-        }
-    },
-    watch: {
-        $route: function $route(to, from) {
-            this.load();
-        }
-    },
-    created: function created() {
-        this.load();
-    },
-    name: "RestaurantEdit"
-});
-
-/***/ }),
 /* 104 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("form", { attrs: { action: "" }, on: { submit: _vm.submit } }, [
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.name,
-            expression: "name"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: {
-          type: "text",
-          id: "name",
-          "aria-describedby": "emailHelp",
-          placeholder: "Name"
-        },
-        domProps: { value: _vm.name },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.name = $event.target.value
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "description" } }, [_vm._v("Description")]),
-      _vm._v(" "),
-      _c("textarea", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.description,
-            expression: "description"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { id: "description", placeholder: "Description" },
-        domProps: { value: _vm.description },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.description = $event.target.value
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c(
-      "button",
-      { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-      [_vm._v("Submit")]
-    )
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-4a7c7c7a", module.exports)
-  }
-}
-
-/***/ }),
-/* 105 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(106)
-/* template */
-var __vue_template__ = __webpack_require__(107)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/Reviews/Edit.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-74bbaa55", Component.options)
-  } else {
-    hotAPI.reload("data-v-74bbaa55", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 106 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Rating__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Rating___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Rating__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    components: {
-        'star-rating': __WEBPACK_IMPORTED_MODULE_0__Rating___default.a
-    },
-    props: {
-        id: {
-            type: Number
-        },
-        restaurantId: {
-            type: Number,
-            required: true
-        }
-    },
-    data: function data() {
-        return {
-            restaurant: {},
-            comment: "",
-            rating: 0
-        };
-    },
-    methods: {
-        submit: function submit(event) {
-            var _this = this;
-
-            if (event) event.preventDefault();
-
-            var options = {
-                method: 'post',
-                url: '/api/restaurants/' + this.restaurantId + '/reviews/',
-                data: {
-                    rating: this.rating,
-                    comment: this.comment
-                }
-            };
-
-            if (this.id > 0) {
-                options.data.id = this.id;
-                options.method = 'put';
-                options.url += this.id.toString();
-            }
-
-            axios(options).then(function (resp) {
-                _this.$router.push('/restaurant/' + _this.restaurantId);
-            });
-        }
-    },
-    created: function created() {
-        var _this2 = this;
-
-        axios.get('/api/restaurants/' + this.restaurantId).then(function (resp) {
-            _this2.restaurant = resp.data.data;
-        });
-
-        if (_.isUndefined(this.id)) {
-            return;
-        }
-
-        var url = '/api/restaurants/' + this.restaurantId + '/review';
-
-        if (this.$store.state.user.hasRole('admin')) {
-            url = '/api/restaurants/' + this.restaurantId + '/reviews/' + this.id;
-        }
-
-        axios.get(url).then(function (resp) {
-            var review = resp.data.data.attributes;
-            _this2.comment = review.comment;
-            _this2.rating = review.rating;
-        });
-    }
-});
-
-/***/ }),
-/* 107 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("form", { attrs: { action: "" }, on: { submit: _vm.submit } }, [
-      _c(
-        "div",
-        { staticClass: "form-group" },
-        [
-          _c("label", { attrs: { for: "rating" } }, [_vm._v("Rating")]),
-          _vm._v(" "),
-          _c("star-rating", {
-            attrs: {
-              rating: _vm.rating,
-              "read-only": false,
-              "star-size": 30,
-              increment: 1
-            },
-            on: {
-              "update:rating": function($event) {
-                _vm.rating = $event
-              }
-            }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "comment" } }, [_vm._v("Comment")]),
-        _vm._v(" "),
-        _c("textarea", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.comment,
-              expression: "comment"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { id: "comment", placeholder: "Leave a comment..." },
-          domProps: { value: _vm.comment },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.comment = $event.target.value
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-        [_vm._v("Submit")]
-      )
-    ])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-74bbaa55", module.exports)
-  }
-}
-
-/***/ }),
-/* 108 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 109 */,
-/* 110 */,
-/* 111 */,
-/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var required = __webpack_require__(113)
-  , qs = __webpack_require__(114)
+var required = __webpack_require__(105)
+  , qs = __webpack_require__(106)
   , protocolre = /^([a-z][a-z0-9.+-]*:)?(\/\/)?([\S\s]*)/i
   , slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
 
@@ -62194,7 +61746,7 @@ module.exports = URL;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
-/* 113 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62239,7 +61791,7 @@ module.exports = function required(port, protocol) {
 
 
 /***/ }),
-/* 114 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62321,25 +61873,233 @@ exports.parse = querystring;
 
 
 /***/ }),
-/* 115 */
+/* 107 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "row mb-4" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("h2", [_vm._v("Restaurant")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card" }, [
+          _c(
+            "div",
+            { staticClass: "card-body" },
+            [
+              _c("h5", { staticClass: "card-title" }, [
+                _vm._v(_vm._s(_vm.name))
+              ]),
+              _vm._v(" "),
+              _c(
+                "h6",
+                { staticClass: "card-subtitle mb-2" },
+                [
+                  _c("star-rating", {
+                    attrs: { rating: _vm.rating, starSize: 30 }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("p", { staticClass: "card-text" }, [
+                _vm._v(_vm._s(_vm.description))
+              ]),
+              _vm._v(" "),
+              this.$store.state.user.hasRole("owner")
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass: "card-link",
+                      attrs: {
+                        to: { name: "editRestaurant", params: { id: _vm.id } }
+                      }
+                    },
+                    [_vm._v("Edit")]
+                  )
+                : _vm._e()
+            ],
+            1
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    this.$store.state.user.hasRole("user")
+      ? _c("div", { staticClass: "row mb-3" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("h4", [_vm._v("Your Review")]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c("ul", { staticClass: "list-group" }, [
+              _c(
+                "li",
+                { staticClass: "list-group-item" },
+                [
+                  _c("user-review", {
+                    attrs: {
+                      "restaurant-id": this.id,
+                      owner: this.users[_vm.ownerId]
+                    }
+                  })
+                ],
+                1
+              )
+            ])
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.highlights.length > 0
+      ? _c("div", { staticClass: "row mb-3" }, [
+          _c(
+            "div",
+            { staticClass: "col-12" },
+            [
+              _c("h4", [_vm._v("Highlights")]),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _c("reviews", {
+                attrs: {
+                  reviews: _vm.highlights,
+                  users: _vm.users,
+                  ownerId: _vm.ownerId
+                }
+              })
+            ],
+            1
+          )
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c("div", { staticClass: "row mb-3" }, [
+      _c(
+        "div",
+        { staticClass: "col-12" },
+        [
+          _c("h4", [_vm._v("Reviews")]),
+          _vm._v(" "),
+          this.$store.state.user.hasRole("owner")
+            ? _c("ul", { staticClass: "nav" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      attrs: { href: "javascript:void(0)" },
+                      on: { click: _vm.showAll }
+                    },
+                    [_vm._v("All")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      attrs: { href: "javascript:void(0)" },
+                      on: { click: _vm.showPending }
+                    },
+                    [_vm._v("Pending Replies")]
+                  )
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _vm.reviews.length > 0
+            ? [
+                _c("reviews", {
+                  attrs: {
+                    reviews: _vm.reviews,
+                    users: _vm.users,
+                    ownerId: _vm.ownerId
+                  }
+                }),
+                _vm._v(" "),
+                this.nextPage != null
+                  ? _c(
+                      "a",
+                      {
+                        attrs: { href: "javascript:void(0);" },
+                        on: {
+                          click: function($event) {
+                            _vm.load(_vm.nextPage)
+                          }
+                        }
+                      },
+                      [_vm._v("Load More")]
+                    )
+                  : _vm._e()
+              ]
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.loadingReviews
+            ? _c(
+                "div",
+                {
+                  staticClass: "alert alert-secondary",
+                  attrs: { role: "alert" }
+                },
+                [_vm._v("\n                Loading reviews..\n            ")]
+              )
+            : _vm._e()
+        ],
+        2
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link disabled", attrs: { href: "#" } }, [
+        _vm._v("Show:")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-8e24f3a6", module.exports)
+  }
+}
+
+/***/ }),
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(116)
+  __webpack_require__(109)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(118)
+var __vue_script__ = __webpack_require__(111)
 /* template */
-var __vue_template__ = __webpack_require__(119)
+var __vue_template__ = __webpack_require__(112)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-7da93528"
+var __vue_scopeId__ = "data-v-4a7c7c7a"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -62350,7 +62110,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/Reviews/ReplyInline.vue"
+Component.options.__file = "resources/assets/js/components/Restaurants/Edit.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -62359,9 +62119,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7da93528", Component.options)
+    hotAPI.createRecord("data-v-4a7c7c7a", Component.options)
   } else {
-    hotAPI.reload("data-v-7da93528", Component.options)
+    hotAPI.reload("data-v-4a7c7c7a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -62372,23 +62132,23 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 116 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(117);
+var content = __webpack_require__(110);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("3d75b50a", content, false, {});
+var update = __webpack_require__(4)("7a780cba", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7da93528\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ReplyInline.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7da93528\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ReplyInline.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4a7c7c7a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Edit.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4a7c7c7a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Edit.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -62398,7 +62158,7 @@ if(false) {
 }
 
 /***/ }),
-/* 117 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -62406,13 +62166,13 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 118 */
+/* 111 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62431,26 +62191,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: {
-        reviewId: Number,
-        restaurantId: Number
-    },
+    props: ['id'],
     data: function data() {
         return {
-            showInput: false,
-            reply: "",
-            submitted: false
+            name: "",
+            description: ""
         };
     },
     methods: {
@@ -62459,109 +62206,126 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             if (event) event.preventDefault();
 
-            axios.post('/api/restaurants/' + this.restaurantId + '/reviews/' + this.reviewId + '/reply', {
-                reply: this.reply
-            }).then(function (resp) {
-                _this.submitted = true;
+            var options = {
+                method: 'post',
+                url: '/api/restaurants/',
+                data: {
+                    name: this.name,
+                    description: this.description
+                }
+            };
+
+            if (this.id > 0) {
+                options.data.id = this.id;
+                options.method = 'put';
+                options.url += this.id.toString();
+            }
+
+            axios(options).then(function (resp) {
+                _this.$router.push('/restaurant/' + resp.data.data.id);
             });
+        },
+        load: function load() {
+            var _this2 = this;
+
+            if (this.id > 0) {
+                axios.get('/api/restaurants/' + this.id).then(function (resp) {
+                    _this2.name = resp.data.data.attributes.name;
+                    _this2.description = resp.data.data.attributes.description;
+                }).catch(function (error) {
+                    if (error.response.status == 403 || error.response.status == 404) {
+                        _this2.$router.push('/');
+                    }
+                });
+            } else {
+                this.name = "";
+                this.description = "";
+            }
         }
-    }
+    },
+    watch: {
+        $route: function $route(to, from) {
+            this.load();
+        }
+    },
+    created: function created() {
+        this.load();
+    },
+    name: "RestaurantEdit"
 });
 
 /***/ }),
-/* 119 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      !_vm.showInput
-        ? [
-            _c(
-              "a",
-              {
-                attrs: { href: "javascript:void(0)" },
-                on: {
-                  click: function($event) {
-                    _vm.showInput = true
-                  }
-                }
-              },
-              [_vm._v("Leave a reply")]
-            )
-          ]
-        : !_vm.submitted
-          ? [
-              _c(
-                "form",
-                { attrs: { action: "" }, on: { submit: _vm.submit } },
-                [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "reply" } }, [
-                      _vm._v("Replying to comment:")
-                    ]),
-                    _vm._v(" "),
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.reply,
-                          expression: "reply"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { id: "reply", placeholder: "Leave a reply..." },
-                      domProps: { value: _vm.reply },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.reply = $event.target.value
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { type: "submit" }
-                    },
-                    [_vm._v("Submit")]
-                  )
-                ]
-              )
-            ]
-          : [
-              _c(
-                "div",
-                {
-                  staticClass: "alert alert-warning",
-                  attrs: { role: "alert" }
-                },
-                [
-                  _c("p", [
-                    _c("b", [
-                      _vm._v(
-                        _vm._s(this.$store.state.user.attributes.name) +
-                          " (Owner):"
-                      )
-                    ])
-                  ]),
-                  _vm._v("\n            " + _vm._s(_vm.reply) + "\n        ")
-                ]
-              )
-            ]
-    ],
-    2
-  )
+  return _c("form", { attrs: { action: "" }, on: { submit: _vm.submit } }, [
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.name,
+            expression: "name"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          id: "name",
+          "aria-describedby": "emailHelp",
+          placeholder: "Name"
+        },
+        domProps: { value: _vm.name },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.name = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "description" } }, [_vm._v("Description")]),
+      _vm._v(" "),
+      _c("textarea", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.description,
+            expression: "description"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { id: "description", placeholder: "Description" },
+        domProps: { value: _vm.description },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.description = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c(
+      "button",
+      { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+      [_vm._v("Submit")]
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -62569,9 +62333,242 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7da93528", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-4a7c7c7a", module.exports)
   }
 }
+
+/***/ }),
+/* 113 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(114)
+/* template */
+var __vue_template__ = __webpack_require__(115)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Reviews/Edit.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-74bbaa55", Component.options)
+  } else {
+    hotAPI.reload("data-v-74bbaa55", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 114 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Rating__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Rating___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Rating__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        'star-rating': __WEBPACK_IMPORTED_MODULE_0__Rating___default.a
+    },
+    props: {
+        id: {
+            type: Number
+        },
+        restaurantId: {
+            type: Number,
+            required: true
+        }
+    },
+    data: function data() {
+        return {
+            restaurant: {},
+            comment: "",
+            rating: 0
+        };
+    },
+    methods: {
+        submit: function submit(event) {
+            var _this = this;
+
+            if (event) event.preventDefault();
+
+            var options = {
+                method: 'post',
+                url: '/api/restaurants/' + this.restaurantId + '/reviews/',
+                data: {
+                    rating: this.rating,
+                    comment: this.comment
+                }
+            };
+
+            if (this.id > 0) {
+                options.data.id = this.id;
+                options.method = 'put';
+                options.url += this.id.toString();
+            }
+
+            axios(options).then(function (resp) {
+                _this.$router.push('/restaurant/' + _this.restaurantId);
+            });
+        }
+    },
+    created: function created() {
+        var _this2 = this;
+
+        axios.get('/api/restaurants/' + this.restaurantId).then(function (resp) {
+            _this2.restaurant = resp.data.data;
+        });
+
+        if (_.isUndefined(this.id)) {
+            return;
+        }
+
+        var url = '/api/restaurants/' + this.restaurantId + '/review';
+
+        if (this.$store.state.user.hasRole('admin')) {
+            url = '/api/restaurants/' + this.restaurantId + '/reviews/' + this.id;
+        }
+
+        axios.get(url).then(function (resp) {
+            var review = resp.data.data.attributes;
+            _this2.comment = review.comment;
+            _this2.rating = review.rating;
+        });
+    }
+});
+
+/***/ }),
+/* 115 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("form", { attrs: { action: "" }, on: { submit: _vm.submit } }, [
+      _c(
+        "div",
+        { staticClass: "form-group" },
+        [
+          _c("label", { attrs: { for: "rating" } }, [_vm._v("Rating")]),
+          _vm._v(" "),
+          _c("star-rating", {
+            attrs: {
+              rating: _vm.rating,
+              "read-only": false,
+              "star-size": 30,
+              increment: 1
+            },
+            on: {
+              "update:rating": function($event) {
+                _vm.rating = $event
+              }
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "comment" } }, [_vm._v("Comment")]),
+        _vm._v(" "),
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.comment,
+              expression: "comment"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { id: "comment", placeholder: "Leave a comment..." },
+          domProps: { value: _vm.comment },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.comment = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_vm._v("Submit")]
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-74bbaa55", module.exports)
+  }
+}
+
+/***/ }),
+/* 116 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

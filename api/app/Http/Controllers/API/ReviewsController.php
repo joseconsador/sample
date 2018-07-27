@@ -184,7 +184,8 @@ class ReviewsController extends BaseAPIController
      * @param Review $review
      * @return ReviewResource
      */
-    public function reply(ReplyReview $request, Restaurant $restaurant, Review $review) {
+    public function reply(ReplyReview $request, Restaurant $restaurant, Review $review)
+    {
         $review->reply = $request->input('reply');
         $review->save();
 

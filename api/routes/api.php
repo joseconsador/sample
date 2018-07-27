@@ -13,11 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('/users', ['as' => 'create', 'uses' => 'API\UsersController@store']);
-
 Route::group(['middleware' => ['auth:api'], 'as' => 'api::'], function () {
     // api/user routes
     Route::group(['prefix' => 'users', 'as' => 'users::'], function () {
+        Route::post('/', [ 'as' => 'create', 'uses' => 'API\UsersController@store']);
         Route::get('/', ['uses' => 'API\UsersController@index']);
         Route::get('/{user}', ['as' => 'show', 'uses' => 'API\UsersController@show']);
         Route::get('/{user}/reviews', ['uses' => 'API\UsersController@reviews']);
