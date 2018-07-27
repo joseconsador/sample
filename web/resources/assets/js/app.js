@@ -88,6 +88,8 @@ import Restaurants from './components/Restaurants/Restaurants'
 import Restaurant from './components/Restaurants/Restaurant'
 import EditRestaurant from './components/Restaurants/Edit'
 import EditReview from './components/Reviews/Edit'
+import Users from './components/Users/Users'
+import EditUser from './components/Users/Edit'
 
 const router = new VueRouter({
     mode: 'history',
@@ -114,6 +116,27 @@ const router = new VueRouter({
             path: '/register',
             name: 'register',
             component: Register,
+        },
+        {
+            path: '/users/:page(\\d+)',
+            name: 'users',
+            component: Users,
+            props: (route) => ({
+                page: Number(route.params.page)
+            }),
+        },
+        {
+            path: '/user/edit/:id(\\d+)',
+            name: 'editUser',
+            component: EditUser,
+            props: (route) => ({
+                id: Number(route.params.id)
+            }),
+        },
+        {
+            path: '/user/new',
+            name: 'addUser',
+            component: EditUser,
         },
         {
             path: '/restaurants/:page(\\d+)',
@@ -166,6 +189,8 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
     if (!['login', 'logout', 'register'].includes(to.name) && !store.state.loggedIn) {
         next('login');
+    } else if (['users', 'editUser', 'addUser'].includes(to.name) && !store.state.user.hasRole('admin')) {
+        next('/')
     } else if (['addRestaurant', 'editRestaurant'].includes(to.name) && !store.state.user.hasRole('owner')) {
         next('/')
     } else if (['addReview', 'editReview'].includes(to.name) && !store.state.user.hasRole('user')) {

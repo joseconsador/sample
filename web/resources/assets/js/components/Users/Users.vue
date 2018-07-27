@@ -2,7 +2,7 @@
     <div>
         <div class="row">
             <div class="col-3">
-                <router-link class="nav-link" :to="{ name: 'addRestaurant' }">Add Restaurant</router-link>
+                <router-link class="nav-link" :to="{ name: 'addUser' }">Add User</router-link>
             </div>
         </div>
         <div class="row">
@@ -21,29 +21,23 @@
                 >
                 </paginate>
             </div>
-            <div class="col-3">
-                <slider id="name" ref="slider" v-bind="filterOptions" v-model="currentRating"></slider>
-            </div>
-            <div class="col-3">
-                <button @click="load(1)" type="submit" class="btn btn-primary">Filter</button>
-            </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <restaurant-list v-bind:restaurants=restaurantData :onDelete="deleteRestaurant" />
+                <user-list v-bind:users=userData :onDelete="deleteuser" />
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import RestaurantList from '../Restaurants/RestaurantList';
+    import UserList from '../Users/UserList'
     import Paginate from 'vuejs-paginate';
     import VueSlider from 'vue-slider-component';
 
     export default {
         components: {
-            'restaurant-list': RestaurantList,
+            'user-list': UserList,
             'paginate': Paginate,
             'slider': VueSlider,
         },
@@ -58,35 +52,28 @@
         },
         data: function () {
             return {
-                restaurantData: {},
+                userData: {},
                 pageCount: 1,
-                currentRating: this.rating,
                 currentPage: this.page,
-                filterOptions: {
-                    max: 5,
-                    interval: 1,
-                    piecewise: true,
-                    piecewiseLabel: true,
-                },
             }
         },
         methods: {
             load: function(page) {
                 this.currentPage = page;
-                this.$router.push('/restaurants/' + page + '?rating=' + this.currentRating);
+                this.$router.push('/users/' + page);
             },
             fetch: function() {
-                var uri = '/api/restaurants?page=' + this.page + '&rating=' + this.currentRating;
+                var uri = '/api/users?page=' + this.page;
 
                 axios.get(uri).then(resp => {
-                    this.restaurantData = resp.data.data;
+                    this.userData = resp.data.data;
                     this.pageCount = resp.data.meta.last_page;
                 });
             },
-            deleteRestaurant: function(id) {
-                axios.delete('/api/restaurants/' + id)
+            deleteuser: function(id) {
+                axios.delete('/api/users/' + id)
                     .then(resp => {
-                        alert("Deleted restaurant");
+                        alert("Deleted user");
                         this.fetch();
                     });
             }

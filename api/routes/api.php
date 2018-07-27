@@ -18,6 +18,7 @@ Route::group(['middleware' => ['auth:api'], 'as' => 'api::'], function () {
     Route::group(['prefix' => 'users', 'as' => 'users::'], function () {
         Route::post('/', [ 'as' => 'create', 'uses' => 'API\UsersController@store']);
         Route::put('/{user}', [ 'as' => 'create', 'uses' => 'API\UsersController@update']);
+        Route::delete('/{user}', [ 'as' => 'create', 'uses' => 'API\UsersController@destroy']);
         Route::get('/', ['uses' => 'API\UsersController@index']);
         Route::get('/{user}', ['as' => 'show', 'uses' => 'API\UsersController@show']);
         Route::get('/{user}/reviews', ['uses' => 'API\UsersController@reviews']);

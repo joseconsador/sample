@@ -73,7 +73,3 @@
         name: "RestaurantEdit"
     }
 </script>
-
-<style scoped>
-
-</style>

@@ -30,7 +30,7 @@
             description: {
                 type: String,
                 required: false,
-                default: "Some quick example text to build on the card title and make up the bulk of the card's"
+                default: "",
             },
             rating: {
                 type: Number,
