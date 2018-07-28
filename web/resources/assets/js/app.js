@@ -80,6 +80,7 @@ const store = new Vuex.Store({
 Vue.use(VueRouter);
 Vue.use(require('vue-moment'));
 
+import Errors from './components/Errors';
 import App from './components/views/App'
 import Home from './components/views/Home'
 import Auth from './components/views/Auth'
@@ -90,6 +91,9 @@ import EditRestaurant from './components/Restaurants/Edit'
 import EditReview from './components/Reviews/Edit'
 import Users from './components/Users/Users'
 import EditUser from './components/Users/Edit'
+
+// Globally include the error component
+Vue.component('errors', Errors);
 
 const router = new VueRouter({
     mode: 'history',
@@ -208,6 +212,10 @@ window.axios.interceptors.response.use(function (response) {
     if (error.response.status == 401) {
         store.commit('setLoggedIn', false);
         router.push('/login');
+    }
+
+    if ([401, 422].includes(error.response.status)) {
+        error.errors = error.response.data.errors || error.response.data.message;
     }
 
     // Do something with response error

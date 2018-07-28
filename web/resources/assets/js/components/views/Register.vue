@@ -27,6 +27,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+        <errors :errors="errors" />
     </div>
 </template>
 
@@ -38,7 +39,8 @@
                 email: "",
                 role: "user",
                 password: "",
-                confirmPassword: ""
+                confirmPassword: "",
+                errors: {},
             }
         },
         methods: {
@@ -54,6 +56,8 @@
                 }).then(resp => {
                     alert("You may now login with your credentials");
                     this.$router.push('/login');
+                }).catch(error => {
+                    this.errors = error.errors;
                 });
             }
         }

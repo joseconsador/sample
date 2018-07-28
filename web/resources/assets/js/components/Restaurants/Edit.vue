@@ -1,15 +1,18 @@
 <template>
-    <form v-on:submit="submit" action="">
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input  v-model="name" type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Name">
-        </div>
-        <div class="form-group">
-            <label for="description">Description</label>
-            <textarea v-model="description" class="form-control" id="description" placeholder="Description" />
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    <div>
+        <form v-on:submit="submit" action="">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input  v-model="name" type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Name">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea v-model="description" class="form-control" id="description" placeholder="Description" />
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <errors :errors="errors" />
+    </div>
 </template>
 
 <script>
@@ -18,7 +21,8 @@
         data: function() {
             return {
                 name: "",
-                description: ""
+                description: "",
+                errors: {},
             }
         },
         methods: {
@@ -40,9 +44,12 @@
                     options.url += this.id.toString();
                 }
 
-                axios(options).then(resp => {
-                    this.$router.push('/restaurant/' + resp.data.data.id);
-                });
+                axios(options)
+                    .then(resp => {
+                        this.$router.push('/restaurant/' + resp.data.data.id);
+                    }).catch(errors => {
+                        this.errors = errors.errors;
+                    });
             },
             load: function() {
                 if (this.id > 0) {

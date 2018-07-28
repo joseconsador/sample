@@ -11,6 +11,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+        <errors :errors="errors" />
     </div>
 </template>
 <script>
@@ -25,6 +26,7 @@
             return {
                 email: "",
                 password: "",
+                errors: {}
             }
         },
         methods: {
@@ -42,6 +44,7 @@
                     return resp;
                 }).catch(err => {
                     this.$store.commit('setLoggedIn', false);
+                    this.errors = err.errors;
                     return err;
                 });
             },

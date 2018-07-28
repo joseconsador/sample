@@ -16,6 +16,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+        <errors :errors="errors" />
     </div>
 </template>
 
@@ -40,6 +41,7 @@
                 restaurant: {},
                 comment: "",
                 rating: 0,
+                errors: {},
             }
         },
         methods: {
@@ -61,9 +63,13 @@
                     options.url += this.id.toString();
                 }
 
-                axios(options).then(resp => {
-                    this.$router.push('/restaurant/' + this.restaurantId);
-                });
+                axios(options)
+                    .then(resp => {
+                        this.$router.push('/restaurant/' + this.restaurantId);
+                    })
+                    .catch(errors => {
+                        this.errors = errors.errors;
+                    });
             }
         },
         created: function() {

@@ -1,30 +1,33 @@
 <template>
-    <form v-on:submit="submit" action="">
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input  v-model="name" type="text" class="form-control" id="name" placeholder="Name">
-        </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input  v-model="email" type="email" class="form-control" id="email" placeholder="Email">
-        </div>
-        <div v-if="!this.changePassword" class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="changePassword" v-model="changePassword">
-            <label class="form-check-label" for="changePassword">Change Password</label>
-        </div>
-        <div v-if="this.changePassword" class="form-group">
-            <label for="email">Password</label>
-            <input  v-model="password" type="password" class="form-control" id="password" placeholder="Email">
-        </div>
-        <div class="form-group">
-            <label for="role">Role</label>
-            <select v-model="role" class="form-control" id="role">
-                <option value="user">User</option>
-                <option value="owner">Owner</option>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    <div>
+        <form v-on:submit="submit" action="">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input  v-model="name" type="text" class="form-control" id="name" placeholder="Name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input  v-model="email" type="email" class="form-control" id="email" placeholder="Email">
+            </div>
+            <div v-if="!this.changePassword" class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="changePassword" v-model="changePassword">
+                <label class="form-check-label" for="changePassword">Change Password</label>
+            </div>
+            <div v-if="this.changePassword" class="form-group">
+                <label for="email">Password</label>
+                <input  v-model="password" type="password" class="form-control" id="password" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label for="role">Role</label>
+                <select v-model="role" class="form-control" id="role">
+                    <option value="user">User</option>
+                    <option value="owner">Owner</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <errors :errors="errors" />
+    </div>
 </template>
 
 <script>
@@ -36,7 +39,8 @@
                 email: "",
                 role: "",
                 password: "",
-                changePassword: false
+                changePassword: false,
+                errors: {},
             }
         },
         methods: {
@@ -67,9 +71,13 @@
                     options.data.password_confirmation = this.password;
                 }
 
-                axios(options).then(resp => {
-                    this.$router.push('/users/1');
-                });
+                axios(options)
+                    .then(resp => {
+                        this.$router.push('/users/1');
+                    })
+                    .catch(errors => {
+                        this.errors = errors.errors;
+                    });
             },
             load: function() {
                 if (this.id > 0) {
