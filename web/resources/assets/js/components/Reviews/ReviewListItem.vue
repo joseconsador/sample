@@ -6,15 +6,8 @@
             <small>{{ review.updated_at | moment("dddd, MMMM Do YYYY, h:mm:ss a") }}</small>
         </p>
         <p>{{ review.comment }}</p>
-        <template v-if="review.reply">
-            <div class="alert alert-warning" role="alert">
-                <p><b>{{ owner.attributes.name }} (Owner):</b></p>
-                {{ review.reply }}
-            </div>
-        </template>
-        <template v-else-if="id != undefined && (this.$store.state.user.hasRole('admin') || (owner.id == this.$store.state.user.id))">
-            <reply-inline :restaurant-id="review.restaurant_id" :review-id="id" />
-        </template>
+
+        <reply-inline :reply="review.reply" :owner="owner" :restaurant-id="review.restaurant_id" :review-id="id" />
 
         <router-link
             v-if="id != undefined && (this.$store.state.user.hasRole('admin') || (review.user_id == this.$store.state.user.id))"
